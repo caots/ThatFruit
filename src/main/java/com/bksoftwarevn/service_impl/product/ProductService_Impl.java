@@ -33,9 +33,6 @@ public class ProductService_Impl implements ProductService {
     @Autowired
     private TagRepository tagRepository;
 
-    @Autowired
-    private BuyFormHasProductRepository buyFormHasProductRepository;
-
     @Override
     public List<Product> findAllProductPage(Pageable pageable) {
         try {
@@ -145,13 +142,10 @@ public class ProductService_Impl implements ProductService {
         return 0;
     }
 
-    //not done
     @Override
     public List<Product> findHotProducts(Pageable pageable) {
         try {
-            List<BuyFormHasProduct> buyFormHasProducts = buyFormHasProductRepository.findByStatus(true);
-
-
+            return productRepository.findProductByHot(pageable).getContent();
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "find-hot-products-error : {0}", ex.getMessage());
         }
@@ -270,7 +264,7 @@ public class ProductService_Impl implements ProductService {
     }
 
     @Override
-    public Sort sortData(String sort,String field) {
+    public Sort sortData(String sort, String field) {
         Sort sortable = null;
         if (sort.equals("ASC")) {
             sortable = Sort.by(field).ascending();

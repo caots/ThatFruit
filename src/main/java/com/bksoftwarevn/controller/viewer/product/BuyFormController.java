@@ -195,6 +195,7 @@ public class BuyFormController {
             List<Product> products = new ArrayList<>();
             carts.forEach(cart -> {
                 Product product = productService.findById(cart.getProduct().getId());
+                product.setSaleNumber(product.getSaleNumber() + 1);
                 products.add(product);
             });
             buyForm.setProducts(products);
@@ -214,6 +215,8 @@ public class BuyFormController {
             String content = "Bạn có đơn đặt hàng mới: MÃ " + buyForm.getId();
             UserMail userMail = new UserMail();
             userMail.setEmailAddress(email);
+            userMail.setTitle(title);
+            userMail.setContent(content);
             boolean result = sendMailService.sendEMail(userMail.getEmailAddress());
             if (result)
                 return new ResponseEntity<>("Congratulations! Your mail has been send to the user.", HttpStatus.OK);

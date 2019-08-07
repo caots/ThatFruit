@@ -46,6 +46,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("select p from Product p where p.status=true and p.smallCategory.bigCategory.menu.id= :id")
     List<Product> findProductByMenu(@Param("id") int id);
 
+    @Query("select p from Product p where p.status=true order by p.saleNumber asc ")
+    Page<Product> findProductByHot(Pageable pageable);
+
     @Query("select p from Product p where p.status=true and p.productType.id= :id")
     Page<Product> findProductByTypePage(@Param("id") int id, Pageable pageable);
 

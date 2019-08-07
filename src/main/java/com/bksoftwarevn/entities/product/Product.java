@@ -47,6 +47,9 @@ public class Product implements Serializable {
     @Column(name = "product_info")
     private String productInfo;
 
+    @Column(name = "sale_number")
+    private String saleNumber;
+
     private String origin;
 
     private String unit; // đơn vị
