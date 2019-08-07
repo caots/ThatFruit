@@ -1,0 +1,231 @@
+package com.bksoftwarevn.controller.admin.product;
+
+import com.bksoftwarevn.entities.Record;
+import com.bksoftwarevn.entities.news.Tag;
+import com.bksoftwarevn.entities.product.Product;
+import com.bksoftwarevn.entities.product.ProductImage;
+import com.bksoftwarevn.entities.product.ProductType;
+import com.bksoftwarevn.service.RecordService;
+import com.bksoftwarevn.service.category.SmallCategoryService;
+import com.bksoftwarevn.service.company.PartnerService;
+import com.bksoftwarevn.service.product.ProductImageService;
+import com.bksoftwarevn.service.product.ProductService;
+import com.bksoftwarevn.service.product.ProductTypeService;
+import com.bksoftwarevn.service.product.TagService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
+import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
+@RequestMapping("api/v1/admin")
+@RolesAllowed("ROLE_ADMIN")
+public class AdminProductController {
+
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private RecordService recordService;
+
+    @Autowired
+    private ProductTypeService productTypeService;
+
+    @Autowired
+    private ProductImageService productImageService;
+
+    @Autowired
+    private TagService tagService;
+
+    @Autowired
+    private SmallCategoryService smallCategoryService;
+
+    @Autowired
+    private PartnerService partnerService;
+
+    //===========================  Tag =============================================
+
+    @PostMapping("/tag")
+    public ResponseEntity<Object> createTag(
+            @RequestBody Tag tag,
+            HttpServletResponse response
+    ) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        tag.setStatus(true);
+        Record record = recordService.findByName("tag");
+        boolean result = tagService.saveTag(tag);
+        if (result) {
+            record.setNumber(record.getNumber() + 1);
+            recordService.saveRecord(record);
+            return new ResponseEntity<>(tag, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("create tag fail", HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/tag")
+    public ResponseEntity<Object> updateTag(
+            @RequestBody Tag tag,
+            HttpServletResponse response
+    ) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        boolean result = tagService.saveTag(tag);
+        if (result) return new ResponseEntity<>(tag, HttpStatus.OK);
+        return new ResponseEntity<>("update tag fail", HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/tag/delete")
+    public ResponseEntity<Object> deleteTag(@RequestParam("id") int id,
+                                            HttpServletResponse response
+    ) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        Record record = recordService.findByName("tag");
+        Tag tag = tagService.findById(id);
+        boolean result = tagService.deleteTag(tag);
+        if (result) {
+            record.setNumber(record.getNumber() - 1);
+            recordService.saveRecord(record);
+            return new ResponseEntity<>("delete tag success", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("delete tag fail", HttpStatus.NOT_FOUND);
+    }
+
+    //=========================== Product Type =====================================
+
+    @PostMapping("/product-type")
+    public ResponseEntity<Object> createProductType(
+            @RequestBody ProductType productType,
+            HttpServletResponse response
+    ) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        productType.setStatus(true);
+        Record record = recordService.findByName("product-type");
+        boolean result = productTypeService.saveProductType(productType);
+        if (result) {
+            record.setNumber(record.getNumber() + 1);
+            recordService.saveRecord(record);
+            return new ResponseEntity<>(productType, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("create product type fail", HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/product-type")
+    public ResponseEntity<Object> updateProductType(
+            @RequestBody ProductType productType,
+            HttpServletResponse response
+    ) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        boolean result = productTypeService.saveProductType(productType);
+        if (result) return new ResponseEntity<>(productType, HttpStatus.OK);
+        return new ResponseEntity<>("update product type fail", HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/product-type/delete")
+    public ResponseEntity<Object> deleteProductType(@RequestParam("id") int id,
+                                                    HttpServletResponse response
+    ) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        Record record = recordService.findByName("product-type");
+        ProductType productType = productTypeService.findById(id);
+        boolean result = productTypeService.deleteProductType(productType);
+        if (result) {
+            record.setNumber(record.getNumber() - 1);
+            recordService.saveRecord(record);
+            return new ResponseEntity<>("delete product type success", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("delete product type fail", HttpStatus.NOT_FOUND);
+    }
+
+    //=========================== Product Image ====================================
+
+    @PostMapping("/product-image")
+    public ResponseEntity<Object> createProductImage(
+            @RequestBody ProductImage productImage,
+            HttpServletResponse response
+    ) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        productImage.setStatus(true);
+        boolean result = productImageService.saveProductImage(productImage);
+        if (result) {
+            return new ResponseEntity<>(productImage, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("create product image fail", HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/product-image")
+    public ResponseEntity<Object> updateProductImage(
+            @RequestBody ProductImage productImage,
+            HttpServletResponse response
+    ) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        boolean result = productImageService.saveProductImage(productImage);
+        if (result) return new ResponseEntity<>(productImage, HttpStatus.OK);
+        return new ResponseEntity<>("update product image fail", HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/product-image/delete")
+    public ResponseEntity<Object> deleteProductImage(
+            @RequestParam("id") int id,
+            HttpServletResponse response
+    ) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        ProductImage productImage = productImageService.findById(id);
+        boolean result = productImageService.deleteProductImage(productImage);
+        if (result)
+            return new ResponseEntity<>("delete product image success", HttpStatus.OK);
+
+        return new ResponseEntity<>("delete product image fail", HttpStatus.NOT_FOUND);
+    }
+
+    //=========================== Product ==========================================
+    @PostMapping(value = "/product")
+    public ResponseEntity<Object> addProduct(
+            @RequestBody Product product,
+            @RequestParam(name = "small-category-id") int smallCategoryId,
+            @RequestParam(name = "partner-id") int partnerId,
+            @RequestParam("tag-id") List<Integer> listTagId
+
+    ) {
+        Record record = recordService.findByName("product");
+        product.setStatus(true);
+        product.setView(0);
+        product.setInitDate(LocalDate.now());
+        product.setSmallCategory(smallCategoryService.findSmallCategoryById(smallCategoryId));
+        product.setPartner(partnerService.findById(partnerId));
+        List<Tag> tags = new ArrayList<>();
+        listTagId.forEach(id ->
+                tags.add(tagService.findById(id))
+        );
+        product.setTags(tags);
+        if (productService.saveProduct(product)) {
+            record.setNumber(record.getNumber() + 1);
+            recordService.saveRecord(record);
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        } else return new ResponseEntity<>("add product fail", HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping(value = "/product")
+    public ResponseEntity<Object> updateProduct(@RequestBody Product product) {
+        if (productService.saveProduct(product))
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        else return new ResponseEntity<>("update product fail", HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping(value = "/product/delete")
+    public ResponseEntity<String> deleteProduct(@RequestParam("id") int idProduct) {
+        Product product = productService.findById(idProduct);
+        Record record = recordService.findByName("product");
+        if (productService.deleteProduct(product)) {
+            record.setNumber(record.getNumber() - 1);
+            recordService.saveRecord(record);
+            return new ResponseEntity<>("delete product success", HttpStatus.OK);
+        } else return new ResponseEntity<>("delete product fail", HttpStatus.BAD_REQUEST);
+    }
+
+
+}
