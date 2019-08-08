@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -223,6 +225,25 @@ public class ProductService_Impl implements ProductService {
                     .collect(Collectors.toList());
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "find-all-product-by-tag-error : {0}", ex.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public List<Product> findAllHotProductByMonthPage() {
+        try {
+            List<Product> listProductByMonth = new ArrayList<>();
+            productRepository.findAllProduct().forEach(product -> {
+                if (product.getInitDate().getMonth() == LocalDate.now().getMonth()) {
+                    listProductByMonth.add(product);
+                }
+            });
+            listProductByMonth.stream()
+                    .sorted((p1, p2) -> p2.getSaleNumber() - p1.getSaleNumber())
+                    .collect(Collectors.toList());
+            return listProductByMonth;
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "find-all-hot-product-by-month-error : {0}", ex.getMessage());
         }
         return null;
     }

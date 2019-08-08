@@ -42,7 +42,7 @@ public class AdminTagController {
             return new ResponseEntity<>("update tag fail!", HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping(value = "/tag/delete")
+    @PutMapping(value = "/delete")
     public ResponseEntity<String> deleteTag(@RequestParam("id") int tagId) {
         Record record = recordService.findByName("tag");
 

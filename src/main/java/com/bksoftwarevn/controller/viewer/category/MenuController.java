@@ -12,11 +12,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/public/menu")
+@RolesAllowed("ROLE_ADMIN")
 public class MenuController {
 
     @Autowired
@@ -61,11 +63,7 @@ public class MenuController {
     @GetMapping(value = "/all")
     public ResponseEntity<List<Menu>> findAllMenu(@RequestHeader("adminbksoftwarevn") String header) {
         if (header.equals(Token.tokenHeader)) {
-            Record record = recordService.findByName("menu");
-
             List<Menu> menus = menuService.findAllMenu();
-            record.setNumber(menus.size());
-            recordService.saveRecord(record);
             return new ResponseEntity<>(menus, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

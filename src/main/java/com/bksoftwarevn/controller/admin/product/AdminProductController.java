@@ -49,51 +49,6 @@ public class AdminProductController {
     @Autowired
     private PartnerService partnerService;
 
-    //===========================  Tag =============================================
-
-    @PostMapping("/tag")
-    public ResponseEntity<Object> createTag(
-            @RequestBody Tag tag,
-            HttpServletResponse response
-    ) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        tag.setStatus(true);
-        Record record = recordService.findByName("tag");
-        boolean result = tagService.saveTag(tag);
-        if (result) {
-            record.setNumber(record.getNumber() + 1);
-            recordService.saveRecord(record);
-            return new ResponseEntity<>(tag, HttpStatus.OK);
-        }
-        return new ResponseEntity<>("create tag fail", HttpStatus.NOT_FOUND);
-    }
-
-    @PutMapping("/tag")
-    public ResponseEntity<Object> updateTag(
-            @RequestBody Tag tag,
-            HttpServletResponse response
-    ) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        boolean result = tagService.saveTag(tag);
-        if (result) return new ResponseEntity<>(tag, HttpStatus.OK);
-        return new ResponseEntity<>("update tag fail", HttpStatus.NOT_FOUND);
-    }
-
-    @PutMapping("/tag/delete")
-    public ResponseEntity<Object> deleteTag(@RequestParam("id") int id,
-                                            HttpServletResponse response
-    ) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        Record record = recordService.findByName("tag");
-        Tag tag = tagService.findById(id);
-        boolean result = tagService.deleteTag(tag);
-        if (result) {
-            record.setNumber(record.getNumber() - 1);
-            recordService.saveRecord(record);
-            return new ResponseEntity<>("delete tag success", HttpStatus.OK);
-        }
-        return new ResponseEntity<>("delete tag fail", HttpStatus.NOT_FOUND);
-    }
 
     //=========================== Product Type =====================================
 
@@ -187,7 +142,7 @@ public class AdminProductController {
     public ResponseEntity<Object> addProduct(
             @RequestBody Product product,
             @RequestParam(name = "small-category-id") int smallCategoryId,
-            @RequestParam(name = "partner-id") int partnerId,
+            @RequestParam(defaultValue = "-1", required = false, name = "partner-id") int partnerId,
             @RequestParam("tag-id") List<Integer> listTagId
 
     ) {
@@ -195,8 +150,9 @@ public class AdminProductController {
         product.setStatus(true);
         product.setView(0);
         product.setInitDate(LocalDate.now());
+        product.setSaleNumber(0);
         product.setSmallCategory(smallCategoryService.findSmallCategoryById(smallCategoryId));
-        product.setPartner(partnerService.findById(partnerId));
+        if (partnerId > 0) product.setPartner(partnerService.findById(partnerId));
         List<Tag> tags = new ArrayList<>();
         listTagId.forEach(id ->
                 tags.add(tagService.findById(id))

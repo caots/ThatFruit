@@ -22,9 +22,6 @@ public class CompanyController {
     private CompanyService companyService;
 
     @Autowired
-    private RecordService recordService;
-
-    @Autowired
     private ContactService contactService;
 
     @GetMapping

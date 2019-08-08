@@ -67,7 +67,7 @@ public class ProductController {
     }
 
     @GetMapping("/find-by-hot")
-    public ResponseEntity<List<Product>> hotProduct(
+    public ResponseEntity<List<Product>> findAllHotProduct(
             HttpServletResponse response,
             @RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
             @RequestParam(name = "size", required = false, defaultValue = "15") Integer size,
@@ -116,6 +116,20 @@ public class ProductController {
 
             double result = Math.ceil((double) productService.sizeOfProductByName(productNameSearch) / size);
             return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/month/page")
+    public ResponseEntity<List<Product>> findHotProductByMonthPage(
+            HttpServletResponse response,
+            @RequestParam("name") String name,
+            @RequestHeader("adminbksoftwarevn") String header
+    ) {
+
+        if (header.equals(Token.tokenHeader)) {
+            List<Product> productsByName = productService.findAllHotProductByMonthPage();
+            return new ResponseEntity<>(productsByName, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

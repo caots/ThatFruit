@@ -48,7 +48,7 @@ public class Product implements Serializable {
     private String productInfo;
 
     @Column(name = "sale_number")
-    private String saleNumber;
+    private int saleNumber;
 
     private String origin;
 
@@ -68,7 +68,7 @@ public class Product implements Serializable {
     private ProductType productType;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "partner_id", nullable = false)
+    @JoinColumn(name = "partner_id")
     @NotNull
     private Partner partner;
 

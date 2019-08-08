@@ -44,6 +44,8 @@ public interface ProductService {
 
     List<Product> findAllProductByTag(int idTag);
 
+    List<Product> findAllHotProductByMonthPage();
+
     Product findById(int id);
 
     boolean saveProduct(Product product);

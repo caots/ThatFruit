@@ -49,4 +49,8 @@ public class News implements Serializable {
 
     public News() {
     }
+
+    public static void main(String[] args) {
+        System.out.println(LocalDateTime.now());
+    }
 }

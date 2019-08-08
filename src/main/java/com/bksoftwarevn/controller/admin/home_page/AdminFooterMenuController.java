@@ -60,7 +60,7 @@ public class AdminFooterMenuController {
                                                           @RequestParam(name = "footer-menu-id") int footerMenuId) {
         footerMenuDetails.setStatus(true);
         footerMenuDetails.setFooterMenu(footerMenuService.findById(footerMenuId));
-        Record record = recordService.findByName("details-footer-menu");
+        Record record = recordService.findByName("footer-menu-details");
         record.setNumber(record.getNumber() + 1);
         recordService.saveRecord(record);
         if (footerMenuDetailsService.saveFooterMenuDetails(footerMenuDetails)) {
@@ -77,7 +77,7 @@ public class AdminFooterMenuController {
 
     @PutMapping(value = "/details/delete")
     public ResponseEntity<String> deleteFooterMenuDetails(@RequestParam("id") int id) {
-        Record record = recordService.findByName("details-footer-menu");
+        Record record = recordService.findByName("footer-menu-details");
         record.setNumber(record.getNumber() - 1);
         recordService.saveRecord(record);
         FooterMenuDetails footerMenuDetails = footerMenuDetailsService.findById(id);

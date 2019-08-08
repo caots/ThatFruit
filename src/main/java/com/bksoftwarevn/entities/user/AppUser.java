@@ -52,10 +52,9 @@ public class AppUser implements Serializable {
     @Size(min = 6, max = 32)
     private String password;
 
-
     private boolean status;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "user_has_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -64,6 +63,7 @@ public class AppUser implements Serializable {
     public Collection<? extends GrantedAuthority> grantedAuthorities() {
         List<GrantedAuthority> list = new ArrayList<>();
         appRoles.forEach(role -> list.add(new SimpleGrantedAuthority(role.getName())));
+        System.out.println("list: " + list);
         return list;
     }
 

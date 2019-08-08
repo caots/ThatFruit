@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("api/v1/admin")
@@ -70,6 +71,8 @@ public class AdminNewsController {
         Record record = recordService.findByName("news");
         news.setStatus(true);
         news.setTopic(topicService.findById(topicId));
+        news.setView(0);
+        news.setTime(LocalDateTime.now());
         if (newsService.saveNews(news)) {
             record.setNumber(record.getNumber() + 1);
             recordService.saveRecord(record);
