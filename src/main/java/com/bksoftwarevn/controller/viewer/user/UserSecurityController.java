@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/v1/public/user")
@@ -48,16 +49,15 @@ public class UserSecurityController {
                                            HttpServletResponse response
     ) {
         response.setHeader("Access-Control-Allow-Origin", "*");
-
-        if (appUserService.findByEmail(registerForm.getUsername()) != null) {
+        if (appUserService.findByEmail(registerForm.getEmail()) != null) {
 
             return new ResponseEntity<>("Email has been used", HttpStatus.BAD_REQUEST);
         }
-
+        registerForm.setInitDate(LocalDate.now());
         if (appUserService.saveAppUser(registerForm)) {
             Record record = recordService.findByName("user");
             record.setNumber(record.getNumber() + 1);
-            AppUser appUser = appUserService.findByEmail(registerForm.getUsername());
+            AppUser appUser = appUserService.findByEmail(registerForm.getEmail());
             recordService.saveRecord(record);
             return new ResponseEntity<>(appUser, HttpStatus.OK);
         }

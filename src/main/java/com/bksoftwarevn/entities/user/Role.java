@@ -22,8 +22,4 @@ public class Role implements Serializable {
     private String name;
 
     private boolean status;
-
-    @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "appRoles")
-    private List<AppUser> appUsers = new ArrayList<>();
 }

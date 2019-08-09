@@ -52,7 +52,7 @@ public class Product implements Serializable {
 
     private String origin;
 
-    private String unit; // đơn vị
+    private String unit;
 
     @NotNull
     private boolean status;
@@ -69,7 +69,6 @@ public class Product implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "partner_id")
-    @NotNull
     private Partner partner;
 
 

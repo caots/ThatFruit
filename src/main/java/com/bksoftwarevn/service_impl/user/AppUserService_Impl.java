@@ -44,7 +44,7 @@ public class AppUserService_Impl implements AppUserService {
     @Override
     public AppUser findByEmailAndPassword(String email, String password) {
         try {
-            AppUser appUser = appUserRepository.findAppUserLogin(email,  MD5.encode(password));
+            AppUser appUser = appUserRepository.findAppUserLogin(email, MD5.encode(password));
             return appUser;
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "find-user-by-email-and-password-error : {0}", ex.getMessage());
@@ -86,16 +86,19 @@ public class AppUserService_Impl implements AppUserService {
 
     @Override
     public boolean saveAppUser(RegisterForm registerForm) {
+        System.out.println(registerForm);
 
         List<Role> appRoles = new ArrayList<>();
         appRoles.add(appRoleRepository.findByName("ROLE_USER"));
         AppUser appUser = new AppUser();
-        appUser.setEmail(registerForm.getUsername());
+        appUser.setEmail(registerForm.getEmail());
         appUser.setPassword(MD5.encode(registerForm.getPassword()));
         appUser.setFullName(registerForm.getFullName());
+        appUser.setInitDate(registerForm.getInitDate());
         appUser.setAppRoles(appRoles);
         appUser.setStatus(true);
         try {
+            System.out.println(appUser);
             appUserRepository.save(appUser);
             return true;
         } catch (Exception ex) {

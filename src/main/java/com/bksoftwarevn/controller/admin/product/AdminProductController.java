@@ -138,13 +138,14 @@ public class AdminProductController {
     }
 
     //=========================== Product ==========================================
+
     @PostMapping(value = "/product")
     public ResponseEntity<Object> addProduct(
             @RequestBody Product product,
             @RequestParam(name = "small-category-id") int smallCategoryId,
-            @RequestParam(defaultValue = "-1", required = false, name = "partner-id") int partnerId,
-            @RequestParam("tag-id") List<Integer> listTagId
-
+            @RequestParam(defaultValue = "-1", required = false, value = "partner-id") int partnerId,
+            @RequestParam("tag-id") List<Integer> listTagId,
+            @RequestParam("product-type-id") int productTypeId
     ) {
         Record record = recordService.findByName("product");
         product.setStatus(true);
@@ -152,12 +153,15 @@ public class AdminProductController {
         product.setInitDate(LocalDate.now());
         product.setSaleNumber(0);
         product.setSmallCategory(smallCategoryService.findSmallCategoryById(smallCategoryId));
+        product.setProductType(productTypeService.findById(productTypeId));
         if (partnerId > 0) product.setPartner(partnerService.findById(partnerId));
         List<Tag> tags = new ArrayList<>();
-        listTagId.forEach(id ->
-                tags.add(tagService.findById(id))
-        );
-        product.setTags(tags);
+        if (listTagId != null) {
+            listTagId.forEach(id ->
+                    tags.add(tagService.findById(id))
+            );
+            product.setTags(tags);
+        }
         if (productService.saveProduct(product)) {
             record.setNumber(record.getNumber() + 1);
             recordService.saveRecord(record);

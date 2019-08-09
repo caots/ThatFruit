@@ -120,10 +120,9 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/month/page")
+    @GetMapping("/month")
     public ResponseEntity<List<Product>> findHotProductByMonthPage(
             HttpServletResponse response,
-            @RequestParam("name") String name,
             @RequestHeader("adminbksoftwarevn") String header
     ) {
 

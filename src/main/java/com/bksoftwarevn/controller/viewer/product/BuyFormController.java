@@ -8,12 +8,13 @@ import com.bksoftwarevn.entities.product.BuyForm;
 import com.bksoftwarevn.entities.product.BuyFormCart;
 import com.bksoftwarevn.entities.product.BuyFormHasProduct;
 import com.bksoftwarevn.entities.product.Product;
-import com.bksoftwarevn.entities.user.Buyer;
+import com.bksoftwarevn.entities.user.AppUser;
 import com.bksoftwarevn.entities.user.UserMail;
 import com.bksoftwarevn.service.RecordService;
 import com.bksoftwarevn.service.SendMailService;
 import com.bksoftwarevn.service.product.BuyFormService;
 import com.bksoftwarevn.service.product.ProductService;
+import com.bksoftwarevn.service.user.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -43,6 +44,9 @@ public class BuyFormController {
     @Autowired
     private RecordService recordService;
 
+    @Autowired
+    private AppUserService appUserService;
+
 
     private Set<BuyFormCart> buyFormCarts = new HashSet<>();
 
@@ -51,23 +55,14 @@ public class BuyFormController {
         buyFormHasProducts.forEach(buyFormHasProduct -> {
             BuyFormCart buyFormCart = new BuyFormCart();
             BuyForm buyForm = buyFormService.findById(buyFormHasProduct.getBuyFormId());
-            Buyer buyer = new Buyer();
-            if (buyForm.getAppUser() != null) {
-                buyer.setId(buyForm.getAppUser().getId());
-                buyer.setName(buyForm.getAppUser().getFullName());
-                buyer.setAddress(buyForm.getAppUser().getAddress());
-                buyer.setEmail(buyForm.getAppUser().getEmail());
-                buyer.setPhone(buyForm.getAppUser().getPhone());
-                buyer.setStatus(buyForm.getAppUser().isStatus());
-            }
             buyFormCart.setId(buyForm.getId());
             buyFormCart.setStatus(buyForm.isStatus());
-            buyFormCart.setName(buyer.getName());
-            buyFormCart.setEmail(buyer.getEmail());
-            buyFormCart.setPhoneNumber(buyer.getPhone());
+            buyFormCart.setName(buyForm.getName());
+            buyFormCart.setEmail(buyForm.getEmail());
+            buyFormCart.setPhoneNumber(buyForm.getPhone());
             buyFormCart.setDate(buyForm.getDate());
             buyFormCart.setNote(buyForm.getNote());
-            buyFormCart.setAddress(buyer.getAddress());
+            buyFormCart.setAddress(buyForm.getAddress());
             Set<String> nameProduct = new HashSet<>();
             buyForm.getProducts().forEach(product -> {
                 nameProduct.add(product.getName());
@@ -165,10 +160,15 @@ public class BuyFormController {
     @PostMapping("/add-form")
     public ResponseEntity<Object> addBuyForm(
             @RequestBody BuyForm buyForm,
+            @RequestParam(defaultValue = "-1", value = "user-id", required = false) int userId,
             @RequestHeader("adminbksoftwarevn") String header
     ) {
 
         if (header.equals(Token.tokenHeader)) {
+            System.out.println("yolo");
+            if (userId > 0) {
+                buyForm.setAppUser(appUserService.findById(userId));
+            }
             buyForm.setStatus(true);
             buyForm.setChecked(false);
             buyForm.setDate(LocalDate.now());
@@ -179,7 +179,7 @@ public class BuyFormController {
             recordService.saveRecord(record);
             return new ResponseEntity<>(buyForm, HttpStatus.OK);
         }
-        return new ResponseEntity<>("saved fail", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("saved fail", HttpStatus.NOT_FOUND);
     }
 
     @PostMapping(value = "/add-products")
@@ -198,6 +198,11 @@ public class BuyFormController {
                 product.setSaleNumber(product.getSaleNumber() + 1);
                 products.add(product);
             });
+            if (buyForm.getAppUser() != null) {
+                AppUser appUser = buyForm.getAppUser();
+                appUser.setAccumulatedPoints(appUser.getAccumulatedPoints() + 1);
+                appUserService.saveAppUser(appUser);
+            }
             buyForm.setProducts(products);
             buyForm.setStatus(true);
             buyFormService.saveBuyForm(buyForm);

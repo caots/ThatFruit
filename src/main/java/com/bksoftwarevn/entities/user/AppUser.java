@@ -36,6 +36,9 @@ public class AppUser implements Serializable {
 
     private String avatar;
 
+    @Column(name = "init_date")
+    private LocalDate initDate;
+
     private int phone;
 
     private int gender;
@@ -54,7 +57,7 @@ public class AppUser implements Serializable {
 
     private boolean status;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_has_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

@@ -1,7 +1,6 @@
 package com.bksoftwarevn.entities.product;
 
 import com.bksoftwarevn.entities.user.AppUser;
-import com.bksoftwarevn.entities.user.Buyer;
 import lombok.Data;
 
 
@@ -25,6 +24,14 @@ public class BuyForm implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String name;
+
+    private int phone;
+
+    private String email;
+
+    private String address;
+
     private LocalDate date;
 
     @NotNull
@@ -38,11 +45,6 @@ public class BuyForm implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private AppUser appUser;
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "buyer_id")
-    @NotNull
-    private Buyer buyer;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "buy_form_has_product",
