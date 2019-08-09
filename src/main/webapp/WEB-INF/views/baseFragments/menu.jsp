@@ -11,21 +11,23 @@
             <p class="app-sidebar__user-designation">Developer</p>
         </div>
     </div>
-    fas fa-sitemap
     <ul class="app-menu">
+
+        <li><a class="app-menu__item" href="home"><i class="app-menu__icon fas fa-home"></i><span
+                class="app-menu__label"> Trang chủ</span></a></li>
 
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                 class="app-menu__icon fas fa-sitemap"></i><span class="app-menu__label">Chuyên mục</span><i
                 class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item" href=""> Danh mục</a>
+                    <a class="treeview-item" href="menu-category"> Danh mục</a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="" rel="noopener"></i> Danh mục sản phẩm</a>
+                    <a class="treeview-item" href="big-category" rel="noopener"></i> Danh mục sản phẩm</a>
                 </li>
                 <li>
-                    <a class="treeview-item" href=""></i> Loại sản phẩm</a>
+                    <a class="treeview-item" href="small-category"></i> Loại sản phẩm</a>
                 </li>
             </ul>
         </li>
@@ -42,8 +44,7 @@
                 <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Widgets</a></li>
             </ul>
         </li>
-        <li><a class="app-menu__item" href=""><i class="app-menu__icon fa fa-pie-chart"></i><span
-                class="app-menu__label">Charts</span></a></li>
+
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                 class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Forms</span><i
                 class="treeview-indicator fa fa-angle-right"></i></a>

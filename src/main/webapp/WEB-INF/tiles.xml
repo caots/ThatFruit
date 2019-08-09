@@ -20,5 +20,20 @@
         <put-attribute name="body" value="/WEB-INF/views/bodyFragments/home.jsp"/>
     </definition>
 
+    <definition name="menu_category" extends="base.definition">
+        <put-attribute name="title" value="home admin"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/category/menu_category.jsp"/>
+    </definition>
+
+    <!--<definition name="big-category" extends="base.definition">
+        <put-attribute name="title" value="home admin"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/category/big_category.jsp"/>
+    </definition>
+
+    <definition name="small-category" extends="base.definition">
+        <put-attribute name="title" value="home admin"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/category/small_category.jsp"/>
+    </definition>-->
+
 
 </tiles-definitions>

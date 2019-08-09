@@ -18,7 +18,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/public/menu")
-@RolesAllowed("ROLE_ADMIN")
 public class MenuController {
 
     @Autowired

@@ -46,4 +46,37 @@ public class HomeAdminController {
         return "home";
     }
 
+    @RequestMapping(value = {"/menu-category"}, method = RequestMethod.GET)
+    public String menuPage(HttpServletRequest request) {
+
+        String token = getToken(request);
+
+        if (token == null) {
+            return "login";
+        }
+        return "menu_category";
+    }
+
+    @RequestMapping(value = {"/big-category"}, method = RequestMethod.GET)
+    public String bigCategoryPage(HttpServletRequest request) {
+
+        String token = getToken(request);
+
+        if (token == null) {
+            return "login";
+        }
+        return "big-category";
+    }
+
+    @RequestMapping(value = {"/small-category"}, method = RequestMethod.GET)
+    public String smallCategoryPage(HttpServletRequest request) {
+
+        String token = getToken(request);
+
+        if (token == null) {
+            return "login";
+        }
+        return "small-category";
+    }
+
 }

@@ -26,8 +26,11 @@ public class Company implements Serializable {
 
     private String email;
 
+    private String address;
+
     private boolean status;
 
-    public Company(){}
+    public Company() {
+    }
 
 }

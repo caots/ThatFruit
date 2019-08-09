@@ -15,3 +15,5 @@
 <script src="resources/js/template/main.js"></script>
 <!-- The javascript plugin to display page loading on top-->
 <script src="resources/js/template/plugins/pace.min.js"></script>
+<script type="text/javascript" src="resources/js/template/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="resources/js/template/plugins/dataTables.bootstrap.min.js"></script>
