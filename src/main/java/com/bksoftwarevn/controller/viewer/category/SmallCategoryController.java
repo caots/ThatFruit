@@ -46,6 +46,19 @@ public class SmallCategoryController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<SmallCategory>> findAllSmallCategoryAll(
+            HttpServletResponse response,
+            @RequestHeader("adminbksoftwarevn") String header
+    ) {
+
+        if (header.equals(Token.tokenHeader)) {
+            List<SmallCategory> lstSmallCategory = smallCategoryService.findAllSmallCategory();
+            return new ResponseEntity<>(lstSmallCategory, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping(value = "/size")
     public ResponseEntity<Double> pagesNumberSmallCategory(
             HttpServletResponse response,

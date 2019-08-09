@@ -10,6 +10,8 @@ public interface BigCategoryService {
 
     List<BigCategory> findAllBigCategoryPage(Pageable pageable);
 
+    List<BigCategory> findAllBigCategory();
+
     List<BigCategory> findAllBigByMenuPage(int menuId, Pageable pageable);
 
     List<BigCategory> findAllBigCategoryByMenu(int menuId);

@@ -37,6 +37,11 @@ public class BigCategoryService_Impl implements BigCategoryService {
     }
 
     @Override
+    public List<BigCategory> findAllBigCategory() {
+        return bigCategoryRepository.findAllBigCategory();
+    }
+
+    @Override
     public List<BigCategory> findAllBigByMenuPage(int menuId, Pageable pageable) {
         try {
             return bigCategoryRepository.findBigCategoryByMenuPage(menuId, pageable).getContent();

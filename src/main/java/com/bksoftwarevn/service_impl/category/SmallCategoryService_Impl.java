@@ -37,6 +37,11 @@ public class SmallCategoryService_Impl implements SmallCategoryService {
     }
 
     @Override
+    public List<SmallCategory> findAllSmallCategory() {
+        return smallCategoryRepository.findAllSmallCategory();
+    }
+
+    @Override
     public List<SmallCategory> findAllSmallByBigPage(int bigCategoryId, Pageable pageable) {
         try {
             return smallCategoryRepository.findSmallByBigCategoryPage(bigCategoryId, pageable).getContent();

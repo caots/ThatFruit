@@ -11,6 +11,8 @@ public interface SmallCategoryService {
 
     List<SmallCategory> findAllSmallCategoryPage(Pageable pageable);
 
+    List<SmallCategory> findAllSmallCategory();
+
     List<SmallCategory> findAllSmallByBigPage(int bigCategoryId, Pageable pageable);
 
     List<SmallCategory> findAllSmallByBig(int bigCategoryId);

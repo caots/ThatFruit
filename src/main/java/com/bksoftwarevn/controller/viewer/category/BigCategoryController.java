@@ -43,6 +43,19 @@ public class BigCategoryController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<BigCategory>> findAllBigCategory(
+            HttpServletResponse response,
+            @RequestHeader("adminbksoftwarevn") String header
+    ) {
+
+        if (header.equals(Token.tokenHeader)) {
+            List<BigCategory> bigCategories = bigCategoryService.findAllBigCategory();
+            return new ResponseEntity<>(bigCategories, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping(value = "/size")
     public ResponseEntity<Double> pageNumberMediumCategory(
             HttpServletResponse response,

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!--Login-->
+    <definition name="login" template="/WEB-INF/views/layouts/login.jsp"/>
+
+    <!-- Base Define -->
+    <definition name="base.definition"
+                template="/WEB-INF/views/layouts/index.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="header" value="/WEB-INF/views/baseFragments/header.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/views/baseFragments/menu.jsp"/>
+        <put-attribute name="body" value=""/>
+    </definition>
+    <!-- Body Admin  -->
+    <definition name="home" extends="base.definition">
+        <put-attribute name="title" value="home admin"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/home.jsp"/>
+    </definition>
+
+
+</tiles-definitions>

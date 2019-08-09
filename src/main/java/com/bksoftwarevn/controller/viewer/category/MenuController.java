@@ -46,6 +46,7 @@ public class MenuController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+
     @GetMapping(value = "/size")
     public ResponseEntity<Double> pageNumberMenu(
             HttpServletResponse response,
