@@ -15943,12 +15943,15 @@ be a descendant of the grid when it is being dragged.
     text-align: -webkit-center;
 }
 
-.app-content .title-body {
+.app-content .title-body  {
     margin-left: -50px;
     text-align: center;
-    color: #009688;
+    font-family: "Times New Roman", serif;
 }
-
+.app-content .title-body #total-record{
+    color: #009688;
+    font-family: "Segoe UI", serif;
+}
 
 .app-content .table-responsive table {
     padding-top: 50px;

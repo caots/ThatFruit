@@ -24,8 +24,8 @@ public class ImagePageController {
     @Autowired
     private RecordService recordService;
 
-    @GetMapping(value = "/page")
-    public ResponseEntity<List<ImagePage>> findAllImagePagePage(
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<ImagePage>> findAllImagePage(
             HttpServletResponse response,
             @RequestHeader("adminbksoftwarevn") String header
     ) {
@@ -35,7 +35,7 @@ public class ImagePageController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping(value = "/start-end")
     public ResponseEntity<List<ImagePage>> findAllImagePageBetweenId(
             @RequestParam("start-id") int startId,
             @RequestParam("end-id") int endId,
@@ -43,11 +43,10 @@ public class ImagePageController {
             @RequestHeader("adminbksoftwarevn") String header
     ) {
         if (header.equals(Token.tokenHeader)) {
-            return new ResponseEntity<>(imagePageService.findAllImageBetweenId(startId,endId), HttpStatus.OK);
+            return new ResponseEntity<>(imagePageService.findAllImageBetweenId(startId, endId), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
 
 
     @GetMapping(value = "/find-by-id")

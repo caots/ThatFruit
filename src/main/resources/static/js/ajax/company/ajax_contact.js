@@ -77,7 +77,7 @@ function deleteContact() {
             timeout: 30000,
             success: function () {
                 alert('Xóa thành công');
-                location.href = "company";
+                location.href = "contact";
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("Xóa thất bại");

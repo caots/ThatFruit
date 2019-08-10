@@ -65,11 +65,32 @@
         <put-attribute name="body" value="/WEB-INF/views/bodyFragments/company/form_contact.jsp"/>
     </definition>
 
-
     <definition name="user" extends="base.definition">
         <put-attribute name="title" value="user"/>
-        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/company/form_contact.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/user/user.jsp"/>
     </definition>
+
+
+    <definition name="image-page" extends="base.definition">
+        <put-attribute name="title" value="image page"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/category/image_page.jsp"/>
+    </definition>
+
+    <definition name="profile-admin" extends="base.definition">
+        <put-attribute name="title" value="profile"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/user/profile_admin.jsp"/>
+    </definition>
+
+    <definition name="topic" extends="base.definition">
+        <put-attribute name="title" value="topic"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/news/topic.jsp"/>
+    </definition>
+
+    <definition name="news" extends="base.definition">
+        <put-attribute name="title" value="title"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/news/news.jsp"/>
+    </definition>
+
 
     <!--============== FORM CHANGE ============================-->
     <definition name="create-category" extends="base.definition">
@@ -141,5 +162,31 @@
         <put-attribute name="title" value="send mail"/>
         <put-attribute name="body" value="/WEB-INF/views/form-change/send_mail.jsp"/>
     </definition>
+
+    <definition name="update-image-page" extends="base.definition">
+        <put-attribute name="title" value="update image page"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/category/change_image_page.jsp"/>
+    </definition>
+
+    <definition name="create-topic" extends="base.definition">
+        <put-attribute name="title" value="create topic"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/news/change_news.jsp"/>
+    </definition>
+
+    <definition name="update-topic" extends="base.definition">
+        <put-attribute name="title" value="update topic"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/news/change_news.jsp"/>
+    </definition>
+
+    <definition name="create-news" extends="base.definition">
+        <put-attribute name="title" value="create news"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/news/change_news.jsp"/>
+    </definition>
+
+    <definition name="update-news" extends="base.definition">
+        <put-attribute name="title" value="update news"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/news/change_news.jsp"/>
+    </definition>
+
 
 </tiles-definitions>

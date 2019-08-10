@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script src="resources/js/ajax/user/ajax_user.js"></script>
-
 <main class="app-content">
     <div class="app-title">
         <div>

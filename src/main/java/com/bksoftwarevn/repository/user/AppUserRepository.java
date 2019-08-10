@@ -18,13 +18,13 @@ public interface AppUserRepository extends JpaRepository<AppUser, Integer> {
     AppUser findById(int id);
 
     @Query("select u from AppUser u where u.email= :email and u.password= :password and u.status=true")
-    AppUser findAppUserLogin(@Param("email") String email, @Param("password")String password);
+    AppUser findAppUserLogin(@Param("email") String email, @Param("password") String password);
 
     List<AppUser> findAll();
 
     List<AppUser> findByStatus(boolean status);
 
-    @Query("select u from AppUser u where u.status=true ")
+    @Query("select u from AppUser u where u.status=true and u.id >1 ")
     Page<AppUser> findAllPage(Pageable pageable);
 
     Page<AppUser> findByFullName(String name, Pageable pageable);

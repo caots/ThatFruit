@@ -124,9 +124,7 @@ public class AppUserService_Impl implements AppUserService {
 
         try {
             Page<AppUser> userPage = appUserRepository.findAllPage(pageable);
-            List<AppUser> users = userPage.getContent();
-            users.get(1).setStatus(false); // pop admin
-            return users;
+            return userPage.getContent();
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "find-all-user-page-error : {0}", ex.getMessage());
         }

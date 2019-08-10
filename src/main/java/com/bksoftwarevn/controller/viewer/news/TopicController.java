@@ -61,11 +61,7 @@ public class TopicController {
     @GetMapping(value = "/all")
     public ResponseEntity<List<Topic>> findAllTopic(@RequestHeader("adminbksoftwarevn") String header) {
         if (header.equals(Token.tokenHeader)) {
-            Record record = recordService.findByName("menu");
-
             List<Topic> topics = topicService.findAllTopic();
-            record.setNumber(topics.size());
-            recordService.saveRecord(record);
             return new ResponseEntity<>(topics, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -145,5 +145,60 @@ public class HomeAdminController {
         return "form-contact";
     }
 
+    @RequestMapping(value = {"/user"}, method = RequestMethod.GET)
+    public String userPage(HttpServletRequest request) {
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "user";
+    }
+
+    @RequestMapping(value = {"/image-page"}, method = RequestMethod.GET)
+    public String imagePagePage(HttpServletRequest request) {
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "image-page";
+    }
+
+    @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
+    public String profilePage(HttpServletRequest request) {
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "profile-admin";
+    }
+
+    @RequestMapping(value = {"/topic"}, method = RequestMethod.GET)
+    public String topicPage(HttpServletRequest request) {
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "topic";
+    }
+
+    @RequestMapping(value = {"/news"}, method = RequestMethod.GET)
+    public String newsPage(HttpServletRequest request) {
+
+        String username = getToken(request);
+        if (username == null) {
+            return "login";
+        }
+        return "news";
+    }
+
+
 
 }

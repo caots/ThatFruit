@@ -69,6 +69,7 @@ public class ChangePageController {
         }
         return "update-product";
     }
+
     //=========================Tag=================================
     @GetMapping("/create-tag")
     public String createTagPage(HttpServletRequest request) {
@@ -201,6 +202,71 @@ public class ChangePageController {
             return "login";
         }
         return "update-partner";
+    }
+
+    @GetMapping("/update-image-page")
+    public String updateImagePage(
+            @RequestParam("id") int id,
+            HttpServletRequest request
+    ) {
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "update-image-page";
+    }
+
+    @GetMapping("/create-topic")
+    public String createTopicPage(HttpServletRequest request) {
+
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "create-topic";
+    }
+
+
+    @GetMapping("/update-topic")
+    public String updateTopicPage(
+            @RequestParam("id") int id,
+            HttpServletRequest request
+    ) {
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "update-topic";
+    }
+
+    @GetMapping("/create-news")
+    public String createNewsPage(HttpServletRequest request) {
+
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "create-news";
+    }
+
+
+    @GetMapping("/update-news")
+    public String updateNewsPage(
+            @RequestParam("id") int id,
+            HttpServletRequest request
+    ) {
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "update-news";
     }
 
 

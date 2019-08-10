@@ -53,39 +53,43 @@ function findAllUser(page) {
             "Authorization": tokenHeader_value,
         },
         url: "api/v1/admin/user/page?page=" + page,
-        success: function (bigCategories) {
-            $("#column-big").html(
+        success: function (users) {
+            $("#column-user").html(
                 "<td style='text-align: center'> STT</td>" +
                 "<td> Tên </td>" +
                 "<td> Ngày sinh</td>" +
-                "<td> Địa chỉ</td>"+
+                "<td> Địa chỉ</td>" +
                 "<td> Số điện thoại</td>" +
-                "<td> </td>" +
-                "<td> Số điện thoại</td>"
+                "<td> Email</td>" +
+                "<td> Chức năng</td>"
             );
-            const listSize = Object.keys(bigCategories).length;
+            const listSize = Object.keys(users).length;
             if (listSize > 0) {
                 $('#total-record').text(listSize);
                 let contentRow = '';
                 var index = 1;
-                bigCategories.map(function (bigCategory) {
+                users.map(function (user) {
+
+                    var dateOfBirth = user.dateOfBirth+'';
+
                     contentRow += `
                         <tr>
-                        <td style='text-align: center' width="15%"> ${index} </td>
-                        <td  width="30%"> ${bigCategory.name} </td>
-                        <td  width="30%" > ${bigCategory.menu.name} </td>
-                        <td  width="25%"> 
+                        <td> ${index} </td>
+                        <td> ${user.fullName} </td>
+                        <td> ${dateOfBirth.replaceAllll(',', '-')} </td>
+                        <td> ${user.address} </td>
+                        <td> ${0+user.phone} </td>
+                        <td> ${user.email} </td>
+                        <td> 
                               <div class="btn-group">
-                                   <a class="btn btn-primary" href="create-category"><i class="fa fa-lg fa-plus"></i></a>
-                                   <a class="btn btn-primary" href="update-category?id=${bigCategory.id}" name="${bigCategory.id}"><i class="fa fa-lg fa-edit"></i></a>
-                                   <a class="btn btn-primary delete-big" name="${bigCategory.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
+                                   <a class="btn btn-primary delete-user" name="${user.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                               </div>
                         </td>
                         </tr>
                     `;
                     index++;
                 });
-                $("#row-big").html(contentRow);
+                $("#row-user").html(contentRow);
                 //============ delete =============
                 deleteUser();
             }
@@ -96,10 +100,10 @@ function findAllUser(page) {
     })
 }
 
-//============ Delete Big Category ========================
+//============ Delete User ========================
 function deleteUser() {
 
-    $('.delete-big').click(function () {
+    $('.delete-user').click(function () {
         const id = $(this).attr("name");
         $.ajax({
             type: "PUT",
@@ -107,11 +111,11 @@ function deleteUser() {
             headers: {
                 "Authorization": tokenHeader_value,
             },
-            url: "api/v1/admin/category/big/delete?id=" + id,
+            url: "api/v1/admin/user/delete?id=" + id,
             timeout: 30000,
             success: function () {
                 alert('Xóa thành công');
-                location.href = "big-category";
+                location.href = "user";
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("Xóa thất bại");

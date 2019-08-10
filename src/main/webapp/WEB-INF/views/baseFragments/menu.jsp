@@ -35,22 +35,6 @@
             </ul>
         </li>
 
-        <li><a class="app-menu__item" href="form-contact"><i class="fab fa-wpforms"></i><span
-                class="app-menu__label">&nbsp; Form khách hàng</span></a></li>
-
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
-            <i class="far fa-newspaper"></i><span class="app-menu__label">&nbsp;Bài viết</span><i
-                class="treeview-indicator fa fa-angle-right"></i></a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item" href="#">Danh mục tiêu đề</a>
-                </li>
-                <li>
-                    <a class="treeview-item" href="#" rel="noopener"></i> Danh mục bài viết</a>
-                </li>
-            </ul>
-        </li>
-
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                 class="app-menu__icon fas fa-sitemap"></i><span class="app-menu__label">Chuyên mục</span><i
                 class="treeview-indicator fa fa-angle-right"></i></a>
@@ -64,9 +48,28 @@
                 <li>
                     <a class="treeview-item" href="small-category"></i> Loại sản phẩm</a>
                 </li>
+                <li>
+                    <a class="treeview-item" href="image-page"></i> Ảnh trang chủ</a>
+                </li>
+
             </ul>
         </li>
 
+        <li><a class="app-menu__item" href="form-contact"><i class="fab fa-wpforms"></i><span
+                class="app-menu__label">&nbsp; Form khách hàng</span></a></li>
+
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+            <i class="far fa-newspaper"></i><span class="app-menu__label">&nbsp;Bài viết</span><i
+                class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li>
+                    <a class="treeview-item" href="topic">Danh mục tiêu đề</a>
+                </li>
+                <li>
+                    <a class="treeview-item" href="news" rel="noopener"></i> Danh mục bài viết</a>
+                </li>
+            </ul>
+        </li>
 
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                 class="app-menu__icon fab fas fa-building"></i><span class="app-menu__label">Công ty</span><i

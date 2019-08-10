@@ -1,11 +1,11 @@
 $(document).ready(function () {
-    findAllContactForm(1);
-    findAllPageContactFormNumber();
+    findAllNews(1);
+    findAllPageNewsNumber();
 
 });
 
 //==================================page=============================.unbind('click')
-function pageContactFormCategory(size) {
+function pageNews(size) {
     let contentRow = '';
     for (let i = 1; i <= size; i++) {
         contentRow += `<li><a href="#" class="page" id="_${i}" name="${i}" >${i}</a></li>`;
@@ -18,16 +18,16 @@ function pageContactFormCategory(size) {
     $("#_1").addClass("active");
 }
 
-function findAllPageContactFormNumber() {
+function findAllPageNewsNumber() {
     $.ajax({
         type: "GET",
         headers: {
-            "Authorization": tokenHeader_value,
+            'adminbksoftwarevn': value_token_public,
         },
-        url: "api/v1/admin/contact-form/size",
+        url: "api/v1/public/news/size",
         success: function (size) {
 
-            pageContactFormCategory(size);
+            pageNews(size);
 
             $('.page').click(function () {
                 const page = $(this).attr("name");
@@ -36,7 +36,7 @@ function findAllPageContactFormNumber() {
                     $(id).removeClass("active");
                 }
                 $(this).addClass("active");
-                findAllContactForm(page);
+                findAllNews(page);
             });
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -45,59 +45,51 @@ function findAllPageContactFormNumber() {
     });
 }
 
-function findAllContactForm(page) {
-    //============ Get All Big Category ========================
+function findAllNews(page) {
     $.ajax({
         type: "GET",
         headers: {
-            "Authorization": tokenHeader_value,
+            'adminbksoftwarevn': value_token_public,
         },
-        url: "api/v1/admin/contact-form/page?page=" + page,
-        success: function (contactForms) {
-            $("#column-form-contact").html(
+        url: "api/v1/public/news/page?page=" + page,
+        success: function (news) {
+            $("#column-news").html(
                 "<td style='text-align: center'> STT</td>" +
                 "<td> Tiêu đề </td>" +
-                "<td> Tên</td>" +
-                "<td> Số điện thoại</td>" +
                 "<td> Nội dung</td>" +
-                "<td> Check</td>"+
+                "<td> Lượt xem</td>" +
+                "<td> Thời gian đăng</td>" +
                 "<td> Chức năng</td>"
             );
-            const listSize = Object.keys(contactForms).length;
+            const listSize = Object.keys(news).length;
             if (listSize > 0) {
                 $('#total-record').text(listSize);
                 let contentRow = '';
                 var index = 1;
-
-                var checked = contactForm.checked;
-                if (checked === true) {
-                    checked = 'Đã Check';
-                } else {
-                    checked = 'Chưa check';
-                }
-
-                contactForms.map(function (contactForm) {
+                news.map(function (newss) {
                     contentRow += `
                         <tr>
                         <td> ${index} </td>
-                        <td> ${contactForm.title} </td>
-                        <td> ${contactForm.fullName} </td>
-                        <td> ${contactForm.phone} </td>
-                        <td> ${contactForm.content} </td>
-                        <td> ${checked} </td>
+                        <td style="text-align: left"> ${newss.title} </td>
+                        <td>  <a href="update-news?id=${newss.id}" name="${newss.id}" style="cursor: pointer;color: green">Nội dung </a>&nbsp;<br> </td> </td>
+                        <td> ${newss.view} </td>
+                        <td> ${newss.time} </td>
                         <td> 
                               <div class="btn-group">
-                                   <a class="btn btn-primary" href="send-mail-form?id=${contactForm.id}" name="${contactForm.id}"><i class="fa fa-lg fa-edit"></i></a>
-                                   <a class="btn btn-primary delete-form" name="${contactForm.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
+                                   <a class="btn btn-primary" href="create-news"><i class="fa fa-lg fa-plus"></i></a>
+                                   <a class="btn btn-primary" href="update-news?id=${newss.id}" name="${newss.id}"><i class="fa fa-lg fa-edit"></i></a>
+                                   <a class="btn btn-primary delete-news" name="${newss.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                               </div>
                         </td>
                         </tr>
                     `;
                     index++;
+                    console.log(typeof (newss.time.prototype));
                 });
-                $("#row-form-contact").html(contentRow);
+                $("#row-news").html(contentRow);
                 //============ delete =============
-                deleteContactForm();
+                deleteNews();
+
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -106,10 +98,10 @@ function findAllContactForm(page) {
     })
 }
 
-//============ Delete Small Category ========================
-function deleteContactForm() {
+//============ Delete News ========================
+function deleteNews() {
 
-    $('.delete-form').click(function () {
+    $('.delete-news').click(function () {
         const id = $(this).attr("name");
         $.ajax({
             type: "PUT",
@@ -117,11 +109,11 @@ function deleteContactForm() {
             headers: {
                 "Authorization": tokenHeader_value,
             },
-            url: "api/v1/admin/category/small/delete?id=" + id,
+            url: "api/v1/admin/news/delete?id=" + id,
             timeout: 30000,
             success: function () {
                 alert('Xóa thành công');
-                location.href = "form-contact";
+                location.href = "news";
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("Xóa thất bại");
