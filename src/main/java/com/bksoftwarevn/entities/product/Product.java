@@ -1,6 +1,5 @@
 package com.bksoftwarevn.entities.product;
 
-
 import com.bksoftwarevn.entities.category.SmallCategory;
 import com.bksoftwarevn.entities.company.Partner;
 import com.bksoftwarevn.entities.news.Tag;
@@ -53,6 +52,9 @@ public class Product implements Serializable {
     private String origin;
 
     private String unit;
+
+    @Column(name = "product_status")
+    private boolean productStatus;
 
     @NotNull
     private boolean status;

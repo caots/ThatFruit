@@ -2729,14 +2729,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
     color: #FFF;
-    background-color: var(--gray-main);
-    border-color: var(--gray-main);
+    background-color: #009688;
+    border-color: #009688;
 }
 
 .btn-primary:hover {
     color: #FFF;
-    background-color:  var(--yellow-main);
-    border-color:  var(--yellow-main);
+    background-color: var(--yellow-main);
+    border-color: var(--yellow-main);
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -14775,6 +14775,7 @@ be a descendant of the grid when it is being dragged.
 
 .btn .icon,
 .btn .fa {
+    padding: 5px;
     font-size: 14px;
     margin-right: 5px;
     vertical-align: middle;
@@ -14910,7 +14911,6 @@ be a descendant of the grid when it is being dragged.
 
 .tile .tile-title {
     margin-top: 0;
-    margin-bottom: 20px;
     font-size: 1.5rem;
 }
 
@@ -15935,4 +15935,105 @@ be a descendant of the grid when it is being dragged.
 
 .user .user-settings label {
     color: #666;
+}
+
+.app-content .table-responsive {
+    height: 560px;
+    background-color: white;
+    text-align: -webkit-center;
+}
+
+.app-content .title-body {
+    margin-left: -50px;
+    text-align: center;
+    color: #009688;
+}
+
+
+.app-content .table-responsive table {
+    padding-top: 50px;
+    width: 1062px;
+    justify-content: center;
+
+}
+
+.app-content .table-responsive table .row-menu tr td .btn-group .btn {
+    border: 2px solid #009688;
+    background-color: #009688;
+}
+
+
+/* PAGEABLE */
+.app-content .table-responsive .pageable {
+    position: absolute;
+    bottom: 10px;
+    right: 30px;
+}
+
+
+.app-content .table-responsive.pageable .pagination {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.app-content .table-responsive.row-menu .btn-group > a > i {
+    font-size: 20px
+}
+
+.app-content .table-responsive .title-table .app-nav {
+    justify-content: center;
+}
+
+.app-content .table-responsive .title-table .app-nav .app-search{
+    font-size: 18px;
+    padding-bottom: 8px;
+}
+
+
+.pagination li {
+    display: inline;
+    text-align: center;
+}
+
+.pagination a {
+    float: left;
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 5px 12px;
+    color: #fff;
+    margin-left: -1px;
+    border: 1px solid #ddd;
+    line-height: 1.5;
+    color: #4285F4;
+    background: #fff;
+}
+
+.pagination li:first-child a {
+    -moz-border-radius: 6px 0 0 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px 0 0 6px;
+}
+
+.pagination li:last-child a {
+    -moz-border-radius: 0 6px 6px 0;
+    -webkit-border-radius: 0;
+    border-radius: 0 6px 6px 0;
+}
+
+.pagination a:hover {
+    background: #eee;
+}
+
+.pagination a.active {
+    cursor: default;
+    border-color: #009688;
+    background: #009688;
+    color: #fff;
+}
+
+.pagination a:active {
+    outline: none;
 }

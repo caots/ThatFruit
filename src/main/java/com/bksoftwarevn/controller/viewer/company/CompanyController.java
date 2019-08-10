@@ -58,6 +58,20 @@ public class CompanyController {
 
     }
 
+    @GetMapping("/contact/all")
+    public ResponseEntity<List<Contact>> findContactByCompany(
+            HttpServletResponse response,
+            @RequestHeader("adminbksoftwarevn") String header
+    ) {
+        if (header.equals(Token.tokenHeader)) {
+            List<Contact> contacts = contactService.findAllContact();
+            if (contacts != null) {
+                return new ResponseEntity<>(contacts, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/contact")
     public ResponseEntity<List<Contact>> findContactByCompany(
             HttpServletResponse response,

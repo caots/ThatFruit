@@ -9,6 +9,8 @@ public interface ContactService {
 
     List<Contact> findByCompany(Company company);
 
+    List<Contact> findAllContact();
+
     Contact findById(int id);
 
     boolean saveContact(Contact contact);

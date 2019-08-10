@@ -12,6 +12,8 @@ public interface ContactRepository extends JpaRepository<Contact, Integer> {
 
     List<Contact> findByCompany(Company company);
 
+    List<Contact> findByStatus(boolean status);
+
     Contact findById(int id);
 
 }

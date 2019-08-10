@@ -16,9 +16,12 @@ public class ImagePage implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String name;
+
     private String url;
 
     private boolean status;
 
-    public ImagePage(){}
+    public ImagePage() {
+    }
 }

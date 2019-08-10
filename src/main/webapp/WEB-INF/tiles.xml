@@ -21,19 +21,119 @@
     </definition>
 
     <definition name="menu_category" extends="base.definition">
-        <put-attribute name="title" value="home admin"/>
+        <put-attribute name="title" value="danh muc"/>
         <put-attribute name="body" value="/WEB-INF/views/bodyFragments/category/menu_category.jsp"/>
     </definition>
 
-    <!--<definition name="big-category" extends="base.definition">
-        <put-attribute name="title" value="home admin"/>
+    <definition name="big-category" extends="base.definition">
+        <put-attribute name="title" value="danh muc san pham"/>
         <put-attribute name="body" value="/WEB-INF/views/bodyFragments/category/big_category.jsp"/>
     </definition>
 
     <definition name="small-category" extends="base.definition">
-        <put-attribute name="title" value="home admin"/>
+        <put-attribute name="title" value="loai san pham"/>
         <put-attribute name="body" value="/WEB-INF/views/bodyFragments/category/small_category.jsp"/>
-    </definition>-->
+    </definition>
 
+    <definition name="product" extends="base.definition">
+        <put-attribute name="title" value="san pham"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/product/product.jsp"/>
+    </definition>
+
+    <definition name="tag" extends="base.definition">
+        <put-attribute name="title" value="tag"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/product/tag.jsp"/>
+    </definition>
+
+    <definition name="company" extends="base.definition">
+        <put-attribute name="title" value="company"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/company/company.jsp"/>
+    </definition>
+
+    <definition name="contact" extends="base.definition">
+        <put-attribute name="title" value="contact"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/company/contact.jsp"/>
+    </definition>
+
+    <definition name="partner" extends="base.definition">
+        <put-attribute name="title" value="partner"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/company/partner.jsp"/>
+    </definition>
+
+    <definition name="form-contact" extends="base.definition">
+        <put-attribute name="title" value="form contact"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/company/form_contact.jsp"/>
+    </definition>
+
+    <!--============== FORM CHANGE ============================-->
+    <definition name="create-category" extends="base.definition">
+        <put-attribute name="title" value="create category"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/category/change_category.jsp"/>
+    </definition>
+
+    <definition name="update-category" extends="base.definition">
+        <put-attribute name="title" value="update category"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/category/change_category.jsp"/>
+    </definition>
+
+    <definition name="create-product" extends="base.definition">
+        <put-attribute name="title" value="create product"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/product/change_product.jsp"/>
+    </definition>
+
+    <definition name="update-product" extends="base.definition">
+        <put-attribute name="title" value="update product"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/product/change_product.jsp"/>
+    </definition>
+
+    <definition name="create-tag" extends="base.definition">
+        <put-attribute name="title" value="create tag"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/product/change_tag.jsp"/>
+    </definition>
+
+    <definition name="update-tag" extends="base.definition">
+        <put-attribute name="title" value="update product"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/product/change_tag.jsp"/>
+    </definition>
+
+    <definition name="create-company" extends="base.definition">
+        <put-attribute name="title" value="create company"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/company/change_company.jsp"/>
+    </definition>
+
+    <definition name="update-company" extends="base.definition">
+        <put-attribute name="title" value="update company"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/company/change_company.jsp"/>
+    </definition>
+
+    <definition name="create-contact" extends="base.definition">
+        <put-attribute name="title" value="create company"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/company/change_contact.jsp"/>
+    </definition>
+
+    <definition name="update-contact" extends="base.definition">
+        <put-attribute name="title" value="update company"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/company/change_contact.jsp"/>
+    </definition>
+
+    <definition name="create-partner" extends="base.definition">
+        <put-attribute name="title" value="create partner"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/company/change_partner.jsp"/>
+    </definition>
+
+    <definition name="update-partner" extends="base.definition">
+        <put-attribute name="title" value="update partner"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/company/change_partner.jsp"/>
+    </definition>
+
+    <definition name="send-mail" extends="base.definition">
+        <put-attribute name="title" value="send mail"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/send_mail.jsp"/>
+    </definition>
+
+    <definition name="send-mail-form" extends="base.definition">
+        <put-attribute name="title" value="send mail"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/send_mail.jsp"/>
+    </definition>
 
 </tiles-definitions>

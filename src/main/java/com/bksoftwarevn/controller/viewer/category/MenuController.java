@@ -61,7 +61,9 @@ public class MenuController {
     }
 
     @GetMapping(value = "/all")
-    public ResponseEntity<List<Menu>> findAllMenu(@RequestHeader("adminbksoftwarevn") String header) {
+    public ResponseEntity<List<Menu>> findAllMenu(
+            @RequestHeader("adminbksoftwarevn") String header
+    ) {
         if (header.equals(Token.tokenHeader)) {
             List<Menu> menus = menuService.findAllMenu();
             return new ResponseEntity<>(menus, HttpStatus.OK);

@@ -36,6 +36,16 @@ public class ContactService_Impl implements ContactService {
     }
 
     @Override
+    public List<Contact> findAllContact() {
+        try {
+            return contactRepository.findByStatus(true);
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "find-list-contact-error : {0}", ex.getMessage());
+        }
+        return null;
+    }
+
+    @Override
     public Contact findById(int id) {
         try {
             Contact contact = contactRepository.findById(id);

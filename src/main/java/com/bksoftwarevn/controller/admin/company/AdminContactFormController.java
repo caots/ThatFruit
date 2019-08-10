@@ -31,32 +31,23 @@ public class AdminContactFormController {
     public ResponseEntity<List<ContactForm>> showBigCategory(
             HttpServletResponse response,
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
-            @RequestParam(name = "size", required = false, defaultValue = "10") int size,
-            @RequestHeader("adminbksoftwarevn") String header
-    ) {
-        if (header.equals(Token.tokenHeader)) {
-            if (page < 1) page = 1;
-            if (size < 0) size = 0;
+            @RequestParam(name = "size", required = false, defaultValue = "10") int size
+            ) {
+        if (page < 1) page = 1;
+        if (size < 0) size = 0;
 
-            Pageable pageable = PageRequest.of(page - 1, size);
-            List<ContactForm> contactForms = contactFormService.findAllContactFormPage(pageable);
-            return new ResponseEntity<>(contactForms, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Pageable pageable = PageRequest.of(page - 1, size);
+        List<ContactForm> contactForms = contactFormService.findAllContactFormPage(pageable);
+        return new ResponseEntity<>(contactForms, HttpStatus.OK);
     }
 
     @GetMapping(value = "/size")
     public ResponseEntity<Double> pageNumberContactForm(
-            HttpServletResponse response,
-            @RequestHeader("adminbksoftwarevn") String header
+            HttpServletResponse response
     ) {
-
         Record record = recordService.findByName("contact-form");
-        if (header.equals(Token.tokenHeader)) {
-            double result = Math.ceil((double) record.getNumber() / 10);
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        double result = Math.ceil((double) record.getNumber() / 10);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PutMapping

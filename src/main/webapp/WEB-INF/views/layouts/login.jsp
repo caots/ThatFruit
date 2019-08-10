@@ -15,7 +15,7 @@
 
     </script>
     <script src="resources/js/ajax/ajax_login.js"></script>
-    <script src="resources/js/ajax/commom.js"></script>
+    <script src="resources/js/ajax/common.js"></script>
 </head>
 <body>
 

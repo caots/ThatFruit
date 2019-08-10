@@ -24,9 +24,9 @@ public class HomeAdminController {
         return token;
     }
 
-    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/login", "/logout"}, method = RequestMethod.GET)
     public String pageLogin(HttpServletRequest request) {
-        Cookie cookies[] = request.getCookies();
+        Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (int i = 0; i < cookies.length; i++) {
                 cookies[i].setMaxAge(0);
@@ -78,5 +78,72 @@ public class HomeAdminController {
         }
         return "small-category";
     }
+
+    @RequestMapping(value = {"/product"}, method = RequestMethod.GET)
+    public String productPage(HttpServletRequest request) {
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "product";
+    }
+
+    @RequestMapping(value = {"/tag"}, method = RequestMethod.GET)
+    public String tagPage(HttpServletRequest request) {
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "tag";
+    }
+
+    @RequestMapping(value = {"/company"}, method = RequestMethod.GET)
+    public String companyPage(HttpServletRequest request) {
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "company";
+    }
+
+    @RequestMapping(value = {"/contact"}, method = RequestMethod.GET)
+    public String contactPage(HttpServletRequest request) {
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "contact";
+    }
+
+    @RequestMapping(value = {"/partner"}, method = RequestMethod.GET)
+    public String partnerPage(HttpServletRequest request) {
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "partner";
+    }
+
+    @RequestMapping(value = {"/form-contact"}, method = RequestMethod.GET)
+    public String formContactPage(HttpServletRequest request) {
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "form-contact";
+    }
+
 
 }
