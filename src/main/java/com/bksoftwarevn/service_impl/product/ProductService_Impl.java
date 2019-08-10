@@ -1,5 +1,6 @@
 package com.bksoftwarevn.service_impl.product;
 
+import com.bksoftwarevn.entities.category.BigCategory;
 import com.bksoftwarevn.entities.category.SmallCategory;
 import com.bksoftwarevn.entities.news.Tag;
 import com.bksoftwarevn.entities.product.BuyFormHasProduct;
@@ -10,13 +11,16 @@ import com.bksoftwarevn.repository.product.BuyFormHasProductRepository;
 import com.bksoftwarevn.repository.product.ProductRepository;
 import com.bksoftwarevn.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -150,6 +154,23 @@ public class ProductService_Impl implements ProductService {
             return productRepository.findProductByHot(pageable).getContent();
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "find-hot-products-error : {0}", ex.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public Set<String> findAllBigCategoryByHotProducts(int max, Pageable pageable) {
+
+        try {
+            Set<String> nameBigs = new HashSet<>();
+            List<Product> productsHot = productRepository.findProductByHot(pageable).getContent();
+            for (Product product : productsHot) {
+                nameBigs.add(product.getSmallCategory().getBigCategory().getName());
+                if (nameBigs.size() >= max) break;
+            }
+            return nameBigs;
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "find-all-big-category-by-hot-product-error : {0}", ex.getMessage());
         }
         return null;
     }

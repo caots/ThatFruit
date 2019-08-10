@@ -1,10 +1,12 @@
 package com.bksoftwarevn.service.product;
 
+import com.bksoftwarevn.entities.category.BigCategory;
 import com.bksoftwarevn.entities.product.Product;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ProductService {
 
@@ -29,6 +31,8 @@ public interface ProductService {
     int sizeOfProductByPartner(int idPartner);
 
     List<Product> findHotProducts(Pageable pageable);
+
+    Set<String> findAllBigCategoryByHotProducts(int max, Pageable pageable);
 
     List<Product> findProductSale(Pageable pageable);
 

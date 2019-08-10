@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "api/v1/public/product")
@@ -80,6 +81,25 @@ public class ProductController {
             Pageable pageable = PageRequest.of(page - 1, size);
             List<Product> products = productService.findHotProducts(pageable);
             return new ResponseEntity<>(products, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/find-big-category-by-hot")
+    public ResponseEntity<Set<String>> findAllBigCategoryByHotProduct(
+            HttpServletResponse response,
+            @RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+            @RequestParam(name = "size", required = false, defaultValue = "15") Integer size,
+            @RequestParam(name = "max", required = false, defaultValue = "6") Integer max,
+            @RequestHeader("adminbksoftwarevn") String header
+    ) {
+
+        if (page < 1) page = 1;
+        if (size < 0) size = 0;
+        if (header.equals(Token.tokenHeader)) {
+            Pageable pageable = PageRequest.of(page - 1, size);
+            Set<String> bigCategoryByHotProducts = productService.findAllBigCategoryByHotProducts(max, pageable);
+            return new ResponseEntity<>(bigCategoryByHotProducts, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
