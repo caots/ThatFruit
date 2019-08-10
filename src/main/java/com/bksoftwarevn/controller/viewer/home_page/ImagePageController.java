@@ -43,7 +43,7 @@ public class ImagePageController {
             @RequestHeader("adminbksoftwarevn") String header
     ) {
         if (header.equals(Token.tokenHeader)) {
-            return new ResponseEntity<>(imagePageService.findAllImage(), HttpStatus.OK);
+            return new ResponseEntity<>(imagePageService.findAllImageBetweenId(startId,endId), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
