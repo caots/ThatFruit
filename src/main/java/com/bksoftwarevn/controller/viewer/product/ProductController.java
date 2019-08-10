@@ -263,14 +263,11 @@ public class ProductController {
     @GetMapping(value = "/find-by-sale")
     public ResponseEntity<List<Product>> showProductSale(
             @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-            @RequestParam(name = "size", required = false, defaultValue = "5") Integer size,
-            @RequestParam(name = "type", required = false, defaultValue = "ASC") String type,
-            @RequestParam(name = "field", required = false, defaultValue = "id") String field
+            @RequestParam(name = "size", required = false, defaultValue = "5") Integer size
             , @RequestHeader("adminbksoftwarevn") String header
     ) {
         if (header.equals(Token.tokenHeader)) {
-            Sort sortable = productService.sortData(type, field);
-            Pageable pageable = PageRequest.of(page, size, sortable);
+            Pageable pageable = PageRequest.of(page, size);
             List<Product> lstProductSale = productService.findProductSale(pageable);
             return new ResponseEntity<>(lstProductSale, HttpStatus.OK);
         }

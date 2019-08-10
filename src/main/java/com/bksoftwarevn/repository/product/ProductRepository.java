@@ -14,16 +14,16 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    @Query("SELECT p FROM Product p WHERE p.name LIKE CONCAT('%',:name_product,'%')")
+    @Query("SELECT p FROM Product p WHERE p.status = true and p.name LIKE CONCAT('%',:name_product,'%')")
     Page<Product> findAllProductByNamePage(@Param("name_product") String name, Pageable pageable);
 
-    @Query("SELECT p FROM Product p WHERE p.name LIKE CONCAT('%',:name_product,'%')")
+    @Query("SELECT p FROM Product p WHERE p.status = true and p.name LIKE CONCAT('%',:name_product,'%')")
     List<Product> findByProductNameSize(@Param("name_product") String name);
 
     @Query(value = "SELECT p  From Product p where p.status=true order by p.initDate desc ")
     Page<Product> findNewProductPage(Pageable pageable);
 
-    @Query(value = " SELECT p From Product p order by (p.originCost - p.saleCost) desc ")
+    @Query(value = " SELECT p From Product p where p.status  = true order by (p.originCost - p.saleCost) desc ")
     Page<Product> findSaleProducts(Pageable pageable);
 
     @Query(value = " SELECT p From Product p where p.smallCategory.id =:id and  p.status= true")
