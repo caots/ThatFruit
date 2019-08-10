@@ -1,5 +1,6 @@
 package com.bksoftwarevn.controller.admin.user;
 
+import com.bksoftwarevn.commom.Token;
 import com.bksoftwarevn.entities.Record;
 import com.bksoftwarevn.entities.user.AppUser;
 import com.bksoftwarevn.service.RecordService;
@@ -28,7 +29,7 @@ public class AdminUserController {
     private RecordService recordService;
 
 
-    @GetMapping
+    @GetMapping("/page")
     public ResponseEntity<List<AppUser>> findAllUser(
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
             @RequestParam(name = "size", required = false, defaultValue = "10") int size,
@@ -41,6 +42,16 @@ public class AdminUserController {
         List<AppUser> users = appUserService.findAllPage(pageable);
         if (users != null) return new ResponseEntity<>(users, HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "/size")
+    public ResponseEntity<Double> pageNumberUser(
+            HttpServletResponse response
+    ) {
+
+        Record record = recordService.findByName("user");
+        double result = Math.ceil((double) record.getNumber() / 10);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PutMapping("/accumulated-point")

@@ -65,6 +65,12 @@
         <put-attribute name="body" value="/WEB-INF/views/bodyFragments/company/form_contact.jsp"/>
     </definition>
 
+
+    <definition name="user" extends="base.definition">
+        <put-attribute name="title" value="user"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/company/form_contact.jsp"/>
+    </definition>
+
     <!--============== FORM CHANGE ============================-->
     <definition name="create-category" extends="base.definition">
         <put-attribute name="title" value="create category"/>

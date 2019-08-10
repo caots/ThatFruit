@@ -29,6 +29,16 @@ public class ImagePageService_Impl implements ImagePageService {
     }
 
     @Override
+    public List<ImagePage> findAllImageBetweenId(int startId, int endId) {
+        try {
+            return imagePageRepository.findByIdBetween(startId, endId);
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "find-all-image-between-id-error : {0}", ex.getMessage());
+        }
+        return null;
+    }
+
+    @Override
     public ImagePage findById(int id) {
         try {
             ImagePage imagePage = imagePageRepository.findById(id);

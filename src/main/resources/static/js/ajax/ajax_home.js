@@ -10,13 +10,22 @@ function findAllRecord() {
         headers: {
             "Authorization": tokenHeader_value,
         },
-        url: "api/v1/admin/record",
+        url: "api/v1/admin/record/all",
         success: function (records) {
             const listSize = Object.keys(records).length;
             if (listSize > 0) {
                 records.map(function (record) {
-                    if (record.name === '') {
-
+                    if (record.name === 'user') {
+                        $('#user-number').text(record.number);
+                    }
+                    if (record.name === 'news') {
+                        $('#news-number').text(record.number);
+                    }
+                    if (record.name === 'product') {
+                        $('#product-number').text(record.number);
+                    }
+                    if (record.name === 'partner') {
+                        $('#partner-number').text(record.number);
                     }
                 });
             }

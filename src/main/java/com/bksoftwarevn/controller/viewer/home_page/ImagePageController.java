@@ -35,6 +35,21 @@ public class ImagePageController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<ImagePage>> findAllImagePageBetweenId(
+            @RequestParam("start-id") int startId,
+            @RequestParam("end-id") int endId,
+            HttpServletResponse response,
+            @RequestHeader("adminbksoftwarevn") String header
+    ) {
+        if (header.equals(Token.tokenHeader)) {
+            return new ResponseEntity<>(imagePageService.findAllImage(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+
+
     @GetMapping(value = "/find-by-id")
     public ResponseEntity<ImagePage> findImagePageById(
             @RequestParam("id") int id,

@@ -16,7 +16,7 @@
         <li><a class="app-menu__item" href="#"><i class="fas fa-shopping-cart"></i><span
                 class="app-menu__label">&nbsp; Danh sách đơn hàng</span></a></li>
 
-        <li><a class="app-menu__item" href="#"><i class="fas fa-users"></i></i><span
+        <li><a class="app-menu__item" href="user"><i class="fas fa-users"></i></i><span
                 class="app-menu__label">&nbsp; Quản lý user</span></a></li>
 
 
@@ -39,7 +39,7 @@
                 class="app-menu__label">&nbsp; Form khách hàng</span></a></li>
 
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
-            <i class="far fa-newspaper"></i><span class="app-menu__label"> Bài viết</span><i
+            <i class="far fa-newspaper"></i><span class="app-menu__label">&nbsp;Bài viết</span><i
                 class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li>

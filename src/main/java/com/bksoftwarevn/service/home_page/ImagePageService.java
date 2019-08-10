@@ -8,6 +8,8 @@ public interface ImagePageService {
 
     List<ImagePage> findAllImage();
 
+    List<ImagePage> findAllImageBetweenId(int startId, int endId);
+
     ImagePage findById(int id);
 
     boolean saveImagePage(ImagePage imagePage);
