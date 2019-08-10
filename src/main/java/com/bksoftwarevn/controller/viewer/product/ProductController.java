@@ -93,7 +93,8 @@ public class ProductController {
             @RequestParam(name = "max", required = false, defaultValue = "6") Integer max,
             @RequestHeader("adminbksoftwarevn") String header
     ) {
-
+        // max: size để show lên màn hình
+        // size: bằng hot product để lấy ddk hết hot product -> tìm đk Big category
         if (page < 1) page = 1;
         if (size < 0) size = 0;
         if (header.equals(Token.tokenHeader)) {
