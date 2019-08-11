@@ -8,6 +8,8 @@ public interface ProductImageService {
 
     List<ProductImage> findAllProductImage();
 
+    List<ProductImage> findAllProductImageByProductId(int productId);
+
     ProductImage findById(int id);
 
     boolean saveProductImage(ProductImage productImage);

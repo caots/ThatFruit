@@ -18,9 +18,21 @@ public class ProductImageController {
     private ProductImageService productImageService;
 
     @GetMapping(value = "/all")
-    public ResponseEntity<List<ProductImage>> findAllProductImage(@RequestHeader("adminbksoftwarevn") String header) {
+    public ResponseEntity<List<ProductImage>> findAllProductImage(
+            @RequestHeader("adminbksoftwarevn") String header) {
         if (header.equals(Token.tokenHeader)) {
             List<ProductImage> productImages = productImageService.findAllProductImage();
+            return new ResponseEntity<>(productImages, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "/find-by-product")
+    public ResponseEntity<List<ProductImage>> findAllProductImageByProductId(
+            @RequestParam("product-id") int productId,
+            @RequestHeader("adminbksoftwarevn") String header) {
+        if (header.equals(Token.tokenHeader)) {
+            List<ProductImage> productImages = productImageService.findAllProductImageByProductId(productId);
             return new ResponseEntity<>(productImages, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

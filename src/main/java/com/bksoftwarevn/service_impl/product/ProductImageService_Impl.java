@@ -2,7 +2,9 @@ package com.bksoftwarevn.service_impl.product;
 
 import com.bksoftwarevn.entities.product.ProductImage;
 import com.bksoftwarevn.repository.product.ProductImageRepository;
+import com.bksoftwarevn.repository.product.ProductRepository;
 import com.bksoftwarevn.service.product.ProductImageService;
+import com.bksoftwarevn.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +20,25 @@ public class ProductImageService_Impl implements ProductImageService {
     @Autowired
     private ProductImageRepository productImageRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @Override
     public List<ProductImage> findAllProductImage() {
         try {
             return productImageRepository.findByStatus(true);
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "find-all-product-image-error : {0}", ex.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public List<ProductImage> findAllProductImageByProductId(int productId) {
+        try {
+            return productImageRepository.findByProduct(productRepository.findById(productId));
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "find-all-product-image-by-product-id-error : {0}", ex.getMessage());
         }
         return null;
     }
