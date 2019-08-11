@@ -68,16 +68,16 @@ function findAllNews(page) {
                 var index = 1;
                 news.map(function (newss) {
                     contentRow += `
-                        <tr>
+                        <tr>  
                         <td> ${index} </td>
                         <td style="text-align: left"> ${newss.title} </td>
-                        <td>  <a href="update-news?id=${newss.id}" name="${newss.id}" style="cursor: pointer;color: green">Nội dung </a>&nbsp;<br> </td> </td>
+                        <td>  <a href="update-news?news-id=${newss.id}"  style="cursor: pointer;color: green">Nội dung </a>&nbsp;<br> </td> </td>
                         <td> ${newss.view} </td>
                         <td> ${newss.time} </td>
                         <td> 
                               <div class="btn-group">
                                    <a class="btn btn-primary" href="create-news"><i class="fa fa-lg fa-plus"></i></a>
-                                   <a class="btn btn-primary" href="update-news?id=${newss.id}" name="${newss.id}"><i class="fa fa-lg fa-edit"></i></a>
+                                   <a class="btn btn-primary" href="update-news?news-id=${newss.id}" name="${newss.id}"><i class="fa fa-lg fa-edit"></i></a>
                                    <a class="btn btn-primary delete-news" name="${newss.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                               </div>
                         </td>

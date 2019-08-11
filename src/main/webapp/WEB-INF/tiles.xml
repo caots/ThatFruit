@@ -172,12 +172,12 @@
 
     <definition name="create-topic" extends="base.definition">
         <put-attribute name="title" value="create topic"/>
-        <put-attribute name="body" value="/WEB-INF/views/form-change/news/change_news.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/news/change_topic.jsp"/>
     </definition>
 
     <definition name="update-topic" extends="base.definition">
         <put-attribute name="title" value="update topic"/>
-        <put-attribute name="body" value="/WEB-INF/views/form-change/news/change_news.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/news/change_topic.jsp"/>
     </definition>
 
     <definition name="create-news" extends="base.definition">

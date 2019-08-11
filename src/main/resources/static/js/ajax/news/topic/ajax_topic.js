@@ -33,7 +33,7 @@ function findAllTopic() {
                         <td>
                             <div class="btn-group">
                                    <a class="btn btn-primary" href="create-topic"><i class="fa fa-lg fa-plus"></i></a>
-                                   <a class="btn btn-primary" href="update-topic?id=${topic.id}" name="${topic.id}"><i class="fa fa-lg fa-edit"></i></a>
+                                   <a class="btn btn-primary" href="update-topic?topic-id=${topic.id}" name="${topic.id}"><i class="fa fa-lg fa-edit"></i></a>
                                    <a class="btn btn-primary delete-topic" name="${topic.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                             </div>
                         </td>

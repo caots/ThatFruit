@@ -1,15 +1,14 @@
 $(document).ready(function () {
-    clickBtnTagChangeSubmit();
+    clickBtnPartnerChangeSubmit();
 });
 
-//============ CREATE TAG ========================
 
-function createTag() {
-    $('#btn-ok-tag').click(function () {
+function createPartner() {
+    $('#btn-ok-partner').click(function () {
 
-        const nameTag = $('#name-tag').val();
-        const tag = {
-            "name": nameTag
+        const namePartner = $('#name-partner').val();
+        const partner = {
+            "name": namePartner
         };
         $.ajax({
             type: "POST",
@@ -17,13 +16,13 @@ function createTag() {
             headers: {
                 "Authorization": tokenHeader_value,
             },
-            url: "api/v1/admin/tag",
-            data: JSON.stringify(tag),
+            url: "api/v1/admin/partner",
+            data: JSON.stringify(partner),
             cache: false,
             timeout: 300000,
             success: function () {
                 alert("Thêm thành công ");
-                $('#btn-ok-tag').prop("disabled", true);
+                $('#btn-ok-partner').prop("disabled", true);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 errMess(jqXHR, textStatus, errorThrown);
@@ -33,9 +32,8 @@ function createTag() {
     });
 }
 
-// ============ FIND TAG BY ID ===================
 
-function findTagById(id) {
+function findPartnerById(id) {
 
     $.ajax({
         type: "GET",
@@ -43,11 +41,10 @@ function findTagById(id) {
         headers: {
             "adminbksoftwarevn": value_token_public,
         },
-        url: "api/v1/public/tag/find-by-id?id=" + id,
+        url: "api/v1/public/partner/find-by-id?id=" + id,
         timeout: 30000,
         success: function (result) {
-            console.log(result);
-            updateTag(result);
+            updatePartner(result);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             errMess(jqXHR, textStatus, errorThrown);
@@ -55,11 +52,10 @@ function findTagById(id) {
     });
 }
 
-//============ UPDATE TAG ========================
-function updateTag(data) {
-    $('#name-tag').val(data.name);
-    $('#btn-ok-tag').click(function () {
-        data.name = $('#name-tag').val();
+function updatePartner(data) {
+    $('#name-partner').val(data.name);
+    $('#btn-ok-partner').click(function () {
+        data.name = $('#name-partner').val();
         console.log(data);
         $.ajax({
             type: "PUT",
@@ -67,12 +63,12 @@ function updateTag(data) {
             headers: {
                 "Authorization": tokenHeader_value,
             },
-            url: "api/v1/admin/tag",
+            url: "api/v1/admin/partner",
             data: JSON.stringify(data),
             timeout: 30000,
             success: function () {
                 alert('Chỉnh sửa thành công');
-                $('#btn-ok-tag').prop("disabled", true);
+                $('#btn-ok-partner').prop("disabled", true);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 errMess(jqXHR, textStatus, errorThrown);
@@ -83,13 +79,13 @@ function updateTag(data) {
     });
 }
 
-function clickBtnTagChangeSubmit() {
+function clickBtnPartnerChangeSubmit() {
     const urlCreatePartner = window.location.href;
     var str = urlCreatePartner.split("=");
     const id = str[str.length - 1];
     console.log(id);
     if ((id - 1) >= 0) {
-        findTagById(id)
-    } else createTag();
+        findPartnerById(id)
+    } else createPartner();
 
 }

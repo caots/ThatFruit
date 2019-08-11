@@ -31,9 +31,7 @@ function findAllMenuCategory() {
                         <td style="width: 50%">  ${menu.name} </td>
                         <td style="width: 30%">
                             <div class="btn-group">
-                                   <a class="btn btn-primary" href="create-category"><i class="fa fa-lg fa-plus"></i></a>
-                                   <a class="btn btn-primary" href="update-category?id=${menu.id}" name="${menu.id}"><i class="fa fa-lg fa-edit"></i></a>
-                                   <a class="btn btn-primary delete-menu" name="${menu.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
+                                   <a class="btn btn-primary" href="update-category?menu-id=${menu.id}" name="${menu.id}"><i class="fa fa-lg fa-edit"></i></a>
                             </div>
                         </td>
                         </tr>
@@ -41,37 +39,10 @@ function findAllMenuCategory() {
                     index++;
                 });
                 $("#row-menu").html(contentRow);
-                //============ delete =============
-                deleteMenu();
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             errMess(jqXHR, textStatus, errorThrown);
         }
-    });
-}
-
-//============ Delete Big Category ========================
-function deleteMenu() {
-
-    $('.delete-menu').click(function () {
-        const id = $(this).attr("name");
-        console.log(tokenHeader_value);
-        $.ajax({
-            type: "PUT",
-            headers: {
-                "Authorization": tokenHeader_value,
-            },
-            contentType: "application/json",
-            url: "api/v1/admin/category/menu/delete?id=" + id,
-            timeout: 30000,
-            success: function () {
-                alert('Xóa thành công');
-                location.href = "menu";
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                errMess(jqXHR, textStatus, errorThrown);
-            }
-        });
     });
 }

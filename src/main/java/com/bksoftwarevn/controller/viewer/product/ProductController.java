@@ -311,7 +311,7 @@ public class ProductController {
             , @RequestHeader("adminbksoftwarevn") String header
     ) {
         if (header.equals(Token.tokenHeader)) {
-            Pageable pageable = PageRequest.of(page, size);
+            Pageable pageable = PageRequest.of(page-1, size);
             List<Product> lstProductSale = productService.findProductSale(pageable);
             return new ResponseEntity<>(lstProductSale, HttpStatus.OK);
         }

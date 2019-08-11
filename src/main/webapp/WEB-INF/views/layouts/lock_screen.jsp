@@ -32,7 +32,7 @@
                 <input class="form-control" id="password-unlock" type="password" placeholder="Password" autofocus>
             </div>
             <div class="form-group btn-container">
-                <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-unlock fa-lg"></i>UNLOCK
+                <button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg"></i>UNLOCK
                 </button>
             </div>
         </div>

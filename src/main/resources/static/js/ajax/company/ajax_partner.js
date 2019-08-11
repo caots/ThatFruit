@@ -32,7 +32,7 @@ function findAllPartner() {
                               <div class="btn-group">
                                    <a class="btn btn-primary" href="create-partner"><i class="fa fa-lg fa-plus"></i></a>
                                    <a class="btn btn-primary" href="update-partner?id=${partner.id}" name="${partner.id}"><i class="fa fa-lg fa-edit"></i></a>
-                                   <a class="btn btn-primary partner" name="${partner.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
+                                   <a class="btn btn-primary delete-partner" name="${partner.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                               </div>
                         </td>
                         </tr>

@@ -1,15 +1,15 @@
 $(document).ready(function () {
-    clickBtnTagChangeSubmit();
+    clickBtnTopicChangeSubmit();
 });
 
-//============ CREATE TAG ========================
+//============ CREATE TOPIC ========================
 
-function createTag() {
-    $('#btn-ok-tag').click(function () {
+function createTopic() {
+    $('#btn-ok-topic').click(function () {
 
-        const nameTag = $('#name-tag').val();
-        const tag = {
-            "name": nameTag
+        const nameTopic = $('#name-topic').val();
+        const topic = {
+            "name": nameTopic
         };
         $.ajax({
             type: "POST",
@@ -17,13 +17,13 @@ function createTag() {
             headers: {
                 "Authorization": tokenHeader_value,
             },
-            url: "api/v1/admin/tag",
-            data: JSON.stringify(tag),
+            url: "api/v1/admin/topic",
+            data: JSON.stringify(topic),
             cache: false,
             timeout: 300000,
             success: function () {
                 alert("Thêm thành công ");
-                $('#btn-ok-tag').prop("disabled", true);
+                $('#btn-ok-topic').prop("disabled", true);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 errMess(jqXHR, textStatus, errorThrown);
@@ -33,9 +33,9 @@ function createTag() {
     });
 }
 
-// ============ FIND TAG BY ID ===================
+// ============ FIND TOPIC BY ID ===================
 
-function findTagById(id) {
+function findTopicById(id) {
 
     $.ajax({
         type: "GET",
@@ -43,11 +43,10 @@ function findTagById(id) {
         headers: {
             "adminbksoftwarevn": value_token_public,
         },
-        url: "api/v1/public/tag/find-by-id?id=" + id,
+        url: "api/v1/public/topic/find-by-id?id=" + id,
         timeout: 30000,
         success: function (result) {
-            console.log(result);
-            updateTag(result);
+            updateTopic(result);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             errMess(jqXHR, textStatus, errorThrown);
@@ -55,11 +54,11 @@ function findTagById(id) {
     });
 }
 
-//============ UPDATE TAG ========================
-function updateTag(data) {
-    $('#name-tag').val(data.name);
-    $('#btn-ok-tag').click(function () {
-        data.name = $('#name-tag').val();
+//============ UPDATE TOPIC ========================
+function updateTopic(data) {
+    $('#name-topic').val(data.name);
+    $('#btn-ok-topic').click(function () {
+        data.name = $('#name-topic').val();
         console.log(data);
         $.ajax({
             type: "PUT",
@@ -67,12 +66,12 @@ function updateTag(data) {
             headers: {
                 "Authorization": tokenHeader_value,
             },
-            url: "api/v1/admin/tag",
+            url: "api/v1/admin/topic",
             data: JSON.stringify(data),
             timeout: 30000,
             success: function () {
                 alert('Chỉnh sửa thành công');
-                $('#btn-ok-tag').prop("disabled", true);
+                $('#btn-ok-topic').prop("disabled", true);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 errMess(jqXHR, textStatus, errorThrown);
@@ -83,13 +82,13 @@ function updateTag(data) {
     });
 }
 
-function clickBtnTagChangeSubmit() {
-    const urlCreatePartner = window.location.href;
-    var str = urlCreatePartner.split("=");
+function clickBtnTopicChangeSubmit() {
+    const urlCreateTopic = window.location.href;
+    var str = urlCreateTopic.split("=");
     const id = str[str.length - 1];
     console.log(id);
     if ((id - 1) >= 0) {
-        findTagById(id)
-    } else createTag();
+        findTopicById(id)
+    } else createTopic();
 
 }

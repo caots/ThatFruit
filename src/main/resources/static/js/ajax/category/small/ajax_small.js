@@ -73,8 +73,8 @@ function findAllSmallCategory(page) {
                         <td  width="30%" > ${smallCategory.bigCategory.name} </td>
                         <td  width="25%"> 
                               <div class="btn-group">
-                                   <a class="btn btn-primary" href="create-category"><i class="fa fa-lg fa-plus"></i></a>
-                                   <a class="btn btn-primary" href="update-category?id=${smallCategory.id}" name="${smallCategory.id}"><i class="fa fa-lg fa-edit"></i></a>
+                                   <a class="btn btn-primary" href="create-small"><i class="fa fa-lg fa-plus"></i></a>
+                                   <a class="btn btn-primary" href="update-category?small-id=${smallCategory.id}" name="${smallCategory.id}"><i class="fa fa-lg fa-edit"></i></a>
                                    <a class="btn btn-primary delete-small" name="${smallCategory.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                               </div>
                         </td>
@@ -104,7 +104,7 @@ function deleteSmallCategory() {
             headers: {
                 "Authorization": tokenHeader_value,
             },
-            url: "api/v1/admin/category/small/delete?id=" + id,
+            url: "api/v1/admin/category/delete/small?id=" + id,
             timeout: 30000,
             success: function () {
                 alert('Xóa thành công');

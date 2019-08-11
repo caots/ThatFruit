@@ -17,7 +17,7 @@ public class ChangePageController {
     }
 
     //=========================Category=================================
-    @GetMapping("/create-category")
+    @GetMapping({"/create-menu", "/create-big", "/create-small", "/create-category"})
     public String createCategoryPage(HttpServletRequest request) {
 
 
@@ -31,7 +31,9 @@ public class ChangePageController {
 
     @GetMapping("/update-category")
     public String updateCategoryPage(
-            @RequestParam("id") int id,
+            @RequestParam(value = "menu-id", required = false, defaultValue = "-1") int menuId,
+            @RequestParam(value = "big-id", required = false, defaultValue = "-1") int bigId,
+            @RequestParam(value = "small-id", required = false, defaultValue = "-1") int smallId,
             HttpServletRequest request
     ) {
         String username = getToken(request);
@@ -232,7 +234,7 @@ public class ChangePageController {
 
     @GetMapping("/update-topic")
     public String updateTopicPage(
-            @RequestParam("id") int id,
+            @RequestParam("topic-id") int id,
             HttpServletRequest request
     ) {
         String username = getToken(request);
@@ -258,7 +260,7 @@ public class ChangePageController {
 
     @GetMapping("/update-news")
     public String updateNewsPage(
-            @RequestParam("id") int id,
+            @RequestParam("news-id") int id,
             HttpServletRequest request
     ) {
         String username = getToken(request);

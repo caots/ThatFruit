@@ -13,7 +13,6 @@ function findAllNameBigCategory() {
         url: "api/v1/public/big-category/all",
         success: function (bigCategories) {
             const listSize = Object.keys(bigCategories).length;
-           /*
             if (listSize > 0) {
 
                 let contentRow = '';
@@ -23,7 +22,7 @@ function findAllNameBigCategory() {
                     `;
                 });
                 $("#big-category-value").html(contentRow);
-            }*/
+            }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             errMess(jqXHR, textStatus, errorThrown);
@@ -40,7 +39,6 @@ function findAllNameMenuCategory() {
         url: "api/v1/public/menu/all",
         success: function (mediumCategories) {
             const listSize = Object.keys(mediumCategories).length;
-           /*
             if (listSize > 0) {
                 let contentRow = '';
                 mediumCategories.map(function (mediumCategory) {
@@ -48,8 +46,8 @@ function findAllNameMenuCategory() {
                        <option value="${mediumCategory.id}">${mediumCategory.name}</option>
                     `;
                 });
-                $("#medium-category-value").html(contentRow);
-            }*/
+                $("#menu-value").html(contentRow);
+            }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             errMess(jqXHR, textStatus, errorThrown);
@@ -66,15 +64,15 @@ function findAllNameSmallCategory() {
         url: "api/v1/public/small-category/all",
         success: function (smallCategories) {
             const listSize = Object.keys(smallCategories).length;
-            /*if (listSize >= 0) {
-                let contentRow = '';
-                smallCategories.map(function (smallCategory) {
-                    contentRow += `
-                       <option value="${smallCategory.id}">${smallCategory.name}</option>
-                    `;
-                });
-                $("#small-category-value").html(contentRow);
-            }*/
+            /* if (listSize >= 0) {
+                 let contentRow = '';
+                 smallCategories.map(function (smallCategory) {
+                     contentRow += `
+                        <option value="${smallCategory.id}">${smallCategory.name}</option>
+                     `;
+                 });
+                 $("#small-category-value").html(contentRow);
+             }*/
         },
         error: function (jqXHR, textStatus, errorThrown) {
             errMess(jqXHR, textStatus, errorThrown);

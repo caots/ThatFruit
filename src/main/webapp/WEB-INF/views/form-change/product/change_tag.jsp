@@ -28,6 +28,10 @@
                         <button id="btn-ok-tag" class="btn btn-primary" type="button"><i
                                 class="fa fa-fw fa-lg fa-check-circle"></i>Đồng ý
                         </button>
+                        <button id="btn-back-menu" class="btn btn-warning" type="button">
+                            <a href="tag" style="color: white">
+                                <i class="far fa-caret-square-left"></i> Trở về </a>
+                        </button>
                     </div>
                 </form>
             </div>

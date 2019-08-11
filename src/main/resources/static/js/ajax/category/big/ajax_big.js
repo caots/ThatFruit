@@ -73,8 +73,8 @@ function findAllBigCategory(page) {
                         <td  width="30%" > ${bigCategory.menu.name} </td>
                         <td  width="25%"> 
                               <div class="btn-group">
-                                   <a class="btn btn-primary" href="create-category"><i class="fa fa-lg fa-plus"></i></a>
-                                   <a class="btn btn-primary" href="update-category?id=${bigCategory.id}" name="${bigCategory.id}"><i class="fa fa-lg fa-edit"></i></a>
+                                   <a class="btn btn-primary" href="create-big"><i class="fa fa-lg fa-plus"></i></a>
+                                   <a class="btn btn-primary" href="update-category?big-id=${bigCategory.id}" name="${bigCategory.id}"><i class="fa fa-lg fa-edit"></i></a>
                                    <a class="btn btn-primary delete-big" name="${bigCategory.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                               </div>
                         </td>
