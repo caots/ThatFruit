@@ -251,18 +251,9 @@ public class ProductService_Impl implements ProductService {
     }
 
     @Override
-    public List<Product> findAllHotProductByMonthPage() {
+    public List<Product> findAllHotProductByMonthPage(Pageable pageable) {
         try {
-            List<Product> listProductByMonth = new ArrayList<>();
-            productRepository.findAllProduct().forEach(product -> {
-                if (product.getInitDate().getMonth() == LocalDate.now().getMonth()) {
-                    listProductByMonth.add(product);
-                }
-            });
-            listProductByMonth.stream()
-                    .sorted((p1, p2) -> p2.getSaleNumber() - p1.getSaleNumber())
-                    .collect(Collectors.toList());
-            return listProductByMonth;
+            return productRepository.listProductByMonth(pageable).getContent();
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "find-all-hot-product-by-month-error : {0}", ex.getMessage());
         }

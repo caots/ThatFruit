@@ -48,7 +48,7 @@ public interface ProductService {
 
     List<Product> findAllProductByTag(int idTag);
 
-    List<Product> findAllHotProductByMonthPage();
+    List<Product> findAllHotProductByMonthPage(Pageable pageable);
 
     Product findById(int id);
 

@@ -144,11 +144,16 @@ public class ProductController {
     @GetMapping("/month")
     public ResponseEntity<List<Product>> findHotProductByMonthPage(
             HttpServletResponse response,
+            @RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+            @RequestParam(name = "size", required = false, defaultValue = "6") Integer size,
             @RequestHeader("adminbksoftwarevn") String header
     ) {
 
         if (header.equals(Token.tokenHeader)) {
-            List<Product> productsByName = productService.findAllHotProductByMonthPage();
+            if (page < 1) page = 1;
+            if (size < 0) size = 0;
+            Pageable pageable = PageRequest.of(page - 1, size);
+            List<Product> productsByName = productService.findAllHotProductByMonthPage(pageable);
             return new ResponseEntity<>(productsByName, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
