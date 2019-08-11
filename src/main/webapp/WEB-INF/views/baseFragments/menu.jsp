@@ -89,5 +89,8 @@
 
             </ul>
         </li>
+
+        <li><a class="app-menu__item" href="unlock"><i class="fas fa-unlock"></i><span
+                class="app-menu__label">&nbsp; Khóa màn hình</span></a></li>
     </ul>
 </aside>

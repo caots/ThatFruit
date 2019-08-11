@@ -85,6 +85,24 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/find-by-special")
+    public ResponseEntity<List<Product>> findAllSpecialProduct(
+            HttpServletResponse response,
+            @RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+            @RequestParam(name = "size", required = false, defaultValue = "15") Integer size,
+            @RequestHeader("adminbksoftwarevn") String header
+    ) {
+
+        if (page < 1) page = 1;
+        if (size < 0) size = 0;
+        if (header.equals(Token.tokenHeader)) {
+            Pageable pageable = PageRequest.of(page - 1, size);
+            List<Product> products = productService.findSpecialProducts(pageable);
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/find-small-category-by-hot")
     public ResponseEntity<Set<String>> findAllBigCategoryByHotProduct(
             HttpServletResponse response,

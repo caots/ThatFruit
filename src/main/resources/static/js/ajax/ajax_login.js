@@ -34,6 +34,7 @@ function onSubmit(event) {
             sessionStorage.setItem("token", data);
             document.cookie = "token=" + data;
             location.href = "home";
+            passwordAdmin = password;
 
         },
         error: function (jqXHR, textStatus, errorThrown) {

@@ -6,6 +6,8 @@
     <!--Login-->
     <definition name="login" template="/WEB-INF/views/layouts/login.jsp"/>
 
+    <definition name="unlock" template="/WEB-INF/views/layouts/lock_screen.jsp"/>
+
     <!-- Base Define -->
     <definition name="base.definition"
                 template="/WEB-INF/views/layouts/index.jsp">
@@ -187,6 +189,4 @@
         <put-attribute name="title" value="update news"/>
         <put-attribute name="body" value="/WEB-INF/views/form-change/news/change_news.jsp"/>
     </definition>
-
-
 </tiles-definitions>

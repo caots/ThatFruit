@@ -15702,6 +15702,7 @@ be a descendant of the grid when it is being dragged.
     font-family: "Niconne";
     margin-bottom: 40px;
     color: #fff;
+    width: 20%;
 }
 
 .lockscreen-content .logo h1 {

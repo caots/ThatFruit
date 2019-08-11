@@ -199,6 +199,16 @@ public class HomeAdminController {
         return "news";
     }
 
+    @RequestMapping(value = {"/unlock"}, method = RequestMethod.GET)
+    public String unlockPage(HttpServletRequest request) {
+
+        String username = getToken(request);
+        if (username == null) {
+            return "login";
+        }
+        return "unlock";
+    }
+
 
 
 }

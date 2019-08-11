@@ -78,7 +78,7 @@ function findAllUser(page) {
                         <td> ${user.fullName} </td>
                         <td> ${dateOfBirth.replaceAllll(',', '-')} </td>
                         <td> ${user.address} </td>
-                        <td> ${0+user.phone} </td>
+                        <td> ${0+''+user.phone} </td>
                         <td> ${user.email} </td>
                         <td> 
                               <div class="btn-group">

@@ -159,6 +159,16 @@ public class ProductService_Impl implements ProductService {
     }
 
     @Override
+    public List<Product> findSpecialProducts(Pageable pageable) {
+        try {
+            return productRepository.findProductBySpecial(pageable).getContent();
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "find-special-products-error : {0}", ex.getMessage());
+        }
+        return null;
+    }
+
+    @Override
     public Set<String> findAllSmallCategoryByHotProducts(int max, Pageable pageable) {
 
         try {
