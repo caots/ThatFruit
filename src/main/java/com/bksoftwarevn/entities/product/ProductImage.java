@@ -8,8 +8,7 @@ import java.io.Serializable;
 
 @Entity
 @Data
-@Table(name = "product")
-
+@Table(name = "product_image")
 public class ProductImage implements Serializable {
 
     private static final long serialVersionUID = 1L;

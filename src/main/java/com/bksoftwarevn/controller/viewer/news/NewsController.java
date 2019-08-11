@@ -7,9 +7,11 @@ import com.bksoftwarevn.entities.news.Topic;
 import com.bksoftwarevn.service.RecordService;
 import com.bksoftwarevn.service.news.NewsService;
 import com.bksoftwarevn.service.news.TopicService;
+import com.bksoftwarevn.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,20 +32,27 @@ public class NewsController {
     @Autowired
     private TopicService topicService;
 
+    @Autowired
+    private ProductService productService;
+
+
     @GetMapping("/page")
     public ResponseEntity<List<News>> findAllNews(
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
             @RequestParam(name = "size", required = false, defaultValue = "20") int size,
+            @RequestParam(name = "type", required = false, defaultValue = "DESC") String type,
+            @RequestParam(name = "field", required = false, defaultValue = "id") String field,
             @RequestHeader("adminbksoftwarevn") String header
     ) {
         if (page < 1) page = 1;
         if (size < 0) size = 0;
         if (header.equals(Token.tokenHeader)) {
-            Pageable pageable = PageRequest.of(page - 1, size);
+            Sort sortable = productService.sortData(type, field);
+
+            Pageable pageable = PageRequest.of(page - 1, size, sortable);
             List<News> newsList = newsService.findAllNewsPage(pageable);
 
             if (newsList != null) {
-                newsList = newsService.findByTime();
                 return new ResponseEntity<>(newsList, HttpStatus.OK);
             }
         }

@@ -306,7 +306,7 @@ public class ProductController {
 
     @GetMapping(value = "/find-by-sale")
     public ResponseEntity<List<Product>> showProductSale(
-            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+            @RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
             @RequestParam(name = "size", required = false, defaultValue = "5") Integer size
             , @RequestHeader("adminbksoftwarevn") String header
     ) {
