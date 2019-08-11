@@ -159,18 +159,18 @@ public class ProductService_Impl implements ProductService {
     }
 
     @Override
-    public Set<String> findAllBigCategoryByHotProducts(int max, Pageable pageable) {
+    public Set<String> findAllSmallCategoryByHotProducts(int max, Pageable pageable) {
 
         try {
-            Set<String> nameBigs = new HashSet<>();
+            Set<String> nameSmalls = new HashSet<>();
             List<Product> productsHot = productRepository.findProductByHot(pageable).getContent();
             for (Product product : productsHot) {
-                nameBigs.add(product.getSmallCategory().getBigCategory().getName());
-                if (nameBigs.size() >= max) break;
+                nameSmalls.add(product.getSmallCategory().getName());
+                if (nameSmalls.size() >= max) break;
             }
-            return nameBigs;
+            return nameSmalls;
         } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, "find-all-big-category-by-hot-product-error : {0}", ex.getMessage());
+            LOGGER.log(Level.SEVERE, "find-all-small-category-by-hot-product-error : {0}", ex.getMessage());
         }
         return null;
     }

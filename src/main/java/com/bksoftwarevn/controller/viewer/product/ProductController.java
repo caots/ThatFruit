@@ -85,7 +85,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/find-big-category-by-hot")
+    @GetMapping("/find-small-category-by-hot")
     public ResponseEntity<Set<String>> findAllBigCategoryByHotProduct(
             HttpServletResponse response,
             @RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
@@ -99,8 +99,8 @@ public class ProductController {
         if (size < 0) size = 0;
         if (header.equals(Token.tokenHeader)) {
             Pageable pageable = PageRequest.of(page - 1, size);
-            Set<String> bigCategoryByHotProducts = productService.findAllBigCategoryByHotProducts(max, pageable);
-            return new ResponseEntity<>(bigCategoryByHotProducts, HttpStatus.OK);
+            Set<String> smallCategoryByHotProducts = productService.findAllSmallCategoryByHotProducts(max, pageable);
+            return new ResponseEntity<>(smallCategoryByHotProducts, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

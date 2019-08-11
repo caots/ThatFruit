@@ -32,7 +32,7 @@ public interface ProductService {
 
     List<Product> findHotProducts(Pageable pageable);
 
-    Set<String> findAllBigCategoryByHotProducts(int max, Pageable pageable);
+    Set<String> findAllSmallCategoryByHotProducts(int max, Pageable pageable);
 
     List<Product> findProductSale(Pageable pageable);
 

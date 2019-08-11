@@ -23,7 +23,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = "SELECT p  From Product p where p.status=true order by p.initDate desc ")
     Page<Product> findNewProductPage(Pageable pageable);
 
-    @Query(value = " SELECT p From Product p where p.status  = true order by (p.originCost - p.saleCost) desc ")
+    @Query(value = " SELECT p From Product p where p.status = true order by (p.originCost - p.saleCost) desc ")
     Page<Product> findSaleProducts(Pageable pageable);
 
     @Query(value = " SELECT p From Product p where p.smallCategory.id =:id and  p.status= true")
