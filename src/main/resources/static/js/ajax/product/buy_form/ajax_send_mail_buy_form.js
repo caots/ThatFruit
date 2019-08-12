@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    clickBtnSendMailChangeSubmit();
+    clickBtnSendMailBuyFormChangeSubmit();
 });
 
-function findFormById(id) {
+function findBuyFormById(id) {
 
     $.ajax({
         type: "GET",
@@ -10,11 +10,11 @@ function findFormById(id) {
         headers: {
             "adminbksoftwarevn": value_token_public,
         },
-        url: "api/v1/public/contact-form/find-by-id?id=" + id,
+        url: "api/v1/public/buy-form/find-by-id?id=" + id,
         timeout: 30000,
         success: function (result) {
-            $('#name-email').val(result.email);
-            sendEmailContactForm();
+            $('#name-email-bf').val(result.email);
+            sendEmailBuyFormContactForm();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             errMess(jqXHR, textStatus, errorThrown);
@@ -23,13 +23,13 @@ function findFormById(id) {
 }
 
 
-function sendEmailContactForm() {
+function sendEmailBuyFormContactForm() {
 
-    $("#btn-ok-email").click(function () {
+    $("#btn-ok-email-bf").click(function () {
 
-        var email = $("#name-email").val();
-        var title = $("#title-email").val();
-        var content = $("#content-email").val();
+        var email = $("#name-email-bf").val();
+        var title = $("#title-email-bf").val();
+        var content = $("#content-email-bf").val();
 
         $.ajax({
             type: "GET",
@@ -41,7 +41,7 @@ function sendEmailContactForm() {
             timeout: 30000,
             success: function () {
                 alert("Gửi email thành công");
-                $('#btn-ok-email').prop("disabled", true);
+                $('#btn-ok-email-bf').prop("disabled", true);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("Gửi email không thành công");
@@ -52,11 +52,11 @@ function sendEmailContactForm() {
     })
 }
 
-function clickBtnSendMailChangeSubmit() {
-    const urlForm = window.location.href;
-    var str = urlForm.split("=");
+function clickBtnSendMailBuyFormChangeSubmit() {
+    const urlBuyForm = window.location.href;
+    var str = urlBuyForm.split("=");
     const id = str[str.length - 1];
     if ((id - 1) >= 0) {
-        findFormById(id)
+        findBuyFormById(id)
     }
 }

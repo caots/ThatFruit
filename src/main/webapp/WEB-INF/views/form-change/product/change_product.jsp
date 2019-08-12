@@ -51,10 +51,16 @@
                             <input id="unit-product" class="form-control" type="text"
                                    placeholder="Enter unit product">
                         </div>
+
+                        <div class="form-group ">
+                            <label class="control-label">Thẻ tag</label>
+                            <input id="tag-product" class="form-control" type="text"
+                                   placeholder="space ' @ '">
+                        </div>
                         <div class="form-group ">
                             <label class="control-label">Tình trạng</label>
                             <select class="form-control" id="product-status" name="product-status-value">
-                                <option value="true" >Còn hàng</option>
+                                <option value="true">Còn hàng</option>
                                 <option value="false">Hết hàng</option>
                             </select>
                         </div>
@@ -69,11 +75,8 @@
                             <select class="form-control" id="product-type-value">
                             </select>
                         </div>
-                        <div class="form-group ">
-                            <label class="control-label">Thẻ tag</label>
-                            <select class="form-control" id="tag-value">
-                            </select>
-                        </div>
+
+
 
 
                     </form>
@@ -89,3 +92,9 @@
         <div class="col-sm-3"></div>
     </div>
 </main>
+<script>
+    // Material Select Initialization
+    $(document).ready(function() {
+        $('.mdb-select').materialSelect();
+    });
+</script>

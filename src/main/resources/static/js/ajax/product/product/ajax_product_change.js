@@ -13,17 +13,13 @@ function createProduct() {
     $('#product-type-value').click(function () {
         idSTypeProduct = $(this).val();
     });
-    let idListTag = '';
-    $('#tag-value').click(function () {
-        idListTag = $(this).val();
-    });
-
     let productStatus = '';
     $('#product-status').click(function () {
         productStatus = $(this).val();
     });
 
     $('#btn-ok-product').click(function () {
+        const listtag = $('#tag-product').val();
         const nameProduct = $("#name-product").val();
         const codeProduct = $("#code-product").val();
         const originCost = $("#origin-cost").val();
@@ -47,7 +43,7 @@ function createProduct() {
             },
             url: "api/v1/admin/product?small-category-id=" + idSmallCategory +
                 "&product-type-id=" + idSTypeProduct +
-                "&tag-id=" + idListTag,
+                "&tag=" + listtag,
             data: JSON.stringify(product),
             cache: false,
             timeout: 300000,
@@ -85,8 +81,14 @@ function findProductById(id) {
 
 // ============ update Product ========================
 function updateProduct(data) {
-    console.log(data.productStatus);
 
+    var listTag = '';
+    console.log(data);
+    data.tags.map(function (tag) {
+        listTag += '@'+tag.name + ' ';
+    });
+
+    $("#tag-product").val(listTag);
     $("#name-product").val(data.name);
     $("#code-product").val(data.productCode);
     $("#origin-cost").val(data.originCost);
@@ -95,9 +97,9 @@ function updateProduct(data) {
     $("#unit-product").val(data.unit);
     $('#product-status').val(data.productStatus);
 
+
     $("#small-category-value").prop("disabled", true);
     $("#product-type-value").prop("disabled", true);
-    $("#tag-value").prop("disabled", true);
     $('#btn-ok-product').click(function () {
 
         data.name = $("#name-product").val();
@@ -109,15 +111,15 @@ function updateProduct(data) {
         if ($('#product-status').val() == null) $('#product-status').val('true');
         data.productStatus = $('#product-status').val();
 
-        console.log(data);
-
+        var listTagAfter = $('#tag-product').val();
+        console.log(listTagAfter);
         $.ajax({
             type: "PUT",
             contentType: "application/json",
             headers: {
                 "Authorization": tokenHeader_value,
             },
-            url: "api/v1/admin/product",
+            url: "api/v1/admin/product?list-tag=" + listTagAfter,
             data: JSON.stringify(data),
             timeout: 30000,
             success: function () {

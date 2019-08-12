@@ -6,6 +6,8 @@
 <script src="resources/js/template/plugins/pace.min.js"></script>
 
 
+
+
 <script type="text/javascript" src="resources/js/template/plugins/chart.js"></script>
 <script type="text/javascript">
     var data = {

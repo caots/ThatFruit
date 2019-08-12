@@ -86,7 +86,7 @@ public class AdminBuyFormController {
     }
 
     @PutMapping(value = "/buy-form/delete")
-    public ResponseEntity<String> deleteTag(@RequestParam("buy-form-id") int buyFormId) {
+    public ResponseEntity<String> deleteBuyForm(@RequestParam("buy-form-id") int buyFormId) {
         Record record = recordService.findByName("buy-form");
 
         if (buyFormService.deleteBuyFormHasProduct(buyFormId)) {

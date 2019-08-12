@@ -13,6 +13,7 @@ function findContentFormById(id) {
         url: "api/v1/public/contact-form/find-by-id?id=" + id,
         timeout: 30000,
         success: function (result) {
+            updateCheckForm(result);
             $('#title-form').val(result.title);
             $('#content-form').val(result.content);
         },
@@ -20,6 +21,28 @@ function findContentFormById(id) {
             errMess(jqXHR, textStatus, errorThrown);
         }
     });
+}
+
+
+function updateCheckForm(result) {
+    result.checked = 'true';
+    $.ajax({
+        type: "PUT",
+        contentType: "application/json",
+        headers: {
+            "Authorization": tokenHeader_value,
+        },
+        url: "api/v1/admin/contact-form",
+        data: JSON.stringify(result),
+        cache: false,
+        timeout: 300000,
+        success: function () {
+            console.log('checked');
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            errMess(jqXHR, textStatus, errorThrown);
+        }
+    })
 }
 
 

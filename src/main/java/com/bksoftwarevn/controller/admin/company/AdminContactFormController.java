@@ -32,7 +32,7 @@ public class AdminContactFormController {
             HttpServletResponse response,
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
             @RequestParam(name = "size", required = false, defaultValue = "10") int size
-            ) {
+    ) {
         if (page < 1) page = 1;
         if (size < 0) size = 0;
 
@@ -61,10 +61,10 @@ public class AdminContactFormController {
 
     @PutMapping("/delete")
     public ResponseEntity<Object> deleteContactForm(
-            @RequestBody ContactForm contactForm
+            @RequestParam("id") int contactId
     ) {
         Record record = recordService.findByName("contact-form");
-        boolean result = contactFormService.deleteContactForm(contactForm);
+        boolean result = contactFormService.deleteContactForm(contactFormService.findById(contactId));
         if (result) {
             record.setStatus(false);
             recordService.saveRecord(record);

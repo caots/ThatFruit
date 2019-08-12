@@ -119,7 +119,7 @@ function deleteContactForm() {
             headers: {
                 "Authorization": tokenHeader_value,
             },
-            url: "api/v1/admin/category/small/delete?id=" + id,
+            url: "api/v1/admin/contact-form/delete?id=" + id,
             timeout: 30000,
             success: function () {
                 alert('Xóa thành công');

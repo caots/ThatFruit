@@ -318,4 +318,47 @@ public class ProductService_Impl implements ProductService {
         return sortable;
 
     }
+
+    public Set<Integer> listTagAdd(String listTag) {
+        Set<Integer> tagIds = new HashSet<>();
+
+        String[] nameTag = listTag.split("@");
+
+        for (int i = 1; i < nameTag.length; i++) {
+            nameTag[i].trim();
+        }
+
+        List<Tag> tags = tagRepository.findAllTagSize();
+        for (int i = 1; i < nameTag.length; i++) {
+            final int[] index = {1};
+            int iTag = i;
+            tags.forEach(tag -> {
+                if (nameTag[iTag].equals(tag.getName())) {
+                    index[0] = -1;
+                }
+            });
+            if (index[0] == 1) {
+                Tag t = new Tag();
+                t.setName(nameTag[i]);
+                t.setStatus(true);
+                tagRepository.save(t);
+                Tag tag = findByNameUnique(t.getName());
+                tagIds.add(tag.getId());
+            } else {
+                Tag tag = findByNameUnique(nameTag[i]);
+                tagIds.add(tag.getId());
+            }
+        }
+        return tagIds;
+    }
+
+    private Tag findByNameUnique(String name) {
+        try {
+            Tag tag = tagRepository.findByName(name);
+            return tag;
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "find-tag-by-name-error : {0}", ex.getMessage());
+        }
+        return null;
+    }
 }

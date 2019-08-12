@@ -13,27 +13,14 @@
         <li><a class="app-menu__item" href="home"><i class="app-menu__icon fas fa-home"></i><span
                 class="app-menu__label"> Trang chủ</span></a></li>
 
-        <li><a class="app-menu__item" href="#"><i class="fas fa-shopping-cart"></i><span
+        <li><a class="app-menu__item" href="buy-form"><i class="fas fa-shopping-cart"></i><span
                 class="app-menu__label">&nbsp; Danh sách đơn hàng</span></a></li>
 
         <li><a class="app-menu__item" href="user"><i class="fas fa-users"></i></i><span
                 class="app-menu__label">&nbsp; Quản lý user</span></a></li>
 
-
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
-                class="app-menu__icon fab fa-product-hunt"></i><span class="app-menu__label">Sản phẩm</span><i
-                class="treeview-indicator fa fa-angle-right"></i></a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item" href="product">Thông tin sản phẩm</a>
-                </li>
-
-                <li>
-                    <a class="treeview-item" href="tag"> Thẻ tag</a>
-                </li>
-
-            </ul>
-        </li>
+        <li><a class="app-menu__item" href="product"><i class="fab fa-product-hunt"></i></i><span
+                class="app-menu__label">&nbsp; Sản phẩm</span></a></li>
 
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                 class="app-menu__icon fas fa-sitemap"></i><span class="app-menu__label">Chuyên mục</span><i

@@ -18,6 +18,8 @@ public interface TagRepository extends JpaRepository<Tag, Integer> {
     @Query(value = " SELECT t From Tag t where  t.status = true")
     List<Tag> findAllTagSize();
 
+    Tag findByName(String name);
+
     Tag findById(int id);
 
 }

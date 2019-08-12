@@ -65,7 +65,7 @@ function updateImagePage(imagePage) {
             uploadFile(formData).then(function (data) {
                 imagePage.url = data;
                 $.ajax({
-                    type: "POST",
+                    type: "PUT",
                     contentType: "application/json",
                     headers: {
                         "Authorization": tokenHeader_value,

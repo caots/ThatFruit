@@ -221,8 +221,8 @@ public class HomeAdminController {
         return "image-product";
     }
 
-    @RequestMapping(value = {"/send-email-product"}, method = RequestMethod.GET)
-    public String sendEmailPage(HttpServletRequest request, @RequestParam("product-id") int id) {
+    @RequestMapping(value = {"/send-mail-product"}, method = RequestMethod.GET)
+    public String sendEmailPage(HttpServletRequest request, @RequestParam("buyform-id") int id) {
 
         String username = getToken(request);
         if (username == null) {
@@ -256,6 +256,18 @@ public class HomeAdminController {
             return "login";
         }
         return "content-form-contact";
+    }
+
+    @GetMapping("/buy-form")
+    public String buyFormPage(
+            HttpServletRequest request
+    ) {
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "buy-form";
     }
 
 

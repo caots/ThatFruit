@@ -21,7 +21,9 @@ import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/v1/admin")
@@ -146,7 +148,7 @@ public class AdminProductController {
             @RequestBody Product product,
             @RequestParam(name = "small-category-id") int smallCategoryId,
             @RequestParam(defaultValue = "-1", required = false, value = "partner-id") int partnerId,
-            @RequestParam("tag-id") List<Integer> listTagId,
+            @RequestParam("tag") String tagString,
             @RequestParam("product-type-id") int productTypeId
     ) {
         Record record = recordService.findByName("product");
@@ -158,13 +160,18 @@ public class AdminProductController {
         product.setSmallCategory(smallCategoryService.findSmallCategoryById(smallCategoryId));
         product.setProductType(productTypeService.findById(productTypeId));
         if (partnerId > 0) product.setPartner(partnerService.findById(partnerId));
-        List<Tag> tags = new ArrayList<>();
-        if (listTagId != null) {
-            listTagId.forEach(id ->
-                    tags.add(tagService.findById(id))
-            );
-            product.setTags(tags);
-        }
+
+        Set<Integer> listTagId = productService.listTagAdd(tagString);
+
+        List<Tag> tagList = new ArrayList<>();
+        listTagId.forEach(id -> {
+            Tag tag = tagService.findById(id);
+            if (tag != null) {
+                tagList.add(tag);
+            }
+        });
+        product.setTags(tagList);
+
         if (productService.saveProduct(product)) {
             record.setNumber(record.getNumber() + 1);
             recordService.saveRecord(record);
@@ -173,7 +180,18 @@ public class AdminProductController {
     }
 
     @PutMapping(value = "/product")
-    public ResponseEntity<Object> updateProduct(@RequestBody Product product) {
+    public ResponseEntity<Object> updateProduct(@RequestBody Product product,
+                                                @RequestParam("list-tag") String listTag) {
+        Set<Integer> listTagId = productService.listTagAdd(listTag);
+
+        List<Tag> tagList = new ArrayList<>();
+        listTagId.forEach(id -> {
+            Tag tag = tagService.findById(id);
+            if (tag != null) {
+                tagList.add(tag);
+            }
+        });
+        product.setTags(tagList);
         if (productService.saveProduct(product))
             return new ResponseEntity<>(product, HttpStatus.OK);
         else return new ResponseEntity<>("update product fail", HttpStatus.BAD_REQUEST);

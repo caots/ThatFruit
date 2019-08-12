@@ -60,6 +60,8 @@ public interface ProductService {
 
     Sort sortData(String sort, String field);
 
+    Set<Integer> listTagAdd(String listTag);
+
     //List<Product> findProductByMenuPartner(int idMenu, int partner,Pageable pageable);
 
     //int sizeOfProductByMenuPartner(int idMenu, int partner);
