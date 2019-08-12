@@ -1,6 +1,5 @@
 package com.bksoftwarevn.controller.viewer.product;
 
-import com.bksoftwarevn.entities.Record;
 import com.bksoftwarevn.entities.news.Tag;
 import com.bksoftwarevn.service.RecordService;
 import com.bksoftwarevn.service.product.TagService;

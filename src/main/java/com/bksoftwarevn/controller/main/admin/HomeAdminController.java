@@ -3,6 +3,7 @@ package com.bksoftwarevn.controller.main.admin;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -209,6 +210,15 @@ public class HomeAdminController {
         return "unlock";
     }
 
+    @RequestMapping(value = {"/image-product"}, method = RequestMethod.GET)
+    public String imageProductPage(HttpServletRequest request, @RequestParam("product-id") int id) {
+
+        String username = getToken(request);
+        if (username == null) {
+            return "login";
+        }
+        return "image-product";
+    }
 
 
 }

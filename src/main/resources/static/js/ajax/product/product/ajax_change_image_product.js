@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    clickBtnImagePageChangeSubmit();
+    clickBtnImageProductChangeSubmit();
 
 });
 
@@ -26,26 +26,26 @@ var uploadFile = async (file) => {
     return data;
 };
 
-function clickBtnImagePageChangeSubmit() {
+function clickBtnImageProductChangeSubmit() {
     const urlImagePage = window.location.href;
     var str = urlImagePage.split("=");
     const id = str[str.length - 1];
     if ((id - 1) >= 0) {
-        findImagePageById(id);
+        findImageproductById(id);
     }
 }
 
-function findImagePageById(id) {
+function findImageproductById(id) {
     $.ajax({
         type: "GET",
         contentType: "application/json",
         headers: {
             "adminbksoftwarevn": value_token_public,
         },
-        url: "api/v1/public/image-page/find-by-id?id=" + id,
+        url: "api/v1/public/product-image/find-by-id?id=" + id,
         timeout: 30000,
         success: function (result) {
-            updateImagePage(result);
+            updateImageProduct(result);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             errMess(jqXHR, textStatus, errorThrown);
@@ -53,30 +53,30 @@ function findImagePageById(id) {
     });
 }
 
-function updateImagePage(imagePage) {
+function updateImageProduct(result) {
 
-    $('#url-image-page').attr('src', imagePage.url);
+    $('#url-image-product').attr('src', result.url);
 
-    $('#btn-ok-image-page').click(function () {
+    $('#btn-ok-image-product').click(function () {
 
-            var formImg = $('#btn-img-page')[0];
+            var formImg = $('#btn-img-product')[0];
             var formData = new FormData(formImg);
 
             uploadFile(formData).then(function (data) {
-                imagePage.url = data;
+                result.url = data;
                 $.ajax({
                     type: "POST",
                     contentType: "application/json",
                     headers: {
                         "Authorization": tokenHeader_value,
                     },
-                    url: "api/v1/admin/home-image",
-                    data: JSON.stringify(imagePage),
+                    url: "api/v1/admin/product-image",
+                    data: JSON.stringify(result),
                     cache: false,
                     timeout: 300000,
-                    success: function (data) {
+                    success: function () {
                         alert('Chỉnh ảnh thành công');
-                        $('#btn-ok-image-page').prop("disabled", true);
+                        $('#btn-ok-image-product').prop("disabled", true);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         errMess(jqXHR, textStatus, errorThrown);

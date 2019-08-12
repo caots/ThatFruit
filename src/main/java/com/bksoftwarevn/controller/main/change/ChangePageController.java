@@ -72,6 +72,58 @@ public class ChangePageController {
         return "update-product";
     }
 
+    @GetMapping("/create-news-product")
+    public String createNewsProductPage(HttpServletRequest request) {
+
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "create-news-product";
+    }
+
+
+    @GetMapping("/update-news-product")
+    public String updateNewsProductPage(
+            @RequestParam("id") int id,
+            HttpServletRequest request
+    ) {
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "update-news-product";
+    }
+
+    @GetMapping("/create-image-product")
+    public String createImageProductPage(HttpServletRequest request) {
+
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "create-image-product";
+    }
+
+
+    @GetMapping("/update-image-product")
+    public String updateImageProductPage(
+            @RequestParam("id") int id,
+            HttpServletRequest request
+    ) {
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "update-image-product";
+    }
+
     //=========================Tag=================================
     @GetMapping("/create-tag")
     public String createTagPage(HttpServletRequest request) {

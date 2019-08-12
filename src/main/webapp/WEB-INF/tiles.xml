@@ -93,6 +93,31 @@
         <put-attribute name="body" value="/WEB-INF/views/bodyFragments/news/news.jsp"/>
     </definition>
 
+    <definition name="create-news-product" extends="base.definition">
+        <put-attribute name="title" value="news product"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/product/news_product.jsp"/>
+    </definition>
+
+    <definition name="update-news-product" extends="base.definition">
+        <put-attribute name="title" value="news product"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/product/news_product.jsp"/>
+    </definition>
+
+    <definition name="create-image-product" extends="base.definition">
+        <put-attribute name="title" value="image product"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/product/change_image_product.jsp"/>
+    </definition>
+
+    <definition name="update-image-product" extends="base.definition">
+        <put-attribute name="title" value="image product"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/product/change_image_product.jsp"/>
+    </definition>
+
+    <definition name="image-product" extends="base.definition">
+        <put-attribute name="title" value="image product"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/product/image_product.jsp"/>
+    </definition>
+
 
     <!--============== FORM CHANGE ============================-->
     <definition name="create-category" extends="base.definition">

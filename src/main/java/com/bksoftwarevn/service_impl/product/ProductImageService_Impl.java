@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductImageService_Impl implements ProductImageService {
@@ -36,7 +37,9 @@ public class ProductImageService_Impl implements ProductImageService {
     @Override
     public List<ProductImage> findAllProductImageByProductId(int productId) {
         try {
-            return productImageRepository.findByProduct(productRepository.findById(productId));
+            return productImageRepository.findByProduct(productRepository.findById(productId))
+                    .stream().filter(ProductImage::isStatus)
+                    .collect(Collectors.toList());
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "find-all-product-image-by-product-id-error : {0}", ex.getMessage());
         }

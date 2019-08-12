@@ -20,7 +20,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT p FROM Product p WHERE p.status = true and p.name LIKE CONCAT('%',:name_product,'%')")
     List<Product> findByProductNameSize(@Param("name_product") String name);
 
-    @Query(value = "SELECT p  From Product p where p.status=true order by p.initDate desc ")
+    @Query(value = "SELECT p  From Product p where p.status=true order by p.id desc ")
     Page<Product> findNewProductPage(Pageable pageable);
 
     @Query(value = " SELECT p From Product p where p.status = true order by (p.originCost - p.saleCost) desc ")

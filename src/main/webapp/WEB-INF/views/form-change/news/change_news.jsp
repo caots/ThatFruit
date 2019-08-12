@@ -47,7 +47,7 @@
             </div>
             <div class="tile-body">
                 <form class="row">
-                    <div id="sample col-12" style="margin-left: 300px;">
+                    <div id="sample col-11" style="margin-left: 130px ">
                         <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
                         <script type="text/javascript">
                             //<![CDATA[
@@ -56,7 +56,7 @@
                             });
                             //]]>
                         </script>
-                        <textarea cols="60" id="area2"></textarea>
+                        <textarea cols="120" id="area2"></textarea>
                     </div>
                 </form>
             </div>

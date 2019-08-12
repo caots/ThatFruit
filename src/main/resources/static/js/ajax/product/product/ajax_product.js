@@ -68,12 +68,12 @@ function displayOnTable(products) {
     $("#column-product").html(
         "<td>STT </td>" +
         "<td>Tên sản phẩm </td>" +
-        "<td>Lượt xem </td>" +
         "<td>Tình trạng </td>" +
         "<td>Giá Gốc</td>" +
         "<td>Giá Bán </td>" +
         "<td>Xuất xứ </td>" +
         "<td>Loại sản phẩm</td>" +
+        "<td>Ảnh sản phẩm </td>" +
         "<td>Giới thiệu </td>" +
         "<td>Chức năng</td>"
     );
@@ -99,13 +99,13 @@ function displayOnTable(products) {
                          <tr>
                          <td> ${index} </td>
                          <td> ${product.name} </td>
-                         <td style="text-align: center"> ${product.view} </td>
-                         <td style="text-align: center"> ${productStatus} </td>
+                         <td > ${product.productCode} </td>
                          <td> ${originCost} </td>
                          <td> ${saleCost} </td>
                          <td> ${product.origin} </td>
                          <td> ${product.productType.name} </td>
-                         <td>   <a href="create-news-product?id=${product.id}" name="${product.id}" style="cursor: pointer;color: green">Bài viết</a>&nbsp;<br> </td>
+                         <td>   <a href="image-product?product-id=${product.id}" name="${product.id}" style="cursor: pointer;color: green">Kho ảnh </a>&nbsp;<br> </td>
+                         <td>   <a href="update-news-product?id=${product.id}" name="${product.id}" style="cursor: pointer;color: green">Bài viết</a>&nbsp;<br> </td>
                          <td style="min-width: 160px">
                             <div class="btn-group">
                                    <a class="btn btn-primary" href="create-product"><i class="fa fa-lg fa-plus"></i></a>

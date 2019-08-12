@@ -7,6 +7,8 @@ function errMess(jqXHR, textStatus, errorThrown) {
     console.log(errorThrown);
 }
 
+const idProduct = '0';
+
 const tokenHeader_value = sessionStorage.getItem("token");
 console.log(tokenHeader_value);
 

@@ -92,8 +92,9 @@ function updateNews(data) {
     $('.nicEdit-main').text(data.content);
     $("#topic-value").prop("disabled", true);
     $('#btn-ok-news').click(function () {
+
         data.content = $('.nicEdit-main').text();
-        data.title = $('#name-title');
+        data.title = $('#name-title').val();
         $.ajax({
             type: "PUT",
             contentType: "application/json",

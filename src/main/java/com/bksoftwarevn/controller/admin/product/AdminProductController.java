@@ -151,6 +151,7 @@ public class AdminProductController {
         product.setStatus(true);
         product.setView(0);
         product.setInitDate(LocalDate.now());
+        product.setProductStatus(true);
         product.setSaleNumber(0);
         product.setSmallCategory(smallCategoryService.findSmallCategoryById(smallCategoryId));
         product.setProductType(productTypeService.findById(productTypeId));
