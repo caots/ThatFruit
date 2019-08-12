@@ -100,11 +100,13 @@ public class AdminProductController {
 
     @PostMapping("/product-image")
     public ResponseEntity<Object> createProductImage(
+            @RequestParam("product_id") int productId,
             @RequestBody ProductImage productImage,
             HttpServletResponse response
     ) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         productImage.setStatus(true);
+        productImage.setProduct(productService.findById(productId));
         boolean result = productImageService.saveProductImage(productImage);
         if (result) {
             return new ResponseEntity<>(productImage, HttpStatus.OK);

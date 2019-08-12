@@ -1,7 +1,10 @@
 $(document).ready(function () {
+
     clickBtnImageProductChangeSubmit();
 
 });
+
+var idProduct = sessionStorage.getItem("product-id");
 
 var uploadFile = async (file) => {
     let data;
@@ -26,16 +29,51 @@ var uploadFile = async (file) => {
     return data;
 };
 
+
 function clickBtnImageProductChangeSubmit() {
     const urlImagePage = window.location.href;
     var str = urlImagePage.split("=");
     const id = str[str.length - 1];
     if ((id - 1) >= 0) {
-        findImageproductById(id);
-    }
+        findImageProductById(id);
+    } else createImageProduct();
 }
 
-function findImageproductById(id) {
+function createImageProduct() {
+    $('#btn-ok-image-product').click(function () {
+
+            var formImg = $('#btn-img-product')[0];
+            var formData = new FormData(formImg);
+
+            uploadFile(formData).then(function (data) {
+                var imageProduct = {
+                    "url": data
+                };
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    headers: {
+                        "Authorization": tokenHeader_value,
+                    },
+                    url: "api/v1/admin/product-image?product_id=" + idProduct,
+                    data: JSON.stringify(imageProduct),
+                    cache: false,
+                    timeout: 300000,
+                    success: function () {
+                        alert('Chỉnh sửa thành công');
+                        $('#btn-ok-image-product').prop("disabled", true);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        errMess(jqXHR, textStatus, errorThrown);
+                    }
+                })
+            });
+        }
+    );
+}
+
+function findImageProductById(id) {
     $.ajax({
         type: "GET",
         contentType: "application/json",

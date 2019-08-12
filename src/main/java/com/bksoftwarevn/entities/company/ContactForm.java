@@ -24,6 +24,8 @@ public class ContactForm implements Serializable {
 
     private int phone;
 
+    private String email;
+
     private String content;
 
     private boolean checked;

@@ -7,13 +7,11 @@ function errMess(jqXHR, textStatus, errorThrown) {
     console.log(errorThrown);
 }
 
-const idProduct = '0';
-
 const tokenHeader_value = sessionStorage.getItem("token");
 console.log(tokenHeader_value);
 
 const value_token_public = '1df0e68d684175afa5ae2c3d1543fa0e';
-const passwordAdmin ='';
+var passwordAdmin = '';
 
 
 //format money

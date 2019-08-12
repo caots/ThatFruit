@@ -33,25 +33,23 @@ public class SendMailService_Impl implements SendMailService {
 
 
     @Override
-    public boolean sendEMail(String email) {
+    public boolean sendEmail(UserMail userMail) {
         try {
-
-            UserMail userMail = userSendMail(email);
             SimpleMailMessage mail = new SimpleMailMessage();
-            mail.setFrom(emailAdminAddress);
             mail.setTo(userMail.getEmailAddress());
+            mail.setFrom(emailAdminAddress);
             mail.setSubject(userMail.getTitle());
             mail.setText(userMail.getContent());
             javaMailSender.send(mail);
             return true;
-
         } catch (MailException ex) {
             LOGGER.log(Level.SEVERE, "send-mail-error : {0}", ex.getMessage());
         }
         return false;
+
     }
 
-    private UserMail userSendMail(String email) {
+   /* private UserMail userSendMail(String email) {
 
         String content = "Mã xác thực: " + generateCode();
         UserMail userMail = new UserMail();
@@ -69,7 +67,7 @@ public class SendMailService_Impl implements SendMailService {
         int numberThree = random.nextInt();
         int numberFour = random.nextInt();
         return MD5.encode(numberOne + "C" + numberTwo + "A" + numberThree + "O" + numberFour);
-    }
+    }*/
 
 
     //Gửi mail với tệp đính kèm

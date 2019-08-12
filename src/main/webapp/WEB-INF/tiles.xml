@@ -118,6 +118,16 @@
         <put-attribute name="body" value="/WEB-INF/views/bodyFragments/product/image_product.jsp"/>
     </definition>
 
+    <definition name="form-send-email" extends="base.definition">
+        <put-attribute name="title" value="image product"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/form_send_mail.jsp"/>
+    </definition>
+
+    <definition name="content-form-contact" extends="base.definition">
+        <put-attribute name="title" value="image product"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/company/content_form.jsp"/>
+    </definition>
+
 
     <!--============== FORM CHANGE ============================-->
     <definition name="create-category" extends="base.definition">
@@ -180,15 +190,11 @@
         <put-attribute name="body" value="/WEB-INF/views/form-change/company/change_partner.jsp"/>
     </definition>
 
-    <definition name="send-mail" extends="base.definition">
+    <definition name="send-mail-product" extends="base.definition">
         <put-attribute name="title" value="send mail"/>
-        <put-attribute name="body" value="/WEB-INF/views/form-change/send_mail.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/bodyFragments/product/send_mail_product.jsp"/>
     </definition>
 
-    <definition name="send-mail-form" extends="base.definition">
-        <put-attribute name="title" value="send mail"/>
-        <put-attribute name="body" value="/WEB-INF/views/form-change/send_mail.jsp"/>
-    </definition>
 
     <definition name="update-image-page" extends="base.definition">
         <put-attribute name="title" value="update image page"/>

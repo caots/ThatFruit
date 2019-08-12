@@ -43,16 +43,18 @@
                         <div class="col-md-8 col-md-offset-3" style="text-align: center">
                             <button class="btn btn-primary" id="btn-ok-image-product" type="button"><i
                                     class="fa fa-fw fa-lg fa-check-circle"></i>Đồng ý
-                            </button>&nbsp;&nbsp;&nbsp;<a  href="" id="btn-image-product"   class="btn btn-secondary ">
+                            </button>&nbsp;&nbsp;&nbsp;<a href="" id="btn-image-product" class="btn btn-secondary ">
                             <i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3" ></div>
+        <div class="col-md-3"></div>
     </div>
 </main>
 <script>
-    $('#btn-image-product').attr('href','product');
+    var idProduct = sessionStorage.getItem("product-id");
+    console.log(idProduct);
+    $('#btn-image-product').attr('href', 'image-product?product-id=' + idProduct);
 </script>

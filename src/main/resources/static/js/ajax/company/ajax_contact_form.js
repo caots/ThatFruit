@@ -56,11 +56,11 @@ function findAllContactForm(page) {
         success: function (contactForms) {
             $("#column-form-contact").html(
                 "<td style='text-align: center'> STT</td>" +
-                "<td> Tiêu đề </td>" +
                 "<td> Tên</td>" +
+                "<td> Email </td>" +
                 "<td> Số điện thoại</td>" +
                 "<td> Nội dung</td>" +
-                "<td> Check</td>"+
+                "<td> Check</td>" +
                 "<td> Chức năng</td>"
             );
             const listSize = Object.keys(contactForms).length;
@@ -69,25 +69,27 @@ function findAllContactForm(page) {
                 let contentRow = '';
                 var index = 1;
 
-                var checked = contactForm.checked;
-                if (checked === true) {
-                    checked = 'Đã Check';
-                } else {
-                    checked = 'Chưa check';
-                }
 
                 contactForms.map(function (contactForm) {
+                    var checked = contactForm.checked;
+                    if (checked === true) {
+                        checked = 'Đã Check';
+                    } else {
+                        checked = 'Chưa check';
+                    }
                     contentRow += `
                         <tr>
                         <td> ${index} </td>
-                        <td> ${contactForm.title} </td>
                         <td> ${contactForm.fullName} </td>
-                        <td> ${contactForm.phone} </td>
-                        <td> ${contactForm.content} </td>
+                        <td> ${contactForm.email} </td>
+                        <td> 0${contactForm.phone} </td>
+                        <td> 
+                             <a href="content-form-contact?id=${contactForm.id}" style="cursor: pointer;color: green">Nội dung </a>&nbsp;<br> </td>
+                        </td>
                         <td> ${checked} </td>
                         <td> 
                               <div class="btn-group">
-                                   <a class="btn btn-primary" href="send-mail-form?id=${contactForm.id}" name="${contactForm.id}"><i class="fa fa-lg fa-edit"></i></a>
+                                   <a class="btn btn-primary" href="form-send-email?id=${contactForm.id}" name="${contactForm.id}"><i class="fa fa-lg fa-edit"></i></a>
                                    <a class="btn btn-primary delete-form" name="${contactForm.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                               </div>
                         </td>

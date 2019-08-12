@@ -1,6 +1,5 @@
 $(document).ready(function () {
     clickBtnProductImageChangeSubmit();
-
 });
 
 
@@ -8,15 +7,15 @@ function clickBtnProductImageChangeSubmit() {
     const urlChangeProduct = window.location.href;
     var str = urlChangeProduct.split("=");
     const id = str[str.length - 1];
+    sessionStorage.setItem("product-id", id);
     if ((id - 1) >= 0) {
-
-        findProductNewsById(id)
+        findProductImageById(id)
     }
 }
 
 //============ Find Product By Id ===================
 
-function findProductNewsById(id) {
+function findProductImageById(id) {
     $.ajax({
         type: "GET",
         contentType: "application/json",

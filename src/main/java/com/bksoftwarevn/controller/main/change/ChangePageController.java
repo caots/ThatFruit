@@ -207,31 +207,6 @@ public class ChangePageController {
 
     //=========================Contact=================================
 
-    @GetMapping("/send-mail")
-    public String sendMailPage(HttpServletRequest request) {
-
-
-        String username = getToken(request);
-
-        if (username == null) {
-            return "login";
-        }
-        return "send-mail";
-    }
-
-    @GetMapping("/send-mail-form")
-    public String sendMailFormPage(
-            @RequestParam("id") int id,
-            HttpServletRequest request
-    ) {
-        String username = getToken(request);
-
-        if (username == null) {
-            return "login";
-        }
-        return "send-mail-form";
-    }
-
     @GetMapping("/create-partner")
     public String createPartnerPage(HttpServletRequest request) {
 

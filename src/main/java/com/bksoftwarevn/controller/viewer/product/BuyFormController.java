@@ -222,7 +222,7 @@ public class BuyFormController {
             userMail.setEmailAddress(email);
             userMail.setTitle(title);
             userMail.setContent(content);
-            boolean result = sendMailService.sendEMail(userMail.getEmailAddress());
+            boolean result = sendMailService.sendEmail(userMail);
             if (result)
                 return new ResponseEntity<>("Congratulations! Your mail has been send to the user.", HttpStatus.OK);
             //==========================================================================

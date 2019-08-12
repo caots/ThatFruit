@@ -1,6 +1,7 @@
 package com.bksoftwarevn.controller.main.admin;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -218,6 +219,43 @@ public class HomeAdminController {
             return "login";
         }
         return "image-product";
+    }
+
+    @RequestMapping(value = {"/send-email-product"}, method = RequestMethod.GET)
+    public String sendEmailPage(HttpServletRequest request, @RequestParam("product-id") int id) {
+
+        String username = getToken(request);
+        if (username == null) {
+            return "login";
+        }
+        return "send-mail-product";
+    }
+
+
+    @GetMapping("/form-send-email")
+    public String sendMailFormPage(
+            @RequestParam("id") int id,
+            HttpServletRequest request
+    ) {
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "form-send-email";
+    }
+
+    @GetMapping("/content-form-contact")
+    public String contentFormMailFormPage(
+            @RequestParam("id") int id,
+            HttpServletRequest request
+    ) {
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "content-form-contact";
     }
 
 

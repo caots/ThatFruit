@@ -1,5 +1,6 @@
 package com.bksoftwarevn.controller;
 
+import com.bksoftwarevn.entities.user.UserMail;
 import com.bksoftwarevn.service.SendMailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,11 +17,14 @@ public class SendMailController {
 
     @GetMapping
     public ResponseEntity<Object> sendEmail(
-            @RequestParam("email") String email
+            @RequestParam("email") String email,
+            @RequestParam("title") String title,
+            @RequestParam("content") String content
+
     ) {
-        boolean result = sendMailService.sendEMail(email);
+        boolean result = sendMailService.sendEmail(new UserMail(email, title, content));
         if (result)
-            return new ResponseEntity<>("Congratulations! Your mail has been send to the user "+email, HttpStatus.OK);
+            return new ResponseEntity<>("Congratulations! Your mail has been send to the user " + email, HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
