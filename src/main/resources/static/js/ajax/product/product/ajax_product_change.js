@@ -14,6 +14,7 @@ function createProduct() {
         productStatus = $(this).val();
     });
 
+
     $('#btn-ok-product').click(function () {
         const listtag = $('#tag-product').val();
         const nameProduct = $("#name-product").val();
@@ -24,7 +25,11 @@ function createProduct() {
         const originCostWholesale = $("#sale-cost-wholesale").val();
         const originProduct = $("#origin-product").val();
         var formImg = $('#btn-img-product-main')[0];
+
         var formData = new FormData(formImg);
+
+        var x = $('#demoDate').val().split('/');
+        var endDate = x[2] + '-' + x[1] + '-' + x[0];
 
         uploadFile(formData).then(function (data) {
 
@@ -38,6 +43,7 @@ function createProduct() {
                 "saleCostWholesale": saleCostWholesale,
                 "originCostWholesale": originCostWholesale,
                 "origin": originProduct,
+                "enDateSale": new Date(endDate),
             };
             $.ajax({
                 type: "POST",
@@ -102,11 +108,16 @@ function updateProduct(data) {
     $("#sale-cost-wholesale").val(data.saleCostWholesale);
     $("#origin-product").val(data.origin);
     $('#product-status').val(data.productStatus);
+    var x = data.endDate.split('-');
+    $('#demoDate').val(x[2] + '/' + x[1] + '/' + x[0]);
 
 
     $("#tag-product").prop("disabled", true);
     $("#small-category-value").prop("disabled", true);
     $('#btn-ok-product').click(function () {
+
+        var y = $('#demoDate').val().split('/');
+        var endDate = y[2] + '-' + y[1] + '-' + y[0];
 
         data.name = $("#name-product").val();
         data.productCode = $("#code-product").val();
@@ -117,6 +128,7 @@ function updateProduct(data) {
         data.originCostWholesale = $("#origin-cost-wholesale").val();
         if ($('#product-status').val() == null) $('#product-status').val('true');
         data.productStatus = $('#product-status').val();
+        data.endDate = new Date(endDate);
 
         var listTagAfter = $('#tag-product').val();
         console.log(listTagAfter);

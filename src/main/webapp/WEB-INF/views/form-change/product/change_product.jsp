@@ -56,6 +56,11 @@
                                    placeholder="Enter origin product">
                         </div>
 
+                        <div class="form-group">
+                            <label class="control-label">Ngày hết Sale</label>
+                            <input class="form-control" id="demoDate" type="text" placeholder="Select Date">
+                        </div>
+
                         <div class="form-group ">
                             <label class="control-label">Thẻ tag</label>
                             <input id="tag-product" class="form-control" type="text"
@@ -98,3 +103,26 @@
         <div class="col-sm-3"></div>
     </div>
 </main>
+<!-- Page specific javascripts-->
+<script type="text/javascript" src="resources/js/template/plugins/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="resources/js/template/plugins/select2.min.js"></script>
+<script type="text/javascript" src="resources/js/template/plugins/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+    $('#sl').click(function(){
+        $('#tl').loadingBtn();
+        $('#tb').loadingBtn({ text : "Signing In"});
+    });
+
+    $('#el').click(function(){
+        $('#tl').loadingBtnComplete();
+        $('#tb').loadingBtnComplete({ html : "Sign In"});
+    });
+
+    $('#demoDate').datepicker({
+        format: "dd/mm/yyyy",
+        autoclose: true,
+        todayHighlight: true
+    });
+
+    $('#demoSelect').select2();
+</script>

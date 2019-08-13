@@ -355,7 +355,7 @@ public class ProductService_Impl implements ProductService {
     }
 
     @Override
-    public boolean setEndDateSale(LocalDate endDateSale) {
+    public boolean setEndDateSale() {
         try {
             List<Product> products = productRepository.findAllProduct();
             products.forEach(product -> {
@@ -379,12 +379,6 @@ public class ProductService_Impl implements ProductService {
             LOGGER.log(Level.SEVERE, "find-tag-by-name-error : {0}", ex.getMessage());
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        LocalDate dt = LocalDate.parse("2018-07-13",
-                DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        System.out.println(dt);
     }
 
 

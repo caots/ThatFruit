@@ -62,7 +62,7 @@ public interface ProductService {
 
     Set<Integer> listTagAdd(String listTag);
 
-    boolean setEndDateSale(LocalDate endDateSale);
+    boolean setEndDateSale();
 
     //List<Product> findProductByMenuPartner(int idMenu, int partner,Pageable pageable);
 
