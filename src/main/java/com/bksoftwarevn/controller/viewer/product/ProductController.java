@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 
@@ -66,6 +68,23 @@ public class ProductController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    // hết ngày sale
+    @GetMapping("/update-sale-product")
+    public ResponseEntity<Object> setEndDateSale(
+            @RequestHeader("adminbksoftwarevn") String header,
+            @RequestParam("end-date") String endDate
+
+    ) {
+        if (header.equals(Token.tokenHeader)) {
+
+            LocalDate endDateSale = LocalDate.parse(endDate,
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            return new ResponseEntity<>(productService.setEndDateSale(endDateSale), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 
     @GetMapping("/find-by-hot")
     public ResponseEntity<List<Product>> findAllHotProduct(
@@ -346,7 +365,6 @@ public class ProductController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
 
 
 }

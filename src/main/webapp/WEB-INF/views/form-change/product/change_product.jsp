@@ -98,9 +98,3 @@
         <div class="col-sm-3"></div>
     </div>
 </main>
-<script>
-    // Material Select Initialization
-    $(document).ready(function () {
-        $('.mdb-select').materialSelect();
-    });
-</script>

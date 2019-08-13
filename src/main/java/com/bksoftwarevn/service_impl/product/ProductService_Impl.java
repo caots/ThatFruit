@@ -19,6 +19,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -353,6 +354,24 @@ public class ProductService_Impl implements ProductService {
         return tagIds;
     }
 
+    @Override
+    public boolean setEndDateSale(LocalDate endDateSale) {
+        try {
+            List<Product> products = productRepository.findAllProduct();
+            products.forEach(product -> {
+                if (LocalDate.now().toString().equals(product.getEnDateSale().toString())) {
+                    product.setSaleCostRetail(product.getOriginCostRetail());
+                    product.setSaleCostWholesale(product.getOriginCostWholesale());
+                    productRepository.save(product);
+                }
+            });
+            return true;
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "set-end-date-sale-error : {0}", ex.getMessage());
+        }
+        return false;
+    }
+
     private Tag findByNameUnique(String name) {
         try {
             return tagRepository.findByName(name);
@@ -361,4 +380,12 @@ public class ProductService_Impl implements ProductService {
         }
         return null;
     }
+
+    public static void main(String[] args) {
+        LocalDate dt = LocalDate.parse("2018-07-13",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        System.out.println(dt);
+    }
+
+
 }

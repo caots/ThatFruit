@@ -5,6 +5,7 @@ import com.bksoftwarevn.entities.product.Product;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -60,6 +61,8 @@ public interface ProductService {
     Sort sortData(String sort, String field);
 
     Set<Integer> listTagAdd(String listTag);
+
+    boolean setEndDateSale(LocalDate endDateSale);
 
     //List<Product> findProductByMenuPartner(int idMenu, int partner,Pageable pageable);
 

@@ -60,6 +60,9 @@ public class Product implements Serializable {
     @Column(name = "product_status")
     private boolean productStatus;
 
+    @Column(name = "end_date_sale")
+    private LocalDate enDateSale;
+
     @NotNull
     private boolean status;
 
