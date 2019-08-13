@@ -31,25 +31,29 @@
                                    placeholder="Enter code product">
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Giá gốc</label>
-                            <input id="origin-cost" class="form-control" type="number"
+                            <label class="control-label">Giá gốc bán lẻ</label>
+                            <input id="origin-cost-Retail" class="form-control" type="number"
                                    placeholder="Enter origin cost">
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Giá bán</label>
-                            <input id="sale-cost" class="form-control" type="number"
+                            <label class="control-label">Giá bán lẻ</label>
+                            <input id="sale-cost-Retail" class="form-control" type="number"
+                                   placeholder="Enter sale cost">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Giá gốc bán buôn</label>
+                            <input id="origin-cost-wholesale" class="form-control" type="number"
+                                   placeholder="Enter origin cost">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Giá bán buôn</label>
+                            <input id="sale-cost-wholesale" class="form-control" type="number"
                                    placeholder="Enter sale cost">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Xuất xứ</label>
                             <input id="origin-product" class="form-control" type="text"
                                    placeholder="Enter origin product">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label">Đơn vị bán</label>
-                            <input id="unit-product" class="form-control" type="text"
-                                   placeholder="Enter unit product">
                         </div>
 
                         <div class="form-group ">
@@ -71,13 +75,15 @@
                             </select>
                         </div>
                         <div class="form-group ">
-                            <label class="control-label">Phương thức</label>
-                            <select class="form-control" id="product-type-value">
-                            </select>
+                            <label class="control-label">Ảnh sản phẩm</label>
+                            <form method="POST" class=" col-md-6" action="" enctype="multipart/form-data"
+                                  id="btn-img-product-main">
+                                <div>
+                                    <label for="image-product-value-main">Chọn file ảnh :</label>
+                                    <input type="file" id="image-product-value-main" name="file" multiple="multiple"/>
+                                </div>
+                            </form>
                         </div>
-
-
-
 
                     </form>
                 </div>
@@ -94,7 +100,7 @@
 </main>
 <script>
     // Material Select Initialization
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.mdb-select').materialSelect();
     });
 </script>

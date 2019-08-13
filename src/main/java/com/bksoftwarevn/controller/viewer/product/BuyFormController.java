@@ -1,6 +1,7 @@
 package com.bksoftwarevn.controller.viewer.product;
 
 
+import com.bksoftwarevn.commom.MD5;
 import com.bksoftwarevn.commom.Token;
 import com.bksoftwarevn.entities.Cart;
 import com.bksoftwarevn.entities.Record;
@@ -23,10 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "api/v1/public/buy-form")
@@ -47,11 +45,8 @@ public class BuyFormController {
     @Autowired
     private AppUserService appUserService;
 
-
-    private Set<BuyFormCart> buyFormCarts = new HashSet<>();
-
     private Set<BuyFormCart> findAllBuyFormCart(List<BuyFormHasProduct> buyFormHasProducts) {
-
+        Set<BuyFormCart> buyFormCarts = new HashSet<>();
         buyFormHasProducts.forEach(buyFormHasProduct -> {
             BuyFormCart buyFormCart = new BuyFormCart();
             BuyForm buyForm = buyFormService.findById(buyFormHasProduct.getBuyFormId());
@@ -68,17 +63,16 @@ public class BuyFormController {
                 nameProduct.add(product.getName());
             });
             buyFormCart.setProducts(nameProduct);
-            long total = buyForm.getProducts()
-                    .stream()
-                    .mapToLong(bf -> (long) bf.getSaleCost()).sum();
-            buyFormCart.setPrice(total);
-            buyFormCart.setChecked(false);
+
+            buyFormCart.setChecked(buyForm.isChecked());
             List<Integer> quantities = new ArrayList<>();
 
             for (BuyFormHasProduct bf : buyFormHasProducts) {
                 quantities.add(bf.getQuantity());
             }
             buyFormCart.setQuantity(quantities);
+
+            buyFormCart.setPrice(buyForm.getTotalPrice());
 
             buyFormCarts.add(buyFormCart);
         });
@@ -89,13 +83,14 @@ public class BuyFormController {
     public ResponseEntity<Set<BuyFormCart>> findAllBuyFormHasProduct(
             @RequestHeader("adminbksoftwarevn") String header,
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
-            @RequestParam(name = "size", required = false, defaultValue = "10") int size
+            @RequestParam(name = "size", required = false, defaultValue = "15") int size
     ) {
         if (header.equals(Token.tokenHeader)) {
             if (page < 1) page = 1;
             if (size < 0) size = 0;
             Pageable pageable = PageRequest.of(page - 1, size);
             List<BuyFormHasProduct> buyFormHasProducts = buyFormService.findAllBuyFormHasProductPage(pageable);
+            System.out.println(buyFormHasProducts);
             return new ResponseEntity<>(findAllBuyFormCart(buyFormHasProducts), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -129,15 +124,12 @@ public class BuyFormController {
 
 
     @GetMapping("find-by-id")
-    public ResponseEntity<BuyFormCart> findBuyFormBuyHasProductById(
+    public ResponseEntity<BuyForm> findBuyFormBuyHasProductById(
             @RequestHeader("adminbksoftwarevn") String header,
             @RequestParam("id") int id
     ) {
         if (header.equals(Token.tokenHeader)) {
-            for (BuyFormCart buyFormCart : buyFormCarts) {
-                if (buyFormCart.getId() == id)
-                    return new ResponseEntity<>(buyFormCart, HttpStatus.OK);
-            }
+            return new ResponseEntity<>(buyFormService.findById(id), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -157,15 +149,13 @@ public class BuyFormController {
         return new ResponseEntity<>("delete fail", HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/add-form")
-    public ResponseEntity<Object> addBuyForm(
+    @PostMapping("/add-buy-form")
+    public ResponseEntity<BuyForm> addBuyForm(
             @RequestBody BuyForm buyForm,
             @RequestParam(defaultValue = "-1", value = "user-id", required = false) int userId,
             @RequestHeader("adminbksoftwarevn") String header
     ) {
-
         if (header.equals(Token.tokenHeader)) {
-            System.out.println("yolo");
             if (userId > 0) {
                 buyForm.setAppUser(appUserService.findById(userId));
             }
@@ -173,13 +163,23 @@ public class BuyFormController {
             buyForm.setChecked(false);
             buyForm.setDate(LocalDate.now());
             buyForm.setProducts(null);
+            buyForm.setCodeBuyForm(generateCode());
             Record record = recordService.findByName("buy-form");
             if (buyFormService.saveBuyForm(buyForm))
                 record.setNumber(record.getNumber() + 1);
             recordService.saveRecord(record);
             return new ResponseEntity<>(buyForm, HttpStatus.OK);
         }
-        return new ResponseEntity<>("saved fail", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    private String generateCode() {
+        Random random = new Random();
+        int numberOne = random.nextInt();
+        int numberTwo = random.nextInt();
+        int numberThree = random.nextInt();
+        int numberFour = random.nextInt();
+        return MD5.encode(numberOne + "TH" + numberTwo + "A" + numberThree + "T" + numberFour);
     }
 
     @PostMapping(value = "/add-products")
@@ -189,12 +189,13 @@ public class BuyFormController {
             @RequestHeader("adminbksoftwarevn") String header
     ) {
         if (header.equals(Token.tokenHeader)) {
+            System.out.println(carts);
             BuyForm buyForm = buyFormService.findById(id);
             if (buyForm == null)
                 return new ResponseEntity<>("buy form id is wrong", HttpStatus.BAD_REQUEST);
             List<Product> products = new ArrayList<>();
             carts.forEach(cart -> {
-                Product product = productService.findById(cart.getProduct().getId());
+                Product product = productService.findById(cart.getProductId());
                 product.setSaleNumber(product.getSaleNumber() + 1);
                 products.add(product);
             });
@@ -207,7 +208,8 @@ public class BuyFormController {
             buyForm.setStatus(true);
             buyFormService.saveBuyForm(buyForm);
             carts.forEach(cart -> {
-                BuyFormHasProduct buyFormHasProduct = buyFormService.findByBuyFormAndProduct(buyForm, cart.getProduct());
+                Product product = productService.findById(cart.getProductId());
+                BuyFormHasProduct buyFormHasProduct = buyFormService.findByBuyFormAndProduct(buyForm, product);
                 buyFormHasProduct.setQuantity(cart.getQuantity());
                 buyFormHasProduct.setStatus(true);
                 buyFormHasProduct.setSoldDate(LocalDate.now());
@@ -217,7 +219,7 @@ public class BuyFormController {
 
             String email = "honghoang1232@gmail.com";
             String title = "Đơn mua hàng mới";
-            String content = "Bạn có đơn đặt hàng mới: MÃ " + buyForm.getId();
+            String content = "Bạn có đơn đặt hàng mới: MÃ " + buyForm.getCodeBuyForm();
             UserMail userMail = new UserMail();
             userMail.setEmailAddress(email);
             userMail.setTitle(title);

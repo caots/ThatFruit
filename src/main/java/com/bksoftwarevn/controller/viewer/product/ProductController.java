@@ -146,6 +146,22 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/name/all")
+    public ResponseEntity<List<Product>> findProductByNamePage(
+            HttpServletResponse response,
+            @RequestParam("name") String name,
+            @RequestHeader("adminbksoftwarevn") String header
+    ) {
+
+        if (header.equals(Token.tokenHeader)) {
+            productNameSearch = name;
+
+            List<Product> productsByName = productService.findProductByNameAll(name);
+            return new ResponseEntity<>(productsByName, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/name/size")
     public ResponseEntity<Double> findProductByNameSize(
             @RequestParam(name = "size", defaultValue = "10", required = false) int size,
@@ -311,7 +327,7 @@ public class ProductController {
             , @RequestHeader("adminbksoftwarevn") String header
     ) {
         if (header.equals(Token.tokenHeader)) {
-            Pageable pageable = PageRequest.of(page-1, size);
+            Pageable pageable = PageRequest.of(page - 1, size);
             List<Product> lstProductSale = productService.findProductSale(pageable);
             return new ResponseEntity<>(lstProductSale, HttpStatus.OK);
         }
@@ -331,39 +347,6 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/by-product-type/page")
-    public ResponseEntity<List<Product>> findProductByProductTypePage(
-            HttpServletResponse response,
-            @RequestParam(name = "id-product-type") int id,
-            @RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
-            @RequestParam(name = "size", required = false, defaultValue = "18") Integer size,
-            @RequestParam(name = "type", required = false, defaultValue = "ASC") String type,
-            @RequestParam(name = "field", required = false, defaultValue = "id") String field,
-            @RequestHeader("adminbksoftwarevn") String header
-    ) {
-        if (header.equals(Token.tokenHeader)) {
-            Sort sortable = productService.sortData(type, field);
-            if (page < 1) page = 1;
-            if (size < 0) size = 0;
-            Pageable pageable = PageRequest.of(page - 1, size, sortable);
-            List<Product> lstProductByProductType = productService.findProductByTypePage(id, pageable);
-            return new ResponseEntity<>(lstProductByProductType, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @GetMapping(value = "/by-product-type/size")
-    public ResponseEntity<Double> findProductByProductTypeSize(
-            HttpServletResponse response,
-            @RequestParam(name = "id-product-type") int id,
-            @RequestHeader("adminbksoftwarevn") String header
-    ) {
-        if (header.equals(Token.tokenHeader)) {
-            double result = Math.ceil((double) productService.sizeOfProductByType(id) / 18);
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
 
 
 }

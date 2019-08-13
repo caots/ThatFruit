@@ -13,6 +13,9 @@ import java.util.List;
 @Repository
 public interface AppUserRepository extends JpaRepository<AppUser, Integer> {
 
+    @Query("SELECT ap FROM AppUser ap WHERE ap.status = true and ap.id > 1and ap.fullName LIKE CONCAT('%',:name_user,'%') order by id desc ")
+    List<AppUser> findAllUserByName(@Param("name_user") String name);
+
     AppUser findByEmail(String email);
 
     AppUser findById(int id);

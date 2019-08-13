@@ -22,6 +22,25 @@ function findBuyFormById(id) {
     });
 }
 
+function updateCheckBuyForm(buyFormId) {
+    console.log(buyFormId);
+    $.ajax({
+        type: "PUT",
+        dataType: "json",
+        headers: {
+            "Authorization": tokenHeader_value,
+        },
+        url: "api/v1/admin/buy-form/check?buy-form-id=" + buyFormId,
+        timeout: 30000,
+        success: function () {
+            console.log("check thành công");
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("check thất bại");
+            errMess(jqXHR, textStatus, errorThrown);
+        }
+    });
+}
 
 function sendEmailBuyFormContactForm() {
 
@@ -48,15 +67,15 @@ function sendEmailBuyFormContactForm() {
                 errMess(jqXHR, textStatus, errorThrown);
             }
         });
-
     })
 }
-
 function clickBtnSendMailBuyFormChangeSubmit() {
     const urlBuyForm = window.location.href;
     var str = urlBuyForm.split("=");
     const id = str[str.length - 1];
+    console.log(id);
+    updateCheckBuyForm(id);
     if ((id - 1) >= 0) {
-        findBuyFormById(id)
+        findBuyFormById(id);
     }
 }

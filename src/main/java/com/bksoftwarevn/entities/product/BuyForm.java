@@ -15,7 +15,6 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "buy_form")
-
 public class BuyForm implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,9 +23,12 @@ public class BuyForm implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "code_buy_form")
+    private String codeBuyForm;
+
     private String name;
 
-    private int phone;
+    private long phone;
 
     private String email;
 
@@ -34,12 +36,14 @@ public class BuyForm implements Serializable {
 
     private LocalDate date;
 
-    @NotNull
     private boolean checked;
 
     private String note;
 
     private boolean status;
+
+    @Column(name = "total_price")
+    private long totalPrice;
 
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

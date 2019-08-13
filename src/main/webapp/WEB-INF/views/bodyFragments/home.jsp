@@ -22,8 +22,8 @@
         <div class="col-md-3">
             <div class="widget-small warning coloured-icon"><i class="icon fa fa-handshake fa-3x"></i>
                 <div class="info">
-                    <h4>Đối tác</h4>
-                    <p><b id="partner-number"></b></p>
+                    <h4>Loại sản phẩm</h4>
+                    <p><b id="small-number"></b></p>
                 </div>
             </div>
         </div>

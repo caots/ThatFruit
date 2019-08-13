@@ -12,6 +12,8 @@ public interface ProductService {
 
     List<Product> findAllProductPage(Pageable pageable);
 
+    List<Product> findProductByNameAll(String name);
+
     List<Product> findAllProduct();
 
     List<Product> findProductByMenuPage(int idMenu, Pageable pageable);
@@ -42,9 +44,6 @@ public interface ProductService {
 
     int sizeOfProductByName(String name);
 
-    List<Product> findProductByTypePage(int productType, Pageable pageable);
-
-    int sizeOfProductByType(int productType);
 
     List<Product> findNewProducts(Pageable pageable);
 

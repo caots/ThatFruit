@@ -39,7 +39,7 @@ public class BuyFormService_Impl implements BuyFormService {
 
     public List<BuyFormHasProduct> findAllBuyFormHasProductPage(Pageable pageable) {
         try {
-            return buyFormHasProductRepository.findByStatusPage(pageable, true).getContent();
+            return buyFormHasProductRepository.findByStatusPage(pageable).getContent();
 
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "find-all-buy-form-has-product-page-error {0}", ex.getMessage());
@@ -93,10 +93,6 @@ public class BuyFormService_Impl implements BuyFormService {
                     nameProduct.add(product.getName());
                 });
                 buyFormCart.setProducts(nameProduct);
-                long total = buyForm.getProducts()
-                        .stream()
-                        .mapToLong(bf -> (long) bf.getSaleCost()).sum();
-                buyFormCart.setPrice(total);
 
                 List<BuyFormHasProduct> buyFormHasProducts = buyFormHasProductRepository.findByBuyFormId(buyForm.getId());
 

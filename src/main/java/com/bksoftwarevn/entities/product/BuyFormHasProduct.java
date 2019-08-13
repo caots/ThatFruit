@@ -25,6 +25,7 @@ public class BuyFormHasProduct implements Serializable {
 
     private Integer quantity;
 
+
     @Column(name = "sold_date")
     private LocalDate soldDate;
 

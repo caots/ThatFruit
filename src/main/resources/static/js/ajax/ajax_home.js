@@ -24,8 +24,8 @@ function findAllRecord() {
                     if (record.name === 'product') {
                         $('#product-number').text(record.number);
                     }
-                    if (record.name === 'partner') {
-                        $('#partner-number').text(record.number);
+                    if (record.name === 'small-category') {
+                        $('#small-number').text(record.number);
                     }
                 });
             }

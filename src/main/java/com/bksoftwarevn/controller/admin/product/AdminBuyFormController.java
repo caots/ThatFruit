@@ -56,7 +56,7 @@ public class AdminBuyFormController {
     }
 
 
-    @PutMapping(value = "/buy-form/check", params = "buy-form-id")
+    @PutMapping(value = "/buy-form/check")
     public ResponseEntity<String> checkBuyForm(@RequestParam(name = "buy-form-id") int id) {
         BuyForm buyForm = buyFormService.findById(id);
         List<BuyFormHasProduct> buyFormHasProducts = buyFormService.findAllBuyFormHasProductByBuyFormId(id);
@@ -86,7 +86,9 @@ public class AdminBuyFormController {
     }
 
     @PutMapping(value = "/buy-form/delete")
-    public ResponseEntity<String> deleteBuyForm(@RequestParam("buy-form-id") int buyFormId) {
+    public ResponseEntity<String> deleteBuyForm(
+            @RequestParam("buy-form-id") int buyFormId
+    ) {
         Record record = recordService.findByName("buy-form");
 
         if (buyFormService.deleteBuyFormHasProduct(buyFormId)) {

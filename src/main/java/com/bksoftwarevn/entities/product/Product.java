@@ -32,11 +32,17 @@ public class Product implements Serializable {
 
     private String image;
 
-    @Column(name = "sale_cost")
-    private double saleCost;
+    @Column(name = "sale_cost_wholesale")
+    private double saleCostWholesale;
 
-    @Column(name = "origin_cost")
-    private double originCost;
+    @Column(name = "origin_cost_wholesale")
+    private double originCostWholesale;
+
+    @Column(name = "sale_cost_retail")
+    private double saleCostRetail;
+
+    @Column(name = "origin_cost_retail")
+    private double originCostRetail;
 
     private int view;
 
@@ -51,8 +57,6 @@ public class Product implements Serializable {
 
     private String origin;
 
-    private String unit;
-
     @Column(name = "product_status")
     private boolean productStatus;
 
@@ -63,11 +67,6 @@ public class Product implements Serializable {
     @JoinColumn(name = "small_category_id", nullable = false)
     @NotNull
     private SmallCategory smallCategory;
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_type_id", nullable = false)
-    @NotNull
-    private ProductType productType;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "partner_id")

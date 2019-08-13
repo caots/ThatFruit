@@ -1,6 +1,6 @@
 $(document).ready(function () {
     findAllPageProductNumber();
-    searchProductByName(1);
+    searchProductByName();
 });
 
 //==================================page=====================================
@@ -69,10 +69,11 @@ function displayOnTable(products) {
         "<td>STT </td>" +
         "<td>Tên sản phẩm </td>" +
         "<td>Tình trạng </td>" +
-        "<td>Giá Gốc</td>" +
-        "<td>Giá Bán </td>" +
+        "<td>Giá gốc bán lẻ</td>" +
+        "<td>Giá bán lẻ</td>" +
+        "<td>Giá gốc bán buôn </td>" +
+        "<td>Giá bán buôn </td>" +
         "<td>Xuất xứ </td>" +
-        "<td>Loại sản phẩm</td>" +
         "<td>Ảnh sản phẩm </td>" +
         "<td>Giới thiệu </td>" +
         "<td>Chức năng</td>"
@@ -92,18 +93,22 @@ function displayOnTable(products) {
                 productStatus = 'Hết hàng';
             }
 
-            var originCost = formatNumber(product.originCost, '.', '.');
-            var saleCost = formatNumber(product.saleCost, '.', '.');
+            var originCostRetail = formatNumber(product.originCostRetail, '.', '.');
+            var saleCostRetail = formatNumber(product.saleCostRetail, '.', '.');
+
+            var originCostWholesale = formatNumber(product.originCostWholesale, '.', '.');
+            var saleCostWholesale = formatNumber(product.saleCostWholesale, '.', '.');
 
             contentRow += `
                          <tr>
                          <td> ${index} </td>
-                         <td> ${product.name} </td>
-                         <td > ${product.productCode} </td>
-                         <td> ${originCost} </td>
-                         <td> ${saleCost} </td>
+                         <td style="text-align: left"> ${product.name} </td>
+                         <td> ${productStatus} </td>
+                          <td> ${originCostRetail} </td>
+                         <td> ${saleCostRetail} </td>
+                          <td> ${originCostWholesale} </td>
+                         <td> ${saleCostWholesale} </td>
                          <td> ${product.origin} </td>
-                         <td> ${product.productType.name} </td>
                          <td>   <a href="image-product?product-id=${product.id}" name="${product.id}" style="cursor: pointer;color: green">Kho ảnh </a>&nbsp;<br> </td>
                          <td>   <a href="update-news-product?id=${product.id}" name="${product.id}" style="cursor: pointer;color: green">Bài viết</a>&nbsp;<br> </td>
                          <td style="min-width: 160px">
@@ -151,20 +156,22 @@ function deleteProduct() {
     });
 }
 
-//=========================== SEARCH BY NAME ===================================
-function searchProductByName(page) {
-    $("#btn-search-product").keypress(function (event) {
+function searchProductByName() {
+
+
+    $("#name-product").keypress(function (event) {
         const keycode = event.keycode ? event.keycode : event.which;
-        if (keycode == 13) {
+        if (keycode == '13') {
             const nameProduct = $('#name-product').val();
+            console.log(nameProduct);
             $.ajax({
                 type: "GET",
                 headers: {
                     "adminbksoftwarevn": value_token_public,
                 },
-                url: "api/v1/public/product/name/page?name=" + nameProduct + "&page=" + page,
+                url: "api/v1/public/product/name/all?name=" + nameProduct,
                 success: function (products) {
-                    findAllPageProductByNameNumber();
+                    console.log(products);
                     displayOnTable(products);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -173,25 +180,6 @@ function searchProductByName(page) {
             })
         }
     });
+
 }
 
-function findAllPageProductByNameNumber() {
-    $.ajax({
-        type: "GET",
-        headers: {
-            "adminbksoftwarevn": value_token_public,
-        },
-        url: "api/v1/public/products/name/size",
-        success: function (size) {
-            pageProduct(size);
-            $('.page').click(function () {
-                    const page = $(this).attr("name");
-                    searchProductByName(page);
-                }
-            );
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            errMess(jqXHR, textStatus, errorThrown);
-        }
-    });
-}

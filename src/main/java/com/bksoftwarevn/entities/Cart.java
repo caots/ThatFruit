@@ -1,7 +1,6 @@
 package com.bksoftwarevn.entities;
 
 
-import com.bksoftwarevn.entities.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -9,7 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class Cart {
 
-    private Product product;
+    private int productId;
 
     private int quantity;
 

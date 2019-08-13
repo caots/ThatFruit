@@ -53,6 +53,18 @@ public class AppUserService_Impl implements AppUserService {
     }
 
     @Override
+    public List<AppUser> findAllUserByName(String name) {
+        try {
+            return appUserRepository.findAllUserByName(name);
+
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "find-all-user-by-name-error : {0}", ex.getMessage());
+        }
+        return null;
+    }
+
+
+    @Override
     public AppUser findById(int id) {
         try {
             return appUserRepository.findById(id);

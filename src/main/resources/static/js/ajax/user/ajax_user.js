@@ -1,6 +1,7 @@
 $(document).ready(function () {
     findAllUser(1);
     findAllPageUserNumber();
+    searchUserByName();
 
 });
 
@@ -54,31 +55,51 @@ function findAllUser(page) {
         },
         url: "api/v1/admin/user/page?page=" + page,
         success: function (users) {
-            $("#column-user").html(
-                "<td style='text-align: center'> STT</td>" +
-                "<td> Tên </td>" +
-                "<td> Ngày sinh</td>" +
-                "<td> Địa chỉ</td>" +
-                "<td> Số điện thoại</td>" +
-                "<td> Email</td>" +
-                "<td> Chức năng</td>"
-            );
-            const listSize = Object.keys(users).length;
-            if (listSize > 0) {
-                $('#total-record').text(listSize);
-                let contentRow = '';
-                var index = 1;
-                users.map(function (user) {
+            displayOnTable(users);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            errMess(jqXHR, textStatus, errorThrown);
+        }
+    })
+}
 
-                    var dateOfBirth = user.dateOfBirth+'';
+function displayOnTable(users) {
+    $("#column-user").html(
+        "<td style='text-align: center'> STT</td>" +
+        "<td> Tên </td>" +
+        "<td> Ngày sinh</td>" +
+        "<td> Địa chỉ</td>" +
+        "<td> Số điện thoại</td>" +
+        "<td> Email</td>" +
+        "<td> Chức năng</td>"
+    );
+    const listSize = Object.keys(users).length;
+    if (listSize > 0) {
+        $('#total-record').text(listSize);
+        let contentRow = '';
+        var index = 1;
+        users.map(function (user) {
+            if (user.address == null) {
+                user.address = 'Chưa có'
+            }
+            if (user.dateOfBirth == null) {
+                user.dateOfBirth = 'Chưa có'
+            }
 
-                    contentRow += `
+
+            var dateOfBirth = user.dateOfBirth + '';
+            var phone = '';
+            if (user.phone !== 0) {
+                phone = 0 + '' + user.phone;
+            } else phone = 'chưa có';
+
+            contentRow += `
                         <tr>
                         <td> ${index} </td>
                         <td> ${user.fullName} </td>
                         <td> ${dateOfBirth.replaceAllll(',', '-')} </td>
                         <td> ${user.address} </td>
-                        <td> ${0+''+user.phone} </td>
+                        <td> ${phone} </td>
                         <td> ${user.email} </td>
                         <td> 
                               <div class="btn-group">
@@ -87,17 +108,12 @@ function findAllUser(page) {
                         </td>
                         </tr>
                     `;
-                    index++;
-                });
-                $("#row-user").html(contentRow);
-                //============ delete =============
-                deleteUser();
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            errMess(jqXHR, textStatus, errorThrown);
-        }
-    })
+            index++;
+        });
+        $("#row-user").html(contentRow);
+        //============ delete =============
+        deleteUser();
+    }
 }
 
 //============ Delete User ========================
@@ -122,6 +138,32 @@ function deleteUser() {
                 errMess(jqXHR, textStatus, errorThrown);
             }
         });
+    });
+
+}
+
+function searchUserByName() {
+
+
+    $("#name-user").keypress(function (event) {
+        const keycode = event.keycode ? event.keycode : event.which;
+        if (keycode == '13') {
+            const nameUser = $('#name-user').val();
+            console.log(nameUser);
+            $.ajax({
+                type: "GET",
+                headers: {
+                    "Authorization": tokenHeader_value,
+                },
+                url: "api/v1/admin/user/name/all?name=" + nameUser,
+                success: function (users) {
+                    displayOnTable(users)
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    errMess(jqXHR, textStatus, errorThrown);
+                }
+            })
+        }
     });
 
 }

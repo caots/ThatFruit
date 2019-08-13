@@ -1,10 +1,12 @@
 package com.bksoftwarevn.service_impl.product;
 
+import com.bksoftwarevn.entities.Record;
 import com.bksoftwarevn.entities.category.BigCategory;
 import com.bksoftwarevn.entities.category.SmallCategory;
 import com.bksoftwarevn.entities.news.Tag;
 import com.bksoftwarevn.entities.product.BuyFormHasProduct;
 import com.bksoftwarevn.entities.product.Product;
+import com.bksoftwarevn.repository.RecordRepository;
 import com.bksoftwarevn.repository.category.SmallCategoryRepository;
 import com.bksoftwarevn.repository.news.TagRepository;
 import com.bksoftwarevn.repository.product.BuyFormHasProductRepository;
@@ -38,6 +40,9 @@ public class ProductService_Impl implements ProductService {
 
     @Autowired
     private TagRepository tagRepository;
+
+    @Autowired
+    private RecordRepository recordRepository;
 
     @Override
     public List<Product> findAllProductPage(Pageable pageable) {
@@ -206,6 +211,16 @@ public class ProductService_Impl implements ProductService {
     }
 
     @Override
+    public List<Product> findProductByNameAll(String name) {
+        try {
+            return productRepository.findAllProductByName(name);
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "find-product-by-name-error : {0}", ex.getMessage());
+        }
+        return null;
+    }
+
+    @Override
     public int sizeOfProductByName(String name) {
         try {
             return productRepository.findByProductNameSize(name).size();
@@ -215,25 +230,6 @@ public class ProductService_Impl implements ProductService {
         return 0;
     }
 
-    @Override
-    public List<Product> findProductByTypePage(int idProductType, Pageable pageable) {
-        try {
-            return productRepository.findProductByTypePage(idProductType, pageable).getContent();
-        } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, "find-product-by-type-page-error : {0}", ex.getMessage());
-        }
-        return null;
-    }
-
-    @Override
-    public int sizeOfProductByType(int idProductType) {
-        try {
-            return productRepository.findProductByType(idProductType).size();
-        } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, "size-of-product-by-type-error : {0}", ex.getMessage());
-        }
-        return 0;
-    }
 
     @Override
     public List<Product> findNewProducts(Pageable pageable) {
@@ -319,16 +315,21 @@ public class ProductService_Impl implements ProductService {
 
     }
 
-    public Set<Integer> listTagAdd(String listTag) {
-        Set<Integer> tagIds = new HashSet<>();
 
-        String[] nameTag = listTag.split("@");
+    public Set<Integer> listTagAdd(String content) {
+        Set<Integer> tagIds = new HashSet<>();
+        System.out.println(content);
+        Record record = recordRepository.findByName("tag");
+        record.setNumber(record.getNumber() + 1);
+
+        String[] nameTag = content.split("@");
 
         for (int i = 1; i < nameTag.length; i++) {
             nameTag[i].trim();
+            System.out.println("tag: " + nameTag[i]);
         }
 
-        List<Tag> tags = tagRepository.findAllTagSize();
+        List<Tag> tags = tagRepository.findAll();
         for (int i = 1; i < nameTag.length; i++) {
             final int[] index = {1};
             int iTag = i;
@@ -354,8 +355,7 @@ public class ProductService_Impl implements ProductService {
 
     private Tag findByNameUnique(String name) {
         try {
-            Tag tag = tagRepository.findByName(name);
-            return tag;
+            return tagRepository.findByName(name);
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "find-tag-by-name-error : {0}", ex.getMessage());
         }

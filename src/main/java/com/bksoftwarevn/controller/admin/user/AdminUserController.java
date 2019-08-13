@@ -44,6 +44,7 @@ public class AdminUserController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+
     @GetMapping(value = "/size")
     public ResponseEntity<Double> pageNumberUser(
             HttpServletResponse response
@@ -52,6 +53,18 @@ public class AdminUserController {
         Record record = recordService.findByName("user");
         double result = Math.ceil((double) record.getNumber() / 10);
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/name/all")
+    public ResponseEntity<List<AppUser>> findAllUser(
+            HttpServletResponse response,
+            @RequestParam("name") String name
+    ) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
+        List<AppUser> users = appUserService.findAllUserByName(name);
+        if (users != null) return new ResponseEntity<>(users, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/accumulated-point")

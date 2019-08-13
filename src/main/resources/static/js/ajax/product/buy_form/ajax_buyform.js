@@ -50,9 +50,9 @@ function findAllBuyForm(page) {
             'adminbksoftwarevn': value_token_public,
         },
         url: "api/v1/public/buy-form?page=" + page,
-        success: function (users) {
+        success: function (buyforms) {
             $("#column-buyform").html(
-                "<td>STT</td>" +
+                "<td>Kiểm tra</td>" +
                 "<td>Tên</td>" +
                 "<td>Số điện thoại</td>" +
                 "<td>email</td>" +
@@ -63,7 +63,7 @@ function findAllBuyForm(page) {
                 "<td>Giá</td>" +
                 "<td>Chức năng</td>"
             );
-            const listSize = Object.keys(users).length;
+            const listSize = Object.keys(buyforms).length;
             if (listSize > 0) {
                 $('#total-record').text(listSize);
                 let contentRow = '';
@@ -72,16 +72,29 @@ function findAllBuyForm(page) {
 
                     var price = formatNumber(buyform.price, '.', '.');
                     var phoneNumber = 0 + '' + buyform.phoneNumber;
+                    console.log(buyform.checked);
+
+                    var checked = buyform.checked;
+                    if (checked === true) {
+                        checked = 'Đã kiểm';
+                    } else {
+                        checked = 'Chưa kiểm';
+                    }
+
+                    var products = buyform.products + '';
+                    var quantity = buyform.quantity + '';
+
+
                     contentRow += `
                             <tr>
-                            <td>${index} </td>
-                            <td>${buyform.name} </td>
+                            <td style="color: red">${checked} </td>
+                            <td style="text-align: left">${buyform.name} </td>
                             <td>${phoneNumber} </td>
                             <td>${buyform.email} </td>
-                            <td>${buyform.address} </td>
-                            <td>${buyform.note} </td>
-                            <td>${buyform.products} </td>
-                            <td style="text-align: center">${buyform.quantity} </td>
+                            <td style="text-align: left">${buyform.address} </td>
+                            <td style="text-align: left">${buyform.note} </td>
+                            <td style="text-align: left">${products.replaceAllll(',', '\n-  ')} </td>
+                            <td style="text-align: center">${quantity.replaceAllll(',', ' - ')} </td>
                             <td>${price} </td>
                             <td>
                                   <a class="btn btn-primary" href="send-mail-product?buyform-id=${buyform.id}" name="${buyform.id}"><i class="fa fa-lg fa-edit"></i></a>
@@ -120,7 +133,7 @@ function deleteBuyForm() {
             timeout: 30000,
             success: function () {
                 alert('Xóa thành công');
-                location.href = "buyform";
+                location.href = "buy-form";
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("Xóa thất bại");

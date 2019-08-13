@@ -18,8 +18,8 @@
         <div class="title-table">
             <ul class="app-nav">
                 <li class="app-search">
-                    <input class="app-search__input" id="name-product" type="search" placeholder="Tìm kiếm">
-                    <button class="app-search__button" id="btn-search-product"><i class="fa fa-search"></i></button>
+                    <input class="app-search__input" id="name-user" type="search" placeholder="Tìm kiếm">
+                    <button class="app-search__button" id="btn-search-user"><i class="fa fa-search"></i></button>
                 </li>
             </ul>
         </div>

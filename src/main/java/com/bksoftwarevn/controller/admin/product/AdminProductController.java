@@ -148,8 +148,7 @@ public class AdminProductController {
             @RequestBody Product product,
             @RequestParam(name = "small-category-id") int smallCategoryId,
             @RequestParam(defaultValue = "-1", required = false, value = "partner-id") int partnerId,
-            @RequestParam("tag") String tagString,
-            @RequestParam("product-type-id") int productTypeId
+            @RequestParam("tag") String tagString
     ) {
         Record record = recordService.findByName("product");
         product.setStatus(true);
@@ -158,11 +157,9 @@ public class AdminProductController {
         product.setProductStatus(true);
         product.setSaleNumber(0);
         product.setSmallCategory(smallCategoryService.findSmallCategoryById(smallCategoryId));
-        product.setProductType(productTypeService.findById(productTypeId));
         if (partnerId > 0) product.setPartner(partnerService.findById(partnerId));
 
         Set<Integer> listTagId = productService.listTagAdd(tagString);
-
         List<Tag> tagList = new ArrayList<>();
         listTagId.forEach(id -> {
             Tag tag = tagService.findById(id);
@@ -182,8 +179,8 @@ public class AdminProductController {
     @PutMapping(value = "/product")
     public ResponseEntity<Object> updateProduct(@RequestBody Product product,
                                                 @RequestParam("list-tag") String listTag) {
-        Set<Integer> listTagId = productService.listTagAdd(listTag);
 
+        Set<Integer> listTagId = productService.listTagAdd(listTag);
         List<Tag> tagList = new ArrayList<>();
         listTagId.forEach(id -> {
             Tag tag = tagService.findById(id);
@@ -192,6 +189,7 @@ public class AdminProductController {
             }
         });
         product.setTags(tagList);
+
         if (productService.saveProduct(product))
             return new ResponseEntity<>(product, HttpStatus.OK);
         else return new ResponseEntity<>("update product fail", HttpStatus.BAD_REQUEST);

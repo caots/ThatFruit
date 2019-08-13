@@ -16,6 +16,8 @@ public interface AppUserService {
 
     AppUser findById(int id);
 
+    List<AppUser> findAllUserByName(String name);
+
     List<AppUser> findAll();
 
     boolean saveAppUser(AppUser appUser);

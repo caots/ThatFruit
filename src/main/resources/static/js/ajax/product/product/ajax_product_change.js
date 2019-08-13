@@ -9,10 +9,6 @@ function createProduct() {
     $('#small-category-value').click(function () {
         idSmallCategory = $(this).val();
     });
-    let idSTypeProduct = '';
-    $('#product-type-value').click(function () {
-        idSTypeProduct = $(this).val();
-    });
     let productStatus = '';
     $('#product-status').click(function () {
         productStatus = $(this).val();
@@ -22,40 +18,49 @@ function createProduct() {
         const listtag = $('#tag-product').val();
         const nameProduct = $("#name-product").val();
         const codeProduct = $("#code-product").val();
-        const originCost = $("#origin-cost").val();
-        const saleCost = $("#sale-cost").val();
+        const originCostRetail = $("#origin-cost-Retail").val();
+        const saleCostRetail = $("#sale-cost-Retail").val();
+        const saleCostWholesale = $("#origin-cost-wholesale").val();
+        const originCostWholesale = $("#sale-cost-wholesale").val();
         const originProduct = $("#origin-product").val();
-        const unitProduct = $("#unit-product").val();
-        const product = {
-            "name": nameProduct,
-            "productStatus": productStatus,
-            "productCode": codeProduct,
-            "saleCost": originCost,
-            "originCost": saleCost,
-            "origin": originProduct,
-            "unit": unitProduct,
-        };
-        $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            headers: {
-                "Authorization": tokenHeader_value,
-            },
-            url: "api/v1/admin/product?small-category-id=" + idSmallCategory +
-                "&product-type-id=" + idSTypeProduct +
-                "&tag=" + listtag,
-            data: JSON.stringify(product),
-            cache: false,
-            timeout: 300000,
-            success: function () {
-                alert("Thêm thành công");
-                $("#btn-ok-product").prop("disabled", true);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                errMess(jqXHR, textStatus, errorThrown);
-                alert("Thêm thất bại ");
-            }
-        })
+        var formImg = $('#btn-img-product-main')[0];
+        var formData = new FormData(formImg);
+
+        uploadFile(formData).then(function (data) {
+
+            const product = {
+                "name": nameProduct,
+                "productStatus": productStatus,
+                "image": data,
+                "productCode": codeProduct,
+                "saleCostRetail": saleCostRetail,
+                "originCostRetail": originCostRetail,
+                "saleCostWholesale": saleCostWholesale,
+                "originCostWholesale": originCostWholesale,
+                "origin": originProduct,
+            };
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                headers: {
+                    "Authorization": tokenHeader_value,
+                },
+                url: "api/v1/admin/product?small-category-id=" + idSmallCategory +
+                    "&tag=" + listtag,
+                data: JSON.stringify(product),
+                cache: false,
+                timeout: 300000,
+                success: function () {
+                    alert("Thêm thành công");
+                    $("#btn-ok-product").prop("disabled", true);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    errMess(jqXHR, textStatus, errorThrown);
+                    alert("Thêm thất bại ");
+                }
+            })
+        });
+
     });
 }
 
@@ -85,29 +90,31 @@ function updateProduct(data) {
     var listTag = '';
     console.log(data);
     data.tags.map(function (tag) {
-        listTag += '@'+tag.name + ' ';
+        listTag += '@' + tag.name + ' ';
     });
 
     $("#tag-product").val(listTag);
     $("#name-product").val(data.name);
     $("#code-product").val(data.productCode);
-    $("#origin-cost").val(data.originCost);
-    $("#sale-cost").val(data.saleCost);
+    $("#origin-cost-Retail").val(data.originCostRetail);
+    $("#sale-cost-Retail").val(data.saleCostRetail);
+    $("#origin-cost-wholesale").val(data.originCostWholesale);
+    $("#sale-cost-wholesale").val(data.saleCostWholesale);
     $("#origin-product").val(data.origin);
-    $("#unit-product").val(data.unit);
     $('#product-status').val(data.productStatus);
 
 
+    $("#tag-product").prop("disabled", true);
     $("#small-category-value").prop("disabled", true);
-    $("#product-type-value").prop("disabled", true);
     $('#btn-ok-product').click(function () {
 
         data.name = $("#name-product").val();
         data.productCode = $("#code-product").val();
-        data.originCost = $("#origin-cost").val();
-        data.saleCost = $("#sale-cost").val();
+        data.originCostRetail = $("#origin-cost-Retail").val();
+        data.saleCostRetail = $("#sale-cost-Retail").val();
         data.origin = $("#origin-product").val();
-        data.unit = $("#unit-product").val();
+        data.saleCostWholesale = $("#sale-cost-wholesale").val();
+        data.originCostWholesale = $("#origin-cost-wholesale").val();
         if ($('#product-status').val() == null) $('#product-status').val('true');
         data.productStatus = $('#product-status').val();
 
@@ -145,3 +152,26 @@ function clickBtnProductChangeSubmit() {
     }
 
 }
+
+var uploadFile = async (file) => {
+    let data;
+    await $.ajax({
+        type: "POST",
+        headers: {
+            "Authorization": tokenHeader_value,
+        },
+        url: "/api/v1/public/upload-file",
+        enctype: 'multipart/form-data',
+        data: file,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (result) {
+            data = result
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            errMess(jqXHR, textStatus, errorThrown);
+        }
+    });
+    return data;
+};
