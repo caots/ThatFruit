@@ -25,12 +25,12 @@
 </section>
 <section class="login-content">
     <div class="logo">
-        <img src="https://admin.haphatsmarthome.com/resources/img/login/bksoftwareLogo.png"
+        <img src="resources/img/bksoftwareLogo.png"
              alt="" class="img-fluid">
     </div>
     <div class="login-box">
         <div class="login-form">
-            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>Thật Fruit</h3>
             <div class="form-group">
                 <label class="control-label">USERNAME</label>
                 <input class="form-control" type="text" placeholder="Email" autofocus id="username">

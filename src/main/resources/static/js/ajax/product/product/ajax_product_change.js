@@ -16,7 +16,7 @@ function createProduct() {
 
 
     $('#btn-ok-product').click(function () {
-        const listtag = $('#tag-product').val();
+        const listTag = $('#tag-product').val();
         const nameProduct = $("#name-product").val();
         const codeProduct = $("#code-product").val();
         const originCostRetail = $("#origin-cost-Retail").val();
@@ -31,43 +31,43 @@ function createProduct() {
         var x = $('#demoDate').val().split('/');
         var endDate = x[2] + '-' + x[1] + '-' + x[0];
 
-        uploadFile(formData).then(function (data) {
+        // uploadFile(formData).then(function (data) {
 
-            const product = {
-                "name": nameProduct,
-                "productStatus": productStatus,
-                "image": data,
-                "productCode": codeProduct,
-                "saleCostRetail": saleCostRetail,
-                "originCostRetail": originCostRetail,
-                "saleCostWholesale": saleCostWholesale,
-                "originCostWholesale": originCostWholesale,
-                "origin": originProduct,
-                "enDateSale": new Date(endDate),
-            };
-            $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                headers: {
-                    "Authorization": tokenHeader_value,
-                },
-                url: "api/v1/admin/product?small-category-id=" + idSmallCategory +
-                    "&tag=" + listtag,
-                data: JSON.stringify(product),
-                cache: false,
-                timeout: 300000,
-                success: function () {
-                    alert("Thêm thành công");
-                    $("#btn-ok-product").prop("disabled", true);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    errMess(jqXHR, textStatus, errorThrown);
-                    alert("Thêm thất bại ");
-                }
-            })
-        });
-
+        const product = {
+            "name": nameProduct,
+            "productStatus": productStatus,
+            //"image": data,
+            "productCode": codeProduct,
+            "saleCostRetail": saleCostRetail,
+            "originCostRetail": originCostRetail,
+            "saleCostWholesale": saleCostWholesale,
+            "originCostWholesale": originCostWholesale,
+            "origin": originProduct,
+            "enDateSale": new Date(endDate),
+        };
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            headers: {
+                "Authorization": tokenHeader_value,
+            },
+            url: "api/v1/admin/product?small-category-id=" + idSmallCategory +
+                "&tag=" + listTag,
+            data: JSON.stringify(product),
+            cache: false,
+            timeout: 300000,
+            success: function () {
+                alert("Thêm thành công");
+                $("#btn-ok-product").prop("disabled", true);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                errMess(jqXHR, textStatus, errorThrown);
+                alert("Thêm thất bại ");
+            }
+        })
     });
+
+    // });
 }
 
 //============ Find Product By Id ===================
@@ -96,10 +96,9 @@ function updateProduct(data) {
     var listTag = '';
     console.log(data);
     data.tags.map(function (tag) {
-        listTag += '@' + tag.name + ' ';
+        listTag += '@' + tag.name;
     });
-
-    $("#tag-product").val(listTag);
+    $('#list-tag').text(listTag);
     $("#name-product").val(data.name);
     $("#code-product").val(data.productCode);
     $("#origin-cost-Retail").val(data.originCostRetail);
@@ -108,11 +107,11 @@ function updateProduct(data) {
     $("#sale-cost-wholesale").val(data.saleCostWholesale);
     $("#origin-product").val(data.origin);
     $('#product-status').val(data.productStatus);
-    var x = data.endDate.split('-');
-    $('#demoDate').val(x[2] + '/' + x[1] + '/' + x[0]);
+    var endDateX = (data.enDateSale + '').split(',');
+    $('#demoDate').val(endDateX[2] + '/' + endDateX[1] + '/' + endDateX[0]);
 
 
-    $("#tag-product").prop("disabled", true);
+    // $("#tag-product").prop("disabled", true);
     $("#small-category-value").prop("disabled", true);
     $('#btn-ok-product').click(function () {
 
@@ -128,7 +127,7 @@ function updateProduct(data) {
         data.originCostWholesale = $("#origin-cost-wholesale").val();
         if ($('#product-status').val() == null) $('#product-status').val('true');
         data.productStatus = $('#product-status').val();
-        data.endDate = new Date(endDate);
+        data.enDateSale = new Date(endDate);
 
         var listTagAfter = $('#tag-product').val();
         console.log(listTagAfter);

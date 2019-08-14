@@ -316,7 +316,7 @@ public class ProductService_Impl implements ProductService {
 
     }
 
-
+    @Override
     public Set<Integer> listTagAdd(String content) {
         Set<Integer> tagIds = new HashSet<>();
         System.out.println(content);
@@ -326,20 +326,24 @@ public class ProductService_Impl implements ProductService {
         String[] nameTag = content.split("@");
 
         for (int i = 1; i < nameTag.length; i++) {
+            nameTag[i].replaceAll("\\s++", "");
             nameTag[i].trim();
-            System.out.println("tag: " + nameTag[i]);
+            System.out.println(nameTag[i]);
         }
+        //done
 
         List<Tag> tags = tagRepository.findAll();
         for (int i = 1; i < nameTag.length; i++) {
-            final int[] index = {1};
-            int iTag = i;
-            tags.forEach(tag -> {
-                if (nameTag[iTag].equals(tag.getName())) {
-                    index[0] = -1;
+            int index = 1;
+
+            for (Tag tag : tags) {
+                if (tag.getName().equals(nameTag[i])) {
+                    index = -1;
+                    break;
                 }
-            });
-            if (index[0] == 1) {
+            }
+            System.out.println(index);
+            if (index == 1) {
                 Tag t = new Tag();
                 t.setName(nameTag[i]);
                 t.setStatus(true);
@@ -348,10 +352,20 @@ public class ProductService_Impl implements ProductService {
                 tagIds.add(tag.getId());
             } else {
                 Tag tag = findByNameUnique(nameTag[i]);
+                System.out.println(tag.getId());
                 tagIds.add(tag.getId());
             }
         }
         return tagIds;
+    }
+
+    private Tag findByNameUnique(String name) {
+        try {
+            return tagRepository.findByName(name);
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "find-tag-by-name-error : {0}", ex.getMessage());
+        }
+        return null;
     }
 
     @Override
@@ -370,15 +384,6 @@ public class ProductService_Impl implements ProductService {
             LOGGER.log(Level.SEVERE, "set-end-date-sale-error : {0}", ex.getMessage());
         }
         return false;
-    }
-
-    private Tag findByNameUnique(String name) {
-        try {
-            return tagRepository.findByName(name);
-        } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, "find-tag-by-name-error : {0}", ex.getMessage());
-        }
-        return null;
     }
 
 

@@ -23,8 +23,9 @@
         <img src="https://admin.haphatsmarthome.com/resources/img/login/bksoftwareLogo.png"
              alt="" class="img-fluid">
     </div>
-    <div class="lock-box"><img class="rounded-circle user-image" src="https://avatars3.githubusercontent.com/u/44569407?s=460&v=4">
-        <h4 class="text-center user-name">Ông chủ</h4>
+    <div class="lock-box"><img class="rounded-circle user-image"
+                               src="resources/img/logothatfruit.png">
+        <h4 class="text-center user-name">Thật Fruit</h4>
         <p class="text-center text-muted">Account Locked</p>
         <div class="unlock-form">
             <div class="form-group">

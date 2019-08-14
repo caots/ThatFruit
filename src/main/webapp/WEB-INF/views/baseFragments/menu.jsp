@@ -2,11 +2,12 @@
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
     <div class="app-sidebar__user">
-        <img class="app-sidebar__user-avatar" src="https://avatars3.githubusercontent.com/u/44569407?s=460&v=4"
-             alt="User Image" width="30%">
+        <img class="app-sidebar__user-avatar"
+             src="resources/img/logothatfruit.png"
+             alt="User Image" width="30%" style="background: #eff7ff">
         <div>
-            <p class="app-sidebar__user-name">Cao Trần</p>
-            <p class="app-sidebar__user-designation">Developer</p>
+            <p class="app-sidebar__user-name">Thật Fruit</p>
+            <p class="app-sidebar__user-designation">Siêu to khổng lồ</p>
         </div>
     </div>
     <ul class="app-menu">

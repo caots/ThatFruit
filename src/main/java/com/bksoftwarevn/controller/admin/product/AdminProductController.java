@@ -12,6 +12,7 @@ import com.bksoftwarevn.service.product.ProductImageService;
 import com.bksoftwarevn.service.product.ProductService;
 import com.bksoftwarevn.service.product.ProductTypeService;
 import com.bksoftwarevn.service.product.TagService;
+import jdk.nashorn.internal.ir.IdentNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -182,6 +183,11 @@ public class AdminProductController {
                                                 @RequestParam("list-tag") String listTag) {
 
         Set<Integer> listTagId = productService.listTagAdd(listTag);
+
+        List<Tag> tagOld = product.getTags();
+
+        Set<Tag> tagTotal = new HashSet<>();
+
         List<Tag> tagList = new ArrayList<>();
         listTagId.forEach(id -> {
             Tag tag = tagService.findById(id);
@@ -189,7 +195,12 @@ public class AdminProductController {
                 tagList.add(tag);
             }
         });
-        product.setTags(tagList);
+
+        tagTotal.addAll(tagOld);
+        tagTotal.addAll(tagList);
+        List<Tag> total = new ArrayList<>();
+        total.addAll(tagTotal);
+        product.setTags(total);
 
         if (productService.saveProduct(product))
             return new ResponseEntity<>(product, HttpStatus.OK);
