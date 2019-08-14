@@ -66,13 +66,16 @@ function findAllNews(page) {
                 let contentRow = '';
                 var index = 1;
                 news.map(function (newss) {
+                    var timePost = newss.time + '';
+                    var list = timePost.split(',');
+                    timePost = list[2] + '-' + list[1] + '-' + list[0] + ' ' + list[3] + ':' + list[4];
                     contentRow += `
                         <tr>  
                         <td> ${index} </td>
                         <td style="text-align: left"> ${newss.title} </td>
                         <td>  <a href="update-news?news-id=${newss.id}"  style="cursor: pointer;color: green">Nội dung </a>&nbsp;<br> </td> </td>
                         <td> ${newss.view} </td>
-                        <td> ${newss.time} </td>
+                        <td> ${timePost} </td>
                         <td> 
                               <div class="btn-group">
                                    <a class="btn btn-primary" href="create-news"><i class="fa fa-lg fa-plus"></i></a>

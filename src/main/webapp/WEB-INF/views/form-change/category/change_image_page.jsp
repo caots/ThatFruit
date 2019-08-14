@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="resources/js/ajax/category/image_home/ajax_image_page_change.js"></script>
 <main class="app-content">
     <div class="app-title">

@@ -18,6 +18,7 @@ function findAllNameBigCategory() {
                 let contentRow = '';
                 bigCategories.map(function (bigCategory) {
                     contentRow += `
+                         <option value="none"></option>
                        <option value ="${bigCategory.id}" >${bigCategory.name}</option>
                     `;
                 });
@@ -43,6 +44,7 @@ function findAllNameMenuCategory() {
                 let contentRow = '';
                 mediumCategories.map(function (mediumCategory) {
                     contentRow += `
+                       <option value="none"></option>
                        <option value="${mediumCategory.id}">${mediumCategory.name}</option>
                     `;
                 });

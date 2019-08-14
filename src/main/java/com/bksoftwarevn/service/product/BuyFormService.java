@@ -1,5 +1,6 @@
 package com.bksoftwarevn.service.product;
 
+import com.bksoftwarevn.entities.news.News;
 import com.bksoftwarevn.entities.product.BuyForm;
 import com.bksoftwarevn.entities.product.BuyFormCart;
 import com.bksoftwarevn.entities.product.BuyFormHasProduct;

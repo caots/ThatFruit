@@ -51,7 +51,6 @@ String.prototype.replaceAllll = function (
 };
 
 var uploadFile = async (file) => {
-
     let data;
     await $.ajax({
         type: "POST",

@@ -118,7 +118,6 @@ function updateProduct(data) {
     $('#demoDate').val(endDateX[2] + '/' + endDateX[1] + '/' + endDateX[0]);
 
     var formData;
-
     $("#change-product").change(function () {
         formData = new FormData($("form")[0]);
     });

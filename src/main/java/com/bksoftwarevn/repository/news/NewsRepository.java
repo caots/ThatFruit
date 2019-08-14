@@ -2,6 +2,7 @@ package com.bksoftwarevn.repository.news;
 
 import com.bksoftwarevn.entities.news.News;
 import com.bksoftwarevn.entities.news.Topic;
+import com.bksoftwarevn.entities.product.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +14,12 @@ import java.util.List;
 
 @Repository
 public interface NewsRepository extends JpaRepository<News, Integer> {
+
+    @Query("SELECT n FROM News n WHERE n.status = true and n.title LIKE CONCAT('%',:title,'%')")
+    Page<News> findAllnewsByTitlePage(@Param("title") String name, Pageable pageable);
+
+    @Query("SELECT n FROM News n WHERE n.status = true and n.title LIKE CONCAT('%',:title,'%')")
+    List<News> findAllNewsByTitle(@Param("title") String name);
 
     Page<News> findByStatus(boolean status, Pageable pageable);
 
@@ -30,7 +37,7 @@ public interface NewsRepository extends JpaRepository<News, Integer> {
     List<News> findByNameSize(@Param("title") String name);
 
     @Query("SELECT n FROM News n WHERE n.title LIKE CONCAT('%',:title,'%') and n.status= true ")
-    Page<News> findByNamePage(@Param("title") String name,Pageable pageable);
+    Page<News> findByNamePage(@Param("title") String name, Pageable pageable);
 
 
 }

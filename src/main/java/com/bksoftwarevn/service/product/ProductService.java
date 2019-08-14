@@ -11,6 +11,8 @@ import java.util.Set;
 
 public interface ProductService {
 
+    List<Product> findAllHotProductBySmallCategory(int id, Pageable pageable);
+
     List<Product> findAllProductPage(Pageable pageable);
 
     List<Product> findProductByNameAll(String name);

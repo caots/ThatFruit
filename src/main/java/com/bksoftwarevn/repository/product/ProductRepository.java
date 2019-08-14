@@ -37,6 +37,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = " SELECT p From Product p where p.status= true")
     List<Product> findAllProduct();
 
+    @Query(value = " SELECT p From Product p where p.status= true and p.smallCategory.id =:id order by p.saleNumber desc ")
+    Page<Product> findAllHotProductBySmallCategory( @Param("id") int id,Pageable pageable);
+
     @Query(value = " select * from product where MONTH(init_date) = MONTH(NOW()) and status = true order by (origin_cost_retail - sale_cost_retail) desc ", nativeQuery = true)
     Page<Product> listProductByMonth(Pageable pageable);
 

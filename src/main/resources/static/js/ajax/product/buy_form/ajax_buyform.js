@@ -96,7 +96,7 @@ function findAllBuyForm(page) {
                             <td style="text-align: center">${quantity.replaceAllll(',', ' - ')} </td>
                             <td>${price} </td>
                             <td>
-                                  <a class="btn btn-primary" href="send-mail-product?buyform-id=${buyform.id}" name="${buyform.id}"><i class="fa fa-lg fa-edit"></i></a>
+                                  <a class="btn btn-primary" href="send-mail-product?buyform-id=${buyform.id}" name="${buyform.id}"><i class="fa fa-lg fa-edit" style="margin-right: 1px;"></i></a>
                                    <a class="btn btn-primary delete-buy-form" name="${buyform.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                             </td>
                             </tr>

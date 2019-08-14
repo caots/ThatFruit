@@ -46,6 +46,16 @@ public class ProductService_Impl implements ProductService {
     private RecordRepository recordRepository;
 
     @Override
+    public List<Product> findAllHotProductBySmallCategory(int id, Pageable pageable) {
+        try {
+            return productRepository.findAllHotProductBySmallCategory(id, pageable).getContent();
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "find-all-hot-product-by-small-category-error: {0}", ex.getMessage());
+        }
+        return null;
+    }
+
+    @Override
     public List<Product> findAllProductPage(Pageable pageable) {
         try {
             return productRepository.findByStatus(true, pageable).getContent();

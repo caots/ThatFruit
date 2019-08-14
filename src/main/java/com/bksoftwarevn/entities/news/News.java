@@ -29,6 +29,8 @@ public class News implements Serializable {
 
     private String content;
 
+    private String image;
+
     private String description;
 
     private LocalDateTime time;

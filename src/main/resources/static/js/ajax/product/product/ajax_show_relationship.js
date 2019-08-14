@@ -18,7 +18,7 @@ function findAllNameProductType() {
                 let contentRow = '';
                 productType.map(function (product) {
                     contentRow += `
-
+                         <option value="none"></option>
                        <option  value ="${product.id}" >${product.name}</option>
                     `;
                 });
@@ -69,6 +69,7 @@ function findAllNameSmallCategory() {
                 let contentRow = '';
                 smallCategories.map(function (smallCategory) {
                     contentRow += `
+                         <option value="none"></option>
                         <option value="${smallCategory.id}">${smallCategory.name}</option>
                      `;
                 });

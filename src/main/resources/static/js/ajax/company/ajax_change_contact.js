@@ -76,6 +76,7 @@ function findAllNameCompany() {
             let contentRow = '';
             result.map(function (company) {
                 contentRow += `
+                         <option value="none"></option>
                        <option value="${company.id}">${company.name}</option>
                     `;
             });

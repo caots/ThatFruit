@@ -53,6 +53,24 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("hot-by-small-category/page")
+    public ResponseEntity<List<Product>> findAllHotProductBySmallCategoryPage(
+            HttpServletResponse response,
+            @RequestParam("small-id") int smallId,
+            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "3") int size,
+            @RequestHeader("adminbksoftwarevn") String header
+    ) {
+        if (page < 1) page = 1;
+        if (size < 0) size = 0;
+        if (header.equals(Token.tokenHeader)) {
+            Pageable pageable = PageRequest.of(page - 1, size);
+            List<Product> products = productService.findAllHotProductBySmallCategory(smallId, pageable);
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/size")
     public ResponseEntity<Double> pageNumberProduct() {
         float pageNumber = recordService.findByName("product").getNumber();

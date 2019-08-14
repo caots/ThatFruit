@@ -10,33 +10,43 @@ function createNews() {
     $('#topic-value').click(function () {
         idTopic = $(this).val();
     });
+    var formData;
+    $("#change-news").change(function () {
+        formData = new FormData($('form')[0]);
+    });
+
     $('#btn-ok-news').click(function () {
         const contentNews = $('.nicEdit-main').text();
         const titleNews = $('#name-title').val();
-        const news = {
-            "content": contentNews,
-            'title': titleNews
-        };
-        $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            headers: {
-                "Authorization": tokenHeader_value,
-            },
-            url: "api/v1/admin/news?topic-id=" + idTopic,
-            data: JSON.stringify(news),
-            cache: false,
-            timeout: 300000,
-            success: function () {
-                alert("Thêm thành công");
-                $("#btn-ok-news").prop("disabled", true);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                errMess(jqXHR, textStatus, errorThrown);
-                alert("Thêm thất bại ");
-            }
-        })
+        uploadFile(formData).then(data => {
+            const news = {
+                "content": contentNews,
+                'title': titleNews,
+                'image': data.data.display_url,
+            };
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                headers: {
+                    "Authorization": tokenHeader_value,
+                },
+                url: "api/v1/admin/news?topic-id=" + idTopic,
+                data: JSON.stringify(news),
+                cache: false,
+                timeout: 300000,
+                success: function () {
+                    alert("Thêm thành công");
+                    $("#btn-ok-news").prop("disabled", true);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    errMess(jqXHR, textStatus, errorThrown);
+                    alert("Thêm thất bại ");
+                }
+            })
+        });
+
     });
+
 }
 
 //============ Find News By Id ===================
@@ -74,6 +84,7 @@ function findAllTopicName() {
                 let contentRow = '';
                 result.map(function (topic) {
                     contentRow += `
+                        <option value="none"></option>
                        <option value="${topic.id}">${topic.name}</option>
                     `;
                 });
@@ -91,27 +102,35 @@ function updateNews(data) {
     $('#name-title').val(data.title);
     $('.nicEdit-main').text(data.content);
     $("#topic-value").prop("disabled", true);
+    $('#url-image-news').attr('src', data.image);
+    var formData;
+    $("#change-news").change(function () {
+        formData = new FormData($('form')[0]);
+    });
     $('#btn-ok-news').click(function () {
 
         data.content = $('.nicEdit-main').text();
         data.title = $('#name-title').val();
-        $.ajax({
-            type: "PUT",
-            contentType: "application/json",
-            headers: {
-                "Authorization": tokenHeader_value,
-            },
-            url: "api/v1/admin/news",
-            data: JSON.stringify(data),
-            timeout: 30000,
-            success: function () {
-                alert('Chỉnh sửa thành công');
-                $("#btn-ok-news").prop("disabled", true);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                errMess(jqXHR, textStatus, errorThrown);
-                alert("Chỉnh sửa thất bại ");
-            }
+        uploadFile(formData).then(dataImage => {
+            data.image = dataImage.data.display_url;
+            $.ajax({
+                type: "PUT",
+                contentType: "application/json",
+                headers: {
+                    "Authorization": tokenHeader_value,
+                },
+                url: "api/v1/admin/news",
+                data: JSON.stringify(data),
+                timeout: 30000,
+                success: function () {
+                    alert('Chỉnh sửa thành công');
+                    $("#btn-ok-news").prop("disabled", true);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    errMess(jqXHR, textStatus, errorThrown);
+                    alert("Chỉnh sửa thất bại ");
+                }
+            });
         });
     });
 }

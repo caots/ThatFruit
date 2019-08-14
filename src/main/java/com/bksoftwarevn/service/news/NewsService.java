@@ -10,6 +10,10 @@ import java.util.List;
 
 public interface NewsService {
 
+    List<News> findAllNewsByNameTitlePage(String name, Pageable pageable);
+
+    List<News> sizeOfNewsByNameTitle(String name);
+
     List<News> findAllNewsPage(Pageable pageable);
 
     List<News> findAllNewsByTopicPage(Topic topic, Pageable pageable);

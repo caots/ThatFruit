@@ -26,6 +26,17 @@ public class NewsService_Impl implements NewsService {
 
 
     @Override
+    public List<News> findAllNewsByNameTitlePage(String name, Pageable pageable) {
+        return newsRepository.findAllnewsByTitlePage(name, pageable).getContent();
+    }
+
+    @Override
+    public List<News> sizeOfNewsByNameTitle(String name) {
+        return newsRepository.findAllNewsByTitle(name);
+
+    }
+
+    @Override
     public List<News> findAllNewsPage(Pageable pageable) {
         try {
             return newsRepository.findByStatus(true, pageable).getContent();
@@ -58,7 +69,7 @@ public class NewsService_Impl implements NewsService {
     @Override
     public List<News> findAllNewsByTitle(String title, Pageable pageable) {
         try {
-            return newsRepository.findByNamePage(title,pageable).getContent();
+            return newsRepository.findByNamePage(title, pageable).getContent();
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "find-all-news-by-title-error : {0}", ex.getMessage());
         }

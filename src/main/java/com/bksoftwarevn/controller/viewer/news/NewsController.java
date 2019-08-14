@@ -59,8 +59,45 @@ public class NewsController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("find-by-title/page")
+    public ResponseEntity<List<News>> findAllNews(
+            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "20") int size,
+            @RequestParam(name = "type", required = false, defaultValue = "DESC") String type,
+            @RequestParam(name = "field", required = false, defaultValue = "id") String field,
+            @RequestParam("title") String title,
+            @RequestHeader("adminbksoftwarevn") String header
+    ) {
+        if (page < 1) page = 1;
+        if (size < 0) size = 0;
+        if (header.equals(Token.tokenHeader)) {
+            Sort sortable = productService.sortData(type, field);
+
+            Pageable pageable = PageRequest.of(page - 1, size, sortable);
+            List<News> newsList = newsService.findAllNewsByNameTitlePage(title, pageable);
+
+            if (newsList != null) {
+                return new ResponseEntity<>(newsList, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "find-by-title/size")
+    public ResponseEntity<Double> pageNumberNewsFindByTitleName(
+            HttpServletResponse response,
+            @RequestParam("title") String title,
+            @RequestHeader("adminbksoftwarevn") String header
+    ) {
+        if (header.equals(Token.tokenHeader)) {
+            double result = Math.ceil((double) newsService.sizeOfNewsBTitle(title));
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping(value = "/size")
-    public ResponseEntity<Double> pageNumberMenu(
+    public ResponseEntity<Double> pageNumbernews(
             HttpServletResponse response,
             @RequestHeader("adminbksoftwarevn") String header
     ) {
