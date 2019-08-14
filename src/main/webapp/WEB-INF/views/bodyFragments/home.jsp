@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<script src="resources/js/ajax/ajax_home.js"></script>
 
 <main class="app-content">
     <div class="row">

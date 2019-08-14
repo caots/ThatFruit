@@ -63,7 +63,6 @@ function findAllNews(page) {
             );
             const listSize = Object.keys(news).length;
             if (listSize > 0) {
-                $('#total-record').text(listSize);
                 let contentRow = '';
                 var index = 1;
                 news.map(function (newss) {

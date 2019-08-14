@@ -15,12 +15,25 @@
     <!-- TABLE -->
     <div class="table-responsive" style="overflow-x:auto;overflow-y: auto">
         <div class="title-table">
+            <ul class="app-nav">
 
+                <li style="margin-top: 10px;">
+                    <button  class="btn btn-primary" type="button">
+                        <a href="create-big" style="color: white">
+                            <i class="fa fa-fw fa-lg fa-check-circle"></i>
+                            Thêm
+                        </a>
+                    </button>
+                </li>
+                <li class="app-search" style="margin: auto"></li>
+
+
+            </ul>
         </div>
 
         <table class="table text-center">
             <thead>
-                    <tr id="column-big" style="font-weight: 600"></tr>
+            <tr id="column-big" style="font-weight: 600"></tr>
             </thead>
             <tbody id="row-big"></tbody>
         </table>

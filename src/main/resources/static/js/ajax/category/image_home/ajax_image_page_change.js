@@ -3,29 +3,6 @@ $(document).ready(function () {
 
 });
 
-var uploadFile = async (file) => {
-    let data;
-    await $.ajax({
-        type: "POST",
-        headers: {
-            "Authorization": tokenHeader_value,
-        },
-        url: "/api/v1/public/upload-file",
-        enctype: 'multipart/form-data',
-        data: file,
-        cache: false,
-        processData: false,
-        contentType: false,
-        success: function (result) {
-            data = result
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            errMess(jqXHR, textStatus, errorThrown);
-        }
-    });
-    return data;
-};
-
 function clickBtnImagePageChangeSubmit() {
     const urlImagePage = window.location.href;
     var str = urlImagePage.split("=");
@@ -57,13 +34,15 @@ function updateImagePage(imagePage) {
 
     $('#url-image-page').attr('src', imagePage.url);
 
+    var formData;
+    $("#change-product").change(function () {
+        formData = new FormData($("form")[0]);
+    });
+
+
     $('#btn-ok-image-page').click(function () {
-
-            var formImg = $('#btn-img-page')[0];
-            var formData = new FormData(formImg);
-
             uploadFile(formData).then(function (data) {
-                imagePage.url = data;
+                imagePage.url = data.data.display_url;
                 $.ajax({
                     type: "PUT",
                     contentType: "application/json",
@@ -76,6 +55,7 @@ function updateImagePage(imagePage) {
                     timeout: 300000,
                     success: function (data) {
                         alert('Chỉnh ảnh thành công');
+                        $('#url-image-page').attr('src', imagePage.url);
                         $('#btn-ok-image-page').prop("disabled", true);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {

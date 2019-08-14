@@ -6,7 +6,7 @@
             <h1><i class="fa fa-th-list"></i> Bảng người dùng</h1>
         </div>
         <h3 class="title-body">
-            Tổng người dùng : <span id="total-record"></span>
+            Tổng người dùng : <span id="total-record-user"></span>
         </h3>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>

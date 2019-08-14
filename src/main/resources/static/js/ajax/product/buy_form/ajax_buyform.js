@@ -65,7 +65,6 @@ function findAllBuyForm(page) {
             );
             const listSize = Object.keys(buyforms).length;
             if (listSize > 0) {
-                $('#total-record').text(listSize);
                 let contentRow = '';
                 var index = 1;
                 buyforms.map(function (buyform) {

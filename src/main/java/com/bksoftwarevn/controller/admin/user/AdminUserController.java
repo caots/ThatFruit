@@ -32,7 +32,7 @@ public class AdminUserController {
     @GetMapping("/page")
     public ResponseEntity<List<AppUser>> findAllUser(
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
-            @RequestParam(name = "size", required = false, defaultValue = "10") int size,
+            @RequestParam(name = "size", required = false, defaultValue = "15") int size,
             HttpServletResponse response
     ) {
         response.setHeader("Access-Control-Allow-Origin", "*");
@@ -51,7 +51,7 @@ public class AdminUserController {
     ) {
 
         Record record = recordService.findByName("user");
-        double result = Math.ceil((double) record.getNumber() / 10);
+        double result = Math.ceil((double) record.getNumber() / 15);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

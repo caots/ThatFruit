@@ -75,7 +75,6 @@ function displayOnTable(users) {
     );
     const listSize = Object.keys(users).length;
     if (listSize > 0) {
-        $('#total-record').text(listSize);
         let contentRow = '';
         var index = 1;
         users.map(function (user) {

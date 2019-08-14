@@ -14,7 +14,18 @@
 
     </div>
     <div class="table-responsive" style="overflow-x:auto;overflow-y: auto">
-        <div class="title-table"></div>
+        <ul class="app-nav">
+            <li style="margin-top: 10px;">
+                <button class="btn btn-primary" type="button">
+                    <a href="create-big" style="color: white">
+                        <i class="fa fa-fw fa-lg fa-check-circle"></i>
+                        Thêm
+                    </a>
+                </button>
+            </li>
+            <li class="app-search" style="margin: auto"></li>
+        </ul>
+
         <table class="table text-center">
             <thead>
             <tr id="column-contact" style="font-weight: 600"></tr>

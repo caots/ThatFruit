@@ -14,8 +14,14 @@ function createProduct() {
         productStatus = $(this).val();
     });
 
+    var formData;
+
+    $("#change-product").change(function () {
+        formData = new FormData($("form")[0]);
+    });
 
     $('#btn-ok-product').click(function () {
+
         const listTag = $('#tag-product').val();
         const nameProduct = $("#name-product").val();
         const codeProduct = $("#code-product").val();
@@ -24,51 +30,51 @@ function createProduct() {
         const saleCostWholesale = $("#origin-cost-wholesale").val();
         const originCostWholesale = $("#sale-cost-wholesale").val();
         const originProduct = $("#origin-product").val();
-        var formImg = $('#btn-img-product-main')[0];
-
-        var formData = new FormData(formImg);
 
         var x = $('#demoDate').val().split('/');
         var endDate = x[2] + '-' + x[1] + '-' + x[0];
+        uploadFile(formData).then(data => {
+            const product = {
+                "name": nameProduct,
+                "productStatus": productStatus,
+                "image": data.data.display_url,
+                "productCode": codeProduct,
+                "saleCostRetail": saleCostRetail,
+                "originCostRetail": originCostRetail,
+                "saleCostWholesale": saleCostWholesale,
+                "originCostWholesale": originCostWholesale,
+                "origin": originProduct,
+                "enDateSale": new Date(endDate),
+            };
+            console.log(product);
 
-        // uploadFile(formData).then(function (data) {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                headers: {
+                    "Authorization": tokenHeader_value,
+                },
+                url: "api/v1/admin/product?small-category-id=" + idSmallCategory +
+                    "&tag=" + listTag,
+                data: JSON.stringify(product),
+                cache: false,
+                timeout: 300000,
+                success: function () {
+                    alert("Thêm thành công");
+                    $('#url-image-product').attr('src', data.data.display_url);
+                    $("#btn-ok-product").prop("disabled", true);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    errMess(jqXHR, textStatus, errorThrown);
+                    alert("Thêm thất bại ");
+                }
+            })
+        });
 
-        const product = {
-            "name": nameProduct,
-            "productStatus": productStatus,
-            //"image": data,
-            "productCode": codeProduct,
-            "saleCostRetail": saleCostRetail,
-            "originCostRetail": originCostRetail,
-            "saleCostWholesale": saleCostWholesale,
-            "originCostWholesale": originCostWholesale,
-            "origin": originProduct,
-            "enDateSale": new Date(endDate),
-        };
-        $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            headers: {
-                "Authorization": tokenHeader_value,
-            },
-            url: "api/v1/admin/product?small-category-id=" + idSmallCategory +
-                "&tag=" + listTag,
-            data: JSON.stringify(product),
-            cache: false,
-            timeout: 300000,
-            success: function () {
-                alert("Thêm thành công");
-                $("#btn-ok-product").prop("disabled", true);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                errMess(jqXHR, textStatus, errorThrown);
-                alert("Thêm thất bại ");
-            }
-        })
+
     });
-
-    // });
 }
+
 
 //============ Find Product By Id ===================
 
@@ -107,8 +113,15 @@ function updateProduct(data) {
     $("#sale-cost-wholesale").val(data.saleCostWholesale);
     $("#origin-product").val(data.origin);
     $('#product-status').val(data.productStatus);
+    $('#url-image-product').attr('src', data.image);
     var endDateX = (data.enDateSale + '').split(',');
     $('#demoDate').val(endDateX[2] + '/' + endDateX[1] + '/' + endDateX[0]);
+
+    var formData;
+
+    $("#change-product").change(function () {
+        formData = new FormData($("form")[0]);
+    });
 
 
     // $("#tag-product").prop("disabled", true);
@@ -128,27 +141,30 @@ function updateProduct(data) {
         if ($('#product-status').val() == null) $('#product-status').val('true');
         data.productStatus = $('#product-status').val();
         data.enDateSale = new Date(endDate);
-
         var listTagAfter = $('#tag-product').val();
-        console.log(listTagAfter);
-        $.ajax({
-            type: "PUT",
-            contentType: "application/json",
-            headers: {
-                "Authorization": tokenHeader_value,
-            },
-            url: "api/v1/admin/product?list-tag=" + listTagAfter,
-            data: JSON.stringify(data),
-            timeout: 30000,
-            success: function () {
-                alert('Chỉnh sửa thành công');
-                $("#btn-ok-product").prop("disabled", true);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                errMess(jqXHR, textStatus, errorThrown);
-                alert("Chỉnh sửa thất bại ");
-            }
+        uploadFile(formData).then(dataImage => {
+            data.image = dataImage.data.display_url;
+            $.ajax({
+                type: "PUT",
+                contentType: "application/json",
+                headers: {
+                    "Authorization": tokenHeader_value,
+                },
+                url: "api/v1/admin/product?list-tag=" + listTagAfter,
+                data: JSON.stringify(data),
+                timeout: 30000,
+                success: function () {
+                    alert('Chỉnh sửa thành công');
+                    $('#url-image-product').attr('src', data.image);
+                    $("#btn-ok-product").prop("disabled", true);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    errMess(jqXHR, textStatus, errorThrown);
+                    alert("Chỉnh sửa thất bại ");
+                }
+            });
         });
+
     });
 }
 
@@ -163,26 +179,3 @@ function clickBtnProductChangeSubmit() {
     }
 
 }
-
-var uploadFile = async (file) => {
-    let data;
-    await $.ajax({
-        type: "POST",
-        headers: {
-            "Authorization": tokenHeader_value,
-        },
-        url: "/api/v1/public/upload-file",
-        enctype: 'multipart/form-data',
-        data: file,
-        cache: false,
-        processData: false,
-        contentType: false,
-        success: function (result) {
-            data = result
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            errMess(jqXHR, textStatus, errorThrown);
-        }
-    });
-    return data;
-};

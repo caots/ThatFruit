@@ -40,7 +40,7 @@ public class ProductController {
     public ResponseEntity<List<Product>> findAllProductPage(
             HttpServletResponse response,
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
-            @RequestParam(name = "size", required = false, defaultValue = "10") int size,
+            @RequestParam(name = "size", required = false, defaultValue = "15") int size,
             @RequestHeader("adminbksoftwarevn") String header
     ) {
         if (page < 1) page = 1;
@@ -56,7 +56,7 @@ public class ProductController {
     @GetMapping("/size")
     public ResponseEntity<Double> pageNumberProduct() {
         float pageNumber = recordService.findByName("product").getNumber();
-        double result = Math.ceil((double) pageNumber / 10);
+        double result = Math.ceil((double) pageNumber / 15);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

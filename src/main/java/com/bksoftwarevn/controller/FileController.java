@@ -23,10 +23,11 @@ public class FileController {
     private final static Logger LOGGER = Logger.getLogger(FileController.class.getName());
 
 
-    private static final String URL_UPLOAD_FILE = "https://image.bksoftwarevn.com/data/public/resources/img/haphatsmarthome/";
+   private static final String URL_UPLOAD_FILE = "https://image.bksoftwarevn.com/data/public/resources/img/haphatsmarthome/";
 
-    private static final String UPLOAD_DIRECTORY = "/home/tomcat/webapps/data/public/resources/img/haphatsmarthome";
+    //private static final String UPLOAD_DIRECTORY = "/home/tomcat/webapps/data/public/resources/img/haphatsmarthome";
 
+    private static final String UPLOAD_DIRECTORY = "F:\\ThatFruit_version1\\src\\main\\resources\\static\\img";
 
     @PostMapping(value = "/upload-file")
     public ResponseEntity<Object> uploadFile(@RequestParam("file") MultipartFile file) {
@@ -67,6 +68,5 @@ public class FileController {
         }
         return new ResponseEntity<>(nameImageNews, HttpStatus.OK);
     }
-
 
 }

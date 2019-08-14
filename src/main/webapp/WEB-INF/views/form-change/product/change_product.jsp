@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="resources/js/ajax/product/product/ajax_product_change.js"></script>
 <script src="resources/js/ajax/product/product/ajax_show_relationship.js"></script>
 <main class="app-content">
@@ -82,11 +83,17 @@
                         </div>
                         <div class="form-group ">
                             <label class="control-label">Ảnh sản phẩm</label>
-                            <form method="POST" class=" col-md-6" action="" enctype="multipart/form-data"
-                                  id="btn-img-product-main">
+                            <form method="POST" action="" enctype="multipart/form-data"
+                                  id="btn-img-request">
+                                <div class="form-group row" style="justify-content: center">
+                                    <img class="user-img"
+                                         id="url-image-product"
+                                         src=""
+                                         width="40%" height="40%">
+                                </div>
                                 <div>
-                                    <label for="image-product-value-main">Chọn file ảnh :</label>
-                                    <input type="file" id="image-product-value-main" name="file" multiple="multiple"/>
+                                    <td><input id="change-product" name="image" type="file"/></td>
+                                    <%--<input type="file" class="form-control-file" name="image" multiple="multiple" id="change-product">--%>
                                 </div>
                             </form>
                         </div>
@@ -109,14 +116,14 @@
 <script type="text/javascript" src="resources/js/template/plugins/select2.min.js"></script>
 <script type="text/javascript" src="resources/js/template/plugins/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
-    $('#sl').click(function(){
+    $('#sl').click(function () {
         $('#tl').loadingBtn();
-        $('#tb').loadingBtn({ text : "Signing In"});
+        $('#tb').loadingBtn({text: "Signing In"});
     });
 
-    $('#el').click(function(){
+    $('#el').click(function () {
         $('#tl').loadingBtnComplete();
-        $('#tb').loadingBtnComplete({ html : "Sign In"});
+        $('#tb').loadingBtnComplete({html: "Sign In"});
     });
 
     $('#demoDate').datepicker({

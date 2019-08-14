@@ -6,29 +6,6 @@ $(document).ready(function () {
 
 var idProduct = sessionStorage.getItem("product-id");
 
-var uploadFile = async (file) => {
-    let data;
-    await $.ajax({
-        type: "POST",
-        headers: {
-            "Authorization": tokenHeader_value,
-        },
-        url: "/api/v1/public/upload-file",
-        enctype: 'multipart/form-data',
-        data: file,
-        cache: false,
-        processData: false,
-        contentType: false,
-        success: function (result) {
-            data = result
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            errMess(jqXHR, textStatus, errorThrown);
-        }
-    });
-    return data;
-};
-
 
 function clickBtnImageProductChangeSubmit() {
     const urlImagePage = window.location.href;
@@ -40,14 +17,18 @@ function clickBtnImageProductChangeSubmit() {
 }
 
 function createImageProduct() {
-    $('#btn-ok-image-product').click(function () {
 
-            var formImg = $('#btn-img-product')[0];
-            var formData = new FormData(formImg);
+    var formData;
+    $("#change-product").change(function () {
+        formData = new FormData($("form")[0]);
+    });
+
+
+    $('#btn-ok-image-product').click(function () {
 
             uploadFile(formData).then(function (data) {
                 var imageProduct = {
-                    "url": data
+                    "url": data.data.display_url
                 };
 
                 $.ajax({
@@ -62,6 +43,7 @@ function createImageProduct() {
                     timeout: 300000,
                     success: function () {
                         alert('Chỉnh sửa thành công');
+                        $('#url-image-product').attr('src', data.data.display_url);
                         $('#btn-ok-image-product').prop("disabled", true);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
@@ -95,15 +77,18 @@ function updateImageProduct(result) {
 
     $('#url-image-product').attr('src', result.url);
 
+    var formData;
+    $("#change-product").change(function () {
+        formData = new FormData($("form")[0]);
+    });
+
+
     $('#btn-ok-image-product').click(function () {
-
-            var formImg = $('#btn-img-product')[0];
-            var formData = new FormData(formImg);
-
             uploadFile(formData).then(function (data) {
-                result.url = data;
+                result.url = data.data.display_url;
+                console.log(result);
                 $.ajax({
-                    type: "POST",
+                    type: "PUT",
                     contentType: "application/json",
                     headers: {
                         "Authorization": tokenHeader_value,
@@ -114,6 +99,7 @@ function updateImageProduct(result) {
                     timeout: 300000,
                     success: function () {
                         alert('Chỉnh ảnh thành công');
+                        $('#url-image-product').attr('src', result.url);
                         $('#btn-ok-image-product').prop("disabled", true);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {

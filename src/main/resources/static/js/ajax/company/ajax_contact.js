@@ -24,7 +24,6 @@ function findAllCompanyContact() {
             );
             const listSize = Object.keys(contacts).length;
             if (listSize > 0) {
-                $('#total-record').text(listSize);
                 let contentRow = '';
                 var index = 1;
                 contacts.map(function (contact) {

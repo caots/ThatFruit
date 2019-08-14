@@ -32,7 +32,7 @@ public class SmallCategoryController {
     public ResponseEntity<List<SmallCategory>> findAllSmallCategoryPage(
             HttpServletResponse response,
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
-            @RequestParam(name = "size", required = false, defaultValue = "10") int size,
+            @RequestParam(name = "size", required = false, defaultValue = "15") int size,
             @RequestHeader("adminbksoftwarevn") String header
     ) {
         if (page < 1) page = 1;
@@ -67,7 +67,7 @@ public class SmallCategoryController {
 
         if (header.equals(Token.tokenHeader)) {
             Record record = recordService.findByName("small-category");
-            double result = Math.ceil((double) record.getNumber() / 10);
+            double result = Math.ceil((double) record.getNumber() / 15);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -26,11 +26,11 @@
 
                         <div class="form-group row">
                             <label class=" col-md-3"></label>
-                            <form method="POST" class=" col-md-6" action="" enctype="multipart/form-data"
-                                  id="btn-img-product">
+                            <form method="POST" action="" enctype="multipart/form-data"
+                                  id="btn-img-request">
                                 <div>
-                                    <label for="image-product-value">Chọn file ảnh :</label>
-                                    <input type="file" id="image-product-value" name="file" multiple="multiple"/>
+                                    <td><input id="change-product" name="image" type="file" /></td>
+                                    <%--<input type="file" class="form-control-file" name="image" multiple="multiple" id="change-product">--%>
                                 </div>
                             </form>
                             <label class=" col-md-1"></label>

@@ -80,7 +80,6 @@ function displayOnTable(products) {
     );
     const listSize = Object.keys(products).length;
     if (listSize > 0) {
-        $('#total-record').text(listSize);
         let contentRow;
         var index = 1;
         products.map(function (product) {

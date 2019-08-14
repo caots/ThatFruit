@@ -62,7 +62,6 @@ function findAllSmallCategory(page) {
             );
             const listSize = Object.keys(smallCategories).length;
             if (listSize > 0) {
-                $('#total-record').text(listSize);
                 let contentRow = '';
                 var index = 1;
                 smallCategories.map(function (smallCategory) {

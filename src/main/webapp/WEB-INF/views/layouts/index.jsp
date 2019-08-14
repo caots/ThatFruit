@@ -29,6 +29,8 @@
 
     <%--=================================== CSS =======================================--%>
     <script src="resources/js/ajax/common.js"></script>
+    <script src="resources/js/ajax/ajax_home.js"></script>
+
 
 </head>
 <body class="app sidebar-mini rtl">

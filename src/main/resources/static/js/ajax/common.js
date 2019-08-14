@@ -49,3 +49,25 @@ String.prototype.replaceAllll = function (
 // replaced out with the new substring.
     return (strText);
 };
+
+var uploadFile = async (file) => {
+
+    let data;
+    await $.ajax({
+        type: "POST",
+        url: "https://api.imgbb.com/1/upload?key=96576401881b8a0f10647bf04074362f",
+        data: file,
+        async: false,
+        cache: false,
+        contentType: false,
+        enctype: 'multipart/form-data',
+        processData: false,
+        success: function (result) {
+            data = result;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            errMess(jqXHR, textStatus, errorThrown);
+        }
+    });
+    return data;
+};
