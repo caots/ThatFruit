@@ -47,9 +47,9 @@ function showImageProduct(productImages) {
         productImages.map(function (productImage) {
             contentRow += `
                         <tr>
-                        <td style='text-align: center' width="20%"> ${index} </td>
-                        <td  width="50%"> ${productImage.url} </td>
-                        <td  width="30%"> 
+                        <td style='text-align: center' > ${index} </td>
+                        <td> ${productImage.url} </td>
+                        <td> 
                               <div class="btn-group">
                                    <a class="btn btn-primary" href="create-image-product"><i class="fa fa-lg fa-plus"></i></a>
                                    <a class="btn btn-primary" href="update-image-product?id=${productImage.id}"><i class="fa fa-lg fa-edit"></i></a>

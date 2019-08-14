@@ -22,7 +22,7 @@
                         <div class="form-group row" style="justify-content: center">
                             <img class="user-img"
                                  id="url-image-page"
-                                 src="https://avatars3.githubusercontent.com/u/44569407?s=460&v=4"
+                                 src="resources/img/logothatfruit.png"
                                  alt="image home page">
                         </div>
 

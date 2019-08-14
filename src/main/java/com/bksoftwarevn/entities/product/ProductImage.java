@@ -19,8 +19,6 @@ public class ProductImage implements Serializable {
 
     private String url;
 
-    private String name;
-
     private boolean status;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
