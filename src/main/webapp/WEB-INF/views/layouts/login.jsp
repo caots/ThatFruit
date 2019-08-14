@@ -30,7 +30,11 @@
     </div>
     <div class="login-box">
         <div class="login-form">
-            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>Thật Fruit</h3>
+            <div class="app-sidebar__user" style="justify-content: center;margin: 0;padding: 0;">
+                <img class="app-sidebar__user-avatar"
+                     src="resources/img/logothatfruit.png"
+                     alt="User Image" width="30%" style="background: #eff7ff">
+            </div>
             <div class="form-group">
                 <label class="control-label">USERNAME</label>
                 <input class="form-control" type="text" placeholder="Email" autofocus id="username">
