@@ -32,6 +32,15 @@ public class Product implements Serializable {
 
     private String image;
 
+    @Column(name = "image_one")
+    private String imageOne;
+
+    @Column(name = "image_two")
+    private String imageTwo;
+
+    @Column(name = "image_three")
+    private String imageThree;
+
     @Column(name = "sale_cost_wholesale")
     private double saleCostWholesale;
 

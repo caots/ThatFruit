@@ -99,7 +99,8 @@ public class ChangePageController {
     }
 
     @GetMapping("/create-image-product")
-    public String createImageProductPage(HttpServletRequest request) {
+    public String createImageProductPage(HttpServletRequest request,
+                                         @RequestParam("product-id") int productId) {
 
 
         String username = getToken(request);

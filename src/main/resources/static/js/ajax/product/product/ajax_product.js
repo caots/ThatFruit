@@ -108,7 +108,7 @@ function displayOnTable(products) {
                           <td> ${originCostWholesale} </td>
                          <td> ${saleCostWholesale} </td>
                          <td> ${product.origin} </td>
-                         <td>   <a href="image-product?product-id=${product.id}" name="${product.id}" style="cursor: pointer;color: green">Kho ảnh </a>&nbsp;<br> </td>
+                         <td>   <a href="create-image-product?product-id=${product.id}" name="${product.id}" style="cursor: pointer;color: green">Kho ảnh </a>&nbsp;<br> </td>
                          <td>   <a href="update-news-product?id=${product.id}" name="${product.id}" style="cursor: pointer;color: green">Bài viết</a>&nbsp;<br> </td>
                          <td style="min-width: 160px">
                             <div class="btn-group">

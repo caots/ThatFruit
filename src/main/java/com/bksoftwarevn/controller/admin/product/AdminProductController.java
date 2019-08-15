@@ -207,6 +207,13 @@ public class AdminProductController {
         else return new ResponseEntity<>("update product fail", HttpStatus.BAD_REQUEST);
     }
 
+    @PutMapping(value = "/product/image")
+    public ResponseEntity<Object> updateProductImage(@RequestBody Product product) {
+        if (productService.saveProduct(product)) {
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        } else return new ResponseEntity<>("delete product fail", HttpStatus.BAD_REQUEST);
+    }
+
     @PutMapping(value = "/product/delete")
     public ResponseEntity<String> deleteProduct(@RequestParam("id") int idProduct) {
         Product product = productService.findById(idProduct);

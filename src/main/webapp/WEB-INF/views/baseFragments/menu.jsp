@@ -6,8 +6,7 @@
              src="resources/img/logothatfruit.png"
              alt="User Image" width="30%" style="background: #eff7ff">
         <div>
-            <p class="app-sidebar__user-name">Thật Fruit</p>
-            <p class="app-sidebar__user-designation">Siêu to khổng lồ</p>
+            <p class="app-sidebar__user-name" style="padding-left: 20px;">Thật Fruit</p>
         </div>
     </div>
     <ul class="app-menu">

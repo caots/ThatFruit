@@ -16,10 +16,10 @@
             <div class="tile">
                 <h3 class="tile-title" style="text-align: center">Ảnh sản phẩm</h3>
                 <div class="tile-body">
-                    <form class="form-horizontal">
+                    <div class="form-horizontal">
                         <div class="form-group row" style="justify-content: center">
                             <img class="user-img"
-                                 id="url-image-product"
+                                 id="url-image-product1"
                                  src="resources/img/logothatfruit.png"
                                  alt="image home page">
                         </div>
@@ -27,24 +27,65 @@
                         <div class="form-group row">
                             <label class=" col-md-3"></label>
                             <form method="POST" action="" enctype="multipart/form-data"
-                                  id="btn-img-request">
+                                  id="btn-img-request1">
                                 <div>
-                                    <td><input id="change-product" name="image" type="file" /></td>
+                                    <td><input id="change-product1" name="image" type="file"/></td>
                                     <%--<input type="file" class="form-control-file" name="image" multiple="multiple" id="change-product">--%>
                                 </div>
                             </form>
-                            <label class=" col-md-1"></label>
+                            <label class="col-md-1"></label>
                         </div>
-                    </form>
+                    </div>
+                </div>
+                <div class="tile-body">
+                    <div class="form-horizontal">
+                        <div class="form-group row" style="justify-content: center">
+                            <img class="user-img"
+                                 id="url-image-product2"
+                                 src="resources/img/logothatfruit.png"
+                                 alt="image home page">
+                        </div>
+
+                        <div class="form-group row">
+                            <label class=" col-md-3"></label>
+                            <form method="POST" action="" enctype="multipart/form-data"
+                                  id="btn-img-request2">
+                                <div>
+                                    <td><input id="change-product2" name="image" type="file"/></td>
+                                </div>
+                            </form>
+                            <label class="col-md-1"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile-body">
+                    <div class="form-horizontal">
+                        <div class="form-group row" style="justify-content: center">
+                            <img class="user-img"
+                                 id="url-image-product3"
+                                 src="resources/img/logothatfruit.png"
+                                 alt="image home page">
+                        </div>
+
+                        <div class="form-group row">
+                            <label class=" col-md-3"></label>
+                            <form method="POST" action="" enctype="multipart/form-data"
+                                  id="btn-img-request3">
+                                <div>
+                                    <td><input id="change-product3" name="image" type="file"/></td>
+                                </div>
+                            </form>
+                            <label class="col-md-1"></label>
+                        </div>
+                    </div>
                 </div>
                 <%--button submit--%>
                 <div class="tile-footer">
                     <div class="row" style="justify-content: center">
                         <div class="col-md-8 col-md-offset-3" style="text-align: center">
-                            <button class="btn btn-primary" id="btn-ok-image-product" type="button"><i
-                                    class="fa fa-fw fa-lg fa-check-circle"></i>Đồng ý
-                            </button>&nbsp;&nbsp;&nbsp;<a href="" id="btn-image-product" class="btn btn-secondary ">
-                            <i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                            </button>&nbsp;&nbsp;&nbsp;<a href="product" id="btn-image-product"
+                                                          class="btn btn-secondary ">
+                            <i class="fa fa-fw fa-lg fa-times-circle"></i>Đồng ý</a>
                         </div>
                     </div>
                 </div>
@@ -53,8 +94,3 @@
         <div class="col-md-3"></div>
     </div>
 </main>
-<script>
-    var idProduct = sessionStorage.getItem("product-id");
-    console.log(idProduct);
-    $('#btn-image-product').attr('href', 'image-product?product-id=' + idProduct);
-</script>
