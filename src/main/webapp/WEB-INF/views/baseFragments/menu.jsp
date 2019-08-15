@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
-    <div class="app-sidebar__user">
+    <div class="app-sidebar__user" style="padding-left: 20px;">
         <img class="app-sidebar__user-avatar"
              src="resources/img/logothatfruit.png"
              alt="User Image" width="30%" style="background: #eff7ff">
         <div>
-            <p class="app-sidebar__user-name" style="padding-left: 20px;">Thật Fruit</p>
+            <p class="app-sidebar__user-name">Thật Fruit</p>
         </div>
     </div>
     <ul class="app-menu">
