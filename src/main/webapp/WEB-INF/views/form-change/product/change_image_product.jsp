@@ -84,8 +84,8 @@
                     <div class="row" style="justify-content: center">
                         <div class="col-md-8 col-md-offset-3" style="text-align: center">
                             </button>&nbsp;&nbsp;&nbsp;<a href="product" id="btn-image-product"
-                                                          class="btn btn-secondary ">
-                            <i class="fa fa-fw fa-lg fa-times-circle"></i>Đồng ý</a>
+                                                          class="btn btn-primary ">
+                            <i class="fa fa-fw fa-lg fa-check-circle"></i>Hoàn tất</a>
                         </div>
                     </div>
                 </div>

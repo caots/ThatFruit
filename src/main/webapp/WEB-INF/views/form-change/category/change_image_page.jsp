@@ -43,10 +43,8 @@
                 <div class="tile-footer">
                     <div class="row" style="justify-content: center">
                         <div class="col-md-8 col-md-offset-3" style="text-align: center">
-                            <button class="btn btn-primary" id="btn-ok-image-page" type="button"><i
-                                    class="fa fa-fw fa-lg fa-check-circle"></i>Đồng ý
-                            </button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="image-page"><i
-                                class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                            </button>&nbsp;&nbsp;&nbsp;<a class="btn btn-primary " href="image-page"><i
+                                class="fa fa-fw fa-lg fa-check-circle"></i>Hoàn tất</a>
                         </div>
                     </div>
                 </div>

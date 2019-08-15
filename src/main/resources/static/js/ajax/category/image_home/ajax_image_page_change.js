@@ -37,33 +37,25 @@ function updateImagePage(imagePage) {
     var formData;
     $("#change-product").change(function () {
         formData = new FormData($("form")[0]);
+        uploadFile(formData).then(function (data) {
+            imagePage.url = data.data.display_url;
+            $.ajax({
+                type: "PUT",
+                contentType: "application/json",
+                headers: {
+                    "Authorization": tokenHeader_value,
+                },
+                url: "api/v1/admin/home-image",
+                data: JSON.stringify(imagePage),
+                cache: false,
+                timeout: 300000,
+                success: function (data) {
+                    $('#url-image-page').attr('src', imagePage.url);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    errMess(jqXHR, textStatus, errorThrown);
+                }
+            })
+        });
     });
-
-
-    $('#btn-ok-image-page').click(function () {
-            uploadFile(formData).then(function (data) {
-                imagePage.url = data.data.display_url;
-                $.ajax({
-                    type: "PUT",
-                    contentType: "application/json",
-                    headers: {
-                        "Authorization": tokenHeader_value,
-                    },
-                    url: "api/v1/admin/home-image",
-                    data: JSON.stringify(imagePage),
-                    cache: false,
-                    timeout: 300000,
-                    success: function (data) {
-                        alert('Chỉnh ảnh thành công');
-                        $('#url-image-page').attr('src', imagePage.url);
-                        $('#btn-ok-image-page').prop("disabled", true);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        errMess(jqXHR, textStatus, errorThrown);
-                    }
-                })
-            });
-        }
-    );
-
 }
