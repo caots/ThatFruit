@@ -47,7 +47,17 @@
                 </div>
             </div>
             <div class="tile-body">
-                <div class="row" >
+                <div class="row">
+                    <div class="col-md-3" style="padding-top: 25px"></div>
+                    <div class="form-group col-5">
+                        <label class="control-label">Mô tả bài viết </label>
+                        <textarea class="form-control" id="name-description"></textarea>
+                    </div>
+                    <div class="col-md-3" style="padding-top: 25px"></div>
+                </div>
+            </div>
+            <div class="tile-body">
+                <div class="row">
                     <div class="col-md-3" style="padding-top: 25px"></div>
                     <div class="col-md-5">
                         <div class="form-group row" style="justify-content: center">
@@ -55,20 +65,18 @@
                                  id="url-image-news"
                                  src="">
                         </div>
-                        <form id="upload-image-news" method="POST" action="" enctype="multipart/form-data" >
+                        <form id="upload-image-news" method="POST" action="" enctype="multipart/form-data">
                             <div>
                                 <input id="change-news" name="image" type="file"/>
                             </div>
                         </form>
+                        <span style="color: #ff0000">Ảnh hiển thị tốt nhất trong khoảng 330x180(px)</span>
                     </div>
                     <div class="col-md-3" style="padding-top: 25px"></div>
                 </div>
             </div>
-            <div class="form-group ">
 
-
-            </div>
-           <div class="tile-body">
+            <div class="tile-body">
                 <div class="row">
                     <div id="sample col-11" style="margin-left: 130px ">
                         <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>

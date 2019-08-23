@@ -18,10 +18,12 @@ function createNews() {
     $('#btn-ok-news').click(function () {
         const contentNews = $('.nicEdit-main').text();
         const titleNews = $('#name-title').val();
+        const desNews = $('#name-description').val();
         uploadFile(formData).then(data => {
             const news = {
                 "content": contentNews,
                 'title': titleNews,
+                'description': desNews,
                 'image': data.data.display_url,
             };
             $.ajax({
@@ -84,7 +86,7 @@ function findAllTopicName() {
                 let contentRow = '';
                 result.map(function (topic) {
                     contentRow += `
-                        <option value="none"></option>
+                       <option value="none"></option>
                        <option value="${topic.id}">${topic.name}</option>
                     `;
                 });
@@ -100,7 +102,9 @@ function findAllTopicName() {
 // ============ update News ========================
 function updateNews(data) {
     $('#name-title').val(data.title);
+    $('#name-description').val(data.description);
     $('.nicEdit-main').text(data.content);
+    $("#topic-value").text(data.topic.name);
     $("#topic-value").prop("disabled", true);
     $('#url-image-news').attr('src', data.image);
     var formData;
@@ -111,6 +115,7 @@ function updateNews(data) {
 
         data.content = $('.nicEdit-main').text();
         data.title = $('#name-title').val();
+        data.description = $('#name-description').val();
         uploadFile(formData).then(dataImage => {
             data.image = dataImage.data.display_url;
             $.ajax({

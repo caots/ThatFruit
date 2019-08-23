@@ -121,8 +121,6 @@ function updateProduct(data) {
     $("#change-product").change(function () {
         formData = new FormData($("form")[0]);
     });
-
-
     // $("#tag-product").prop("disabled", true);
     $("#small-category-value").prop("disabled", true);
     $('#btn-ok-product').click(function () {

@@ -44,6 +44,7 @@ public class ContactFormController {
     ) {
         if (header.equals(Token.tokenHeader)) {
             contactForm.setStatus(true);
+            contactForm.setChecked(false);
             boolean result = contactFormService.saveContactForm(contactForm);
             System.out.println(result);
             Record record = recordService.findByName("contact-form");
