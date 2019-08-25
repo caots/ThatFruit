@@ -10,7 +10,7 @@ function findAllRecord() {
         headers: {
             "Authorization": tokenHeader_value,
         },
-        url: "api/v1/admin/record/all",
+        url: "api/v1/public/record/all",
         success: function (records) {
 
             const listSize = Object.keys(records).length;
