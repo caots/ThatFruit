@@ -35,6 +35,8 @@ public class BuyFormCart implements Serializable {
 
     private List<Product> products = new ArrayList<>();
 
+    private List<String> nameProduct= new ArrayList<>();
+
     private long price;
 
     private boolean status;

@@ -15954,6 +15954,10 @@ be a descendant of the grid when it is being dragged.
     font-family: "Segoe UI", serif;
 }
 
+.app-content .table-responsive{
+    height: 700px;
+}
+
 .app-content .table-responsive table {
     padding-top: 50px;
     width: 1062px;

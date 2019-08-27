@@ -45,7 +45,7 @@ public class BuyFormController {
     @Autowired
     private AppUserService appUserService;
 
-    private Set<BuyFormCart> findAllBuyFormCart(List<BuyFormHasProduct> buyFormHasProducts) {
+    /*private Set<BuyFormCart> findAllBuyFormCart(List<BuyFormHasProduct> buyFormHasProducts) {
         Set<BuyFormCart> buyFormCarts = new HashSet<>();
         buyFormHasProducts.forEach(buyFormHasProduct -> {
             BuyFormCart buyFormCart = new BuyFormCart();
@@ -59,9 +59,7 @@ public class BuyFormController {
             buyFormCart.setNote(buyForm.getNote());
             buyFormCart.setAddress(buyForm.getAddress());
             List<Product> products= new ArrayList<>();
-            buyForm.getProducts().forEach(product -> {
-                products.add(product);
-            });
+            products.addAll(buyForm.getProducts());
             buyFormCart.setProducts(products);
 
             buyFormCart.setChecked(buyForm.isChecked());
@@ -77,10 +75,53 @@ public class BuyFormController {
             buyFormCarts.add(buyFormCart);
         });
         return buyFormCarts;
+    }*/
+
+    private List<BuyFormCart> findAllBuyFormCart(List<BuyForm> buyForms) {
+        List<BuyFormCart> buyFormCarts = new ArrayList<>();
+        buyForms.forEach(buyForm -> {
+            BuyFormCart buyFormCart = new BuyFormCart();
+            buyFormCart.setId(buyForm.getId());
+            buyFormCart.setStatus(buyForm.isStatus());
+            buyFormCart.setName(buyForm.getName());
+            buyFormCart.setEmail(buyForm.getEmail());
+            buyFormCart.setPhoneNumber(buyForm.getPhone());
+            buyFormCart.setDate(buyForm.getDate());
+            buyFormCart.setNote(buyForm.getNote());
+            buyFormCart.setAddress(buyForm.getAddress());
+            List<Product> products = new ArrayList<>();
+            List<Integer> quantities = new ArrayList<>();
+            List<String> nameProduct = new ArrayList<>();
+
+            List<BuyFormHasProduct> buyFormHasProducts =
+                    buyFormService.findAllBuyFormHasProductByBuyFormId(buyForm.getId());
+
+            buyFormHasProducts.forEach(buyFormHasProduct -> {
+                nameProduct.add(productService.findById(buyFormHasProduct.getProductId()).getName());
+                products.add(productService.findById(buyFormHasProduct.getProductId()));
+                quantities.add(buyFormHasProduct.getQuantity());
+
+            });
+
+            buyFormCart.setProducts(products);
+
+            buyFormCart.setChecked(buyForm.isChecked());
+
+            buyFormCart.setQuantity(quantities);
+
+            buyFormCart.setNameProduct(nameProduct);
+
+            buyFormCart.setPrice(buyForm.getTotalPrice());
+
+            buyFormCarts.add(buyFormCart);
+        });
+
+        return buyFormCarts;
     }
 
+
     @GetMapping
-    public ResponseEntity<Set<BuyFormCart>> findAllBuyFormHasProduct(
+    public ResponseEntity<List<BuyFormCart>> findAllBuyFormHasProduct(
             @RequestHeader("adminbksoftwarevn") String header,
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
             @RequestParam(name = "size", required = false, defaultValue = "15") int size
@@ -89,9 +130,8 @@ public class BuyFormController {
             if (page < 1) page = 1;
             if (size < 0) size = 0;
             Pageable pageable = PageRequest.of(page - 1, size);
-            List<BuyFormHasProduct> buyFormHasProducts = buyFormService.findAllBuyFormHasProductPage(pageable);
-            System.out.println(buyFormHasProducts);
-            return new ResponseEntity<>(findAllBuyFormCart(buyFormHasProducts), HttpStatus.OK);
+            List<BuyForm> buyForms = buyFormService.findAllBuyFormPage(pageable);
+            return new ResponseEntity<>(findAllBuyFormCart(buyForms), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -102,9 +142,9 @@ public class BuyFormController {
     ) {
         if (header.equals(Token.tokenHeader)) {
 
-            List<BuyFormHasProduct> buyFormHasProducts = buyFormService.findAllBuyFormHasProduct();
+            List<BuyForm> buyFormHasProducts = buyFormService.findAllBuyForm();
             double sizePage = findAllBuyFormCart(buyFormHasProducts).size();
-            double result = Math.ceil(sizePage / 10);
+            double result = Math.ceil(sizePage / 15);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -219,7 +259,7 @@ public class BuyFormController {
 
             String email = "honghoang1232@gmail.com";
             String title = "Đơn mua hàng mới";
-            String content = "Bạn có đơn đặt hàng mới: MÃ " + buyForm.getCodeBuyForm();
+            String content = "Bạn có đơn đặt hàng mới: MÃ " + buyForm.getId();
             UserMail userMail = new UserMail();
             userMail.setEmailAddress(email);
             userMail.setTitle(title);

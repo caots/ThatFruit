@@ -14,6 +14,11 @@ import java.util.List;
 @Repository
 public interface BuyFormRepository extends JpaRepository<BuyForm, Integer> {
 
+    @Query("select bf from BuyForm bf where bf.status=true order by id desc ")
+    Page<BuyForm> findAllBuyFormPage( Pageable pageable);
+
+    List<BuyForm> findByStatus(boolean status);
+
     @Query("select bf from BuyForm bf where bf.status=true and bf.checked=:status")
     Page<BuyForm> findAllByCheckedPage(@Param("status") boolean status, Pageable pageable);
 

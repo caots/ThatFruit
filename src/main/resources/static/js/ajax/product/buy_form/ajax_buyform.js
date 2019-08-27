@@ -52,13 +52,14 @@ function findAllBuyForm(page) {
         url: "api/v1/public/buy-form?page=" + page,
         success: function (buyforms) {
             $("#column-buyform").html(
+                "<td>Mã đơn hàng</td>" +
                 "<td>Kiểm tra</td>" +
                 "<td>Tên</td>" +
                 "<td>Số điện thoại</td>" +
                 "<td>email</td>" +
                 "<td>Địa chỉ</td>" +
                 "<td>Ghi chú</td>" +
-                "<td>Tên sản phẩm</td>" +
+                "<td>Sản phẩm</td>" +
                 "<td>Số lượng</td>" +
                 "<td>Giá</td>" +
                 "<td>Chức năng</td>"
@@ -80,12 +81,13 @@ function findAllBuyForm(page) {
                         checked = 'Chưa kiểm';
                     }
 
-                    var products = buyform.products + '';
+                    var products = buyform.nameProduct + '';
                     var quantity = buyform.quantity + '';
 
 
                     contentRow += `
                             <tr>
+                            <td>${buyform.id} </td>
                             <td style="color: red">${checked} </td>
                             <td style="text-align: left">${buyform.name} </td>
                             <td>${phoneNumber} </td>

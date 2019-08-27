@@ -36,6 +36,27 @@ public class BuyFormService_Impl implements BuyFormService {
 
 
     @Override
+    public List<BuyForm> findAllBuyFormPage(Pageable pageable) {
+        try {
+            return buyFormRepository.findAllBuyFormPage(pageable).getContent();
+
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "find-all-buy-form-page-error {0}", ex.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public List<BuyForm> findAllBuyForm() {
+        try {
+            return buyFormRepository.findByStatus(true);
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "find-all-buy-form-error {0}", ex.getMessage());
+        }
+        return null;
+    }
+
+    @Override
 
     public List<BuyFormHasProduct> findAllBuyFormHasProductPage(Pageable pageable) {
         try {

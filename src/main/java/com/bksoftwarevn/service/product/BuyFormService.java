@@ -11,6 +11,10 @@ import java.util.List;
 
 public interface BuyFormService {
 
+    List<BuyForm> findAllBuyFormPage(Pageable pageable);
+
+    List<BuyForm> findAllBuyForm();
+
     List<BuyFormHasProduct> findAllBuyFormHasProductPage(Pageable pageable);
 
     List<BuyFormHasProduct> findAllBuyFormHasProduct();
