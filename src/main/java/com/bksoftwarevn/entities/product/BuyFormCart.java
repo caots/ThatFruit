@@ -33,7 +33,7 @@ public class BuyFormCart implements Serializable {
 
     private boolean checked;
 
-    private Set<String> products = new HashSet<>();
+    private List<Product> products = new ArrayList<>();
 
     private long price;
 

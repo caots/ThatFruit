@@ -58,11 +58,11 @@ public class BuyFormController {
             buyFormCart.setDate(buyForm.getDate());
             buyFormCart.setNote(buyForm.getNote());
             buyFormCart.setAddress(buyForm.getAddress());
-            Set<String> nameProduct = new HashSet<>();
+            List<Product> products= new ArrayList<>();
             buyForm.getProducts().forEach(product -> {
-                nameProduct.add(product.getName());
+                products.add(product);
             });
-            buyFormCart.setProducts(nameProduct);
+            buyFormCart.setProducts(products);
 
             buyFormCart.setChecked(buyForm.isChecked());
             List<Integer> quantities = new ArrayList<>();

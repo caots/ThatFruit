@@ -85,14 +85,20 @@ public class BuyFormService_Impl implements BuyFormService {
         try {
             List<BuyFormCart> buyFormCarts = new ArrayList<>();
             List<BuyForm> buyForms = buyFormRepository.findByAppUserPage(userId, pageable).getContent();
-            Set<String> nameProduct = new HashSet<>();
+            List<Product> products = new ArrayList<>();
             new ArrayList<>();
             buyForms.forEach(buyForm -> {
                 BuyFormCart buyFormCart = new BuyFormCart();
-                buyForm.getProducts().forEach(product -> {
-                    nameProduct.add(product.getName());
-                });
-                buyFormCart.setProducts(nameProduct);
+                buyFormCart.setId(buyForm.getId());
+                buyFormCart.setName(buyForm.getName());
+                buyFormCart.setAddress(buyForm.getAddress());
+                buyFormCart.setDate(buyForm.getDate());
+                buyFormCart.setEmail(buyForm.getEmail());
+                buyFormCart.setPhoneNumber(buyForm.getPhone());
+                buyFormCart.setNote(buyForm.getNote());
+                buyFormCart.setPrice(buyForm.getTotalPrice());
+                products.addAll(buyForm.getProducts());
+                buyFormCart.setProducts(products);
 
                 List<BuyFormHasProduct> buyFormHasProducts = buyFormHasProductRepository.findByBuyFormId(buyForm.getId());
 
