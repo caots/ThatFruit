@@ -46,6 +46,19 @@ public class UserInformationController {
         return new ResponseEntity<>(appUser, HttpStatus.OK);
     }
 
+    @GetMapping("/find-by-email")
+    public ResponseEntity<AppUser> myProfileByEmail(
+            HttpServletResponse response,
+            @RequestParam("email") String email
+    ) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        AppUser appUser = appUserService.findByEmail(email);
+        if (appUser != null) {
+            return new ResponseEntity<>(appUser, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping("/change-password")
     public ResponseEntity<Object> changePassword(
             @RequestParam("old") String oldPassword,
