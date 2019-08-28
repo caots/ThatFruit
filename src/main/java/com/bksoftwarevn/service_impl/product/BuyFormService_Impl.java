@@ -9,6 +9,7 @@ import com.bksoftwarevn.repository.product.BuyFormHasProductRepository;
 import com.bksoftwarevn.repository.product.BuyFormRepository;
 import com.bksoftwarevn.repository.user.AppUserRepository;
 import com.bksoftwarevn.service.product.BuyFormService;
+import com.bksoftwarevn.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,9 @@ public class BuyFormService_Impl implements BuyFormService {
 
     @Autowired
     private AppUserRepository appUserRepository;
+
+    @Autowired
+    private ProductService productService;
 
 
     @Override
@@ -106,31 +110,46 @@ public class BuyFormService_Impl implements BuyFormService {
         try {
             List<BuyFormCart> buyFormCarts = new ArrayList<>();
             List<BuyForm> buyForms = buyFormRepository.findByAppUserPage(userId, pageable).getContent();
-            List<Product> products = new ArrayList<>();
-            new ArrayList<>();
             buyForms.forEach(buyForm -> {
+
                 BuyFormCart buyFormCart = new BuyFormCart();
                 buyFormCart.setId(buyForm.getId());
+                buyFormCart.setStatus(buyForm.isStatus());
                 buyFormCart.setName(buyForm.getName());
-                buyFormCart.setAddress(buyForm.getAddress());
-                buyFormCart.setDate(buyForm.getDate());
                 buyFormCart.setEmail(buyForm.getEmail());
                 buyFormCart.setPhoneNumber(buyForm.getPhone());
+                buyFormCart.setDate(buyForm.getDate());
                 buyFormCart.setNote(buyForm.getNote());
-                buyFormCart.setPrice(buyForm.getTotalPrice());
-                products.addAll(buyForm.getProducts());
+                buyFormCart.setAddress(buyForm.getAddress());
+                List<Product> products = new ArrayList<>();
+                List<Integer> quantities = new ArrayList<>();
+                List<String> nameProduct = new ArrayList<>();
+
+                List<BuyFormHasProduct> buyFormHasProducts =
+                        findAllBuyFormHasProductByBuyFormId(buyForm.getId());
+
+                buyFormHasProducts.forEach(buyFormHasProduct -> {
+                    nameProduct.add(productService.findById(buyFormHasProduct.getProductId()).getName());
+                    products.add(productService.findById(buyFormHasProduct.getProductId()));
+                    quantities.add(buyFormHasProduct.getQuantity());
+
+                });
+
                 buyFormCart.setProducts(products);
 
-                List<BuyFormHasProduct> buyFormHasProducts = buyFormHasProductRepository.findByBuyFormId(buyForm.getId());
+                buyFormCart.setChecked(buyForm.isChecked());
 
-                List<Integer> quantities = new ArrayList<>();
-                for (BuyFormHasProduct buyFormHasProduct : buyFormHasProducts) {
-                    quantities.add(buyFormHasProduct.getQuantity());
-                }
                 buyFormCart.setQuantity(quantities);
+
+                buyFormCart.setNameProduct(nameProduct);
+
+                buyFormCart.setPrice(buyForm.getTotalPrice());
+
                 buyFormCarts.add(buyFormCart);
             });
+
             return buyFormCarts;
+
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "find-all-buyForm-by-user-page-error {0}", ex.getMessage());
         }
