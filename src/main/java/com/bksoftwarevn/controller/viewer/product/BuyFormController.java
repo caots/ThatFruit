@@ -226,7 +226,7 @@ public class BuyFormController {
             });
 //            ===================== send-email==========================================
 
-            String email = "honghoang1232@gmail.com";
+            String email = "thatfruit123456@gmail.com";
             String title = "Đơn mua hàng mới";
             String content = "Bạn có đơn đặt hàng mới: MÃ " + buyForm.getId();
             UserMail userMail = new UserMail();
