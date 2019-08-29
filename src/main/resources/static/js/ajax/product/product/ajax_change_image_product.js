@@ -49,7 +49,7 @@ function updateImageProduct(product) {
         uploadFile(formDataTwo).then(function (data) {
             product.imageTwo = data.data.display_url;
             updateProduct(product);
-            $('#url-image-product2').attr('src', product.imageOne);
+            $('#url-image-product2').attr('src', product.imageTwo);
         });
     });
 
@@ -58,7 +58,7 @@ function updateImageProduct(product) {
         uploadFile(formDataThree).then(function (data) {
             product.imageThree = data.data.display_url;
             updateProduct(product);
-            $('#url-image-product3').attr('src', product.imageOne);
+            $('#url-image-product3').attr('src', product.imageThree);
         });
     });
 
