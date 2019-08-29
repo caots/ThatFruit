@@ -13,12 +13,12 @@
 
     </div>
     <!-- TABLE -->
-    <div class="table-responsive" style="overflow-x:auto;overflow-y: auto">
+    <div class="table-responsive" >
         <div class="title-table">
             <ul class="app-nav">
 
                 <li style="margin-top: 10px;">
-                    <button  class="btn btn-primary" type="button">
+                    <button class="btn btn-primary" type="button">
                         <a href="create-big" style="color: white">
                             <i class="fa fa-fw fa-lg fa-check-circle"></i>
                             Thêm

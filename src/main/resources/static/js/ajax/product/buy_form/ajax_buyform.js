@@ -94,7 +94,7 @@ function findAllBuyForm(page) {
                             <td>${buyform.email} </td>
                             <td style="text-align: left">${buyform.address} </td>
                             <td style="text-align: left">${buyform.note} </td>
-                            <td style="text-align: left;min-width: 150px;">${products.replaceAllll(',', ' - ')} </td>
+                            <td style="text-align: left;min-width: 200px;">${products.replaceAllll(',', ' - ')} </td>
                             <td style="text-align: center;min-width: 100px;">${quantity.replaceAllll(',', ' - ')} </td>
                             <td>${price} </td>
                             <td>

@@ -2121,8 +2121,8 @@ pre code {
 
 .table-responsive {
     display: block;
-    width: 100%;
-    overflow-x: auto;
+    /*width: 100%;*/
+    /*overflow-x: auto;*/
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
@@ -15939,7 +15939,6 @@ be a descendant of the grid when it is being dragged.
 }
 
 .app-content .table-responsive {
-    height: 560px;
     background-color: white;
     text-align: -webkit-center;
 }
@@ -15954,9 +15953,6 @@ be a descendant of the grid when it is being dragged.
     font-family: "Segoe UI", serif;
 }
 
-.app-content .table-responsive{
-    height: 550px;
-}
 
 .app-content .table-responsive table {
     padding-top: 50px;
@@ -15971,11 +15967,10 @@ be a descendant of the grid when it is being dragged.
 }
 
 
-/* PAGEABLE */
+/*!* PAGEABLE *!*/
 .app-content .table-responsive .pageable {
-    position: absolute;
-    bottom: 10px;
-    right: 30px;
+    margin-right: 72px;
+   float: right;
 }
 
 
@@ -16044,4 +16039,8 @@ be a descendant of the grid when it is being dragged.
 
 .pagination a:active {
     outline: none;
+}
+
+#table-view {
+    /*overflow: unset !important;*/
 }

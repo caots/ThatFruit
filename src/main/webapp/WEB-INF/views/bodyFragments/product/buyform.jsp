@@ -15,7 +15,7 @@
         </ul>
     </div>
     <!-- TABLE -->
-    <div class="table-responsive" style="overflow-x:auto;overflow-y: auto">
+   <div class="table-responsive">
         <table class="table text-center">
             <thead>
             <tr id="column-buyform" style="font-weight: 600"></tr>

@@ -16,7 +16,7 @@
         </ul>
 
     </div>
-    <div class="table-responsive" style="overflow-x:auto;overflow-y: auto">
+   <div class="table-responsive">
         <ul class="app-nav">
 
             <li style="margin-top: 10px;">
