@@ -81,7 +81,7 @@ function findAllBuyForm(page) {
                         checked = 'Chưa kiểm';
                     }
 
-                    var products = buyform.nameProduct + '';
+                    var products = buyform.nameProduct+'';
                     var quantity = buyform.quantity + '';
 
 
@@ -94,8 +94,8 @@ function findAllBuyForm(page) {
                             <td>${buyform.email} </td>
                             <td style="text-align: left">${buyform.address} </td>
                             <td style="text-align: left">${buyform.note} </td>
-                            <td style="text-align: left">${products.replaceAllll(',', '\n-  ')} </td>
-                            <td style="text-align: center">${quantity.replaceAllll(',', ' - ')} </td>
+                            <td style="text-align: left;min-width: 150px;">${products.replaceAllll(',', ' - ')} </td>
+                            <td style="text-align: center;min-width: 100px;">${quantity.replaceAllll(',', ' - ')} </td>
                             <td>${price} </td>
                             <td>
                                   <a class="btn btn-primary" href="send-mail-product?buyform-id=${buyform.id}" name="${buyform.id}"><i class="fa fa-lg fa-edit" style="margin-right: 1px;"></i></a>

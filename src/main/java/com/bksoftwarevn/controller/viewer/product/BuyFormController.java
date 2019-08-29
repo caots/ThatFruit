@@ -45,37 +45,6 @@ public class BuyFormController {
     @Autowired
     private AppUserService appUserService;
 
-    /*private Set<BuyFormCart> findAllBuyFormCart(List<BuyFormHasProduct> buyFormHasProducts) {
-        Set<BuyFormCart> buyFormCarts = new HashSet<>();
-        buyFormHasProducts.forEach(buyFormHasProduct -> {
-            BuyFormCart buyFormCart = new BuyFormCart();
-            BuyForm buyForm = buyFormService.findById(buyFormHasProduct.getBuyFormId());
-            buyFormCart.setId(buyForm.getId());
-            buyFormCart.setStatus(buyForm.isStatus());
-            buyFormCart.setName(buyForm.getName());
-            buyFormCart.setEmail(buyForm.getEmail());
-            buyFormCart.setPhoneNumber(buyForm.getPhone());
-            buyFormCart.setDate(buyForm.getDate());
-            buyFormCart.setNote(buyForm.getNote());
-            buyFormCart.setAddress(buyForm.getAddress());
-            List<Product> products= new ArrayList<>();
-            products.addAll(buyForm.getProducts());
-            buyFormCart.setProducts(products);
-
-            buyFormCart.setChecked(buyForm.isChecked());
-            List<Integer> quantities = new ArrayList<>();
-
-            for (BuyFormHasProduct bf : buyFormHasProducts) {
-                quantities.add(bf.getQuantity());
-            }
-            buyFormCart.setQuantity(quantities);
-
-            buyFormCart.setPrice(buyForm.getTotalPrice());
-
-            buyFormCarts.add(buyFormCart);
-        });
-        return buyFormCarts;
-    }*/
 
     private List<BuyFormCart> findAllBuyFormCart(List<BuyForm> buyForms) {
         List<BuyFormCart> buyFormCarts = new ArrayList<>();

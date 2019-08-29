@@ -121,6 +121,7 @@ function displayOnTable(products) {
                        `;
             index++;
         });
+
         $("#row-product").html(contentRow);
         $(".body-main .table-responsive tr td").css({
             "max-width": "260px",
