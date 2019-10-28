@@ -348,7 +348,7 @@ public class ProductService_Impl implements ProductService {
             int index = 1;
 
             for (Tag tag : tags) {
-                System.out.println(tag.getName() + " - " + nameTag[i]);
+                System.out.println(tag.getName().trim() + " - " + nameTag[i]);
                 if (tag.getName().equals(nameTag[i])) {
                     index = -1;
                     break;
