@@ -38,14 +38,14 @@ function updateProductNews(product) {
 
     $('#btn-ok-news-product').click(function () {
         product.productInfo = $('.nicEdit-main').text();
-
+        console.log(product);
         $.ajax({
             type: "PUT",
             contentType: "application/json",
             headers: {
                 "Authorization": tokenHeader_value,
             },
-            url: "api/v1/admin/product",
+            url: "api/v1/admin/product/news",
             data: JSON.stringify(product),
             timeout: 30000,
             success: function () {

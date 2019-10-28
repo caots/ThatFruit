@@ -32,7 +32,6 @@ public class BigCategoryController {
             @RequestParam(name = "size", required = false, defaultValue = "10") int size,
             @RequestHeader("adminbksoftwarevn") String header
     ) {
-
         if (header.equals(Token.tokenHeader)) {
             if (page < 1) page = 1;
             if (size < 0) size = 0;
@@ -52,7 +51,7 @@ public class BigCategoryController {
         if (header.equals(Token.tokenHeader)) {
             List<BigCategory> bigCategories = bigCategoryService.findAllBigCategory();
             return new ResponseEntity<>(bigCategories, HttpStatus.OK);
-        }
+       }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 

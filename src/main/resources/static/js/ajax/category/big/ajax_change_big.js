@@ -6,7 +6,7 @@ $(document).ready(function () {
 function createBigCategory() {
 
     let idMenu = '';
-    $('#menu-value').click(function () {
+    $('#menu-value').change(function () {
         idMenu = $(this).val();
     });
     $('#btn-ok-big').click(function () {
@@ -14,6 +14,8 @@ function createBigCategory() {
         const bigCategory = {
             "name": nameBigCategory,
         };
+        console.log(bigCategory);
+        console.log(idMenu);
         $.ajax({
             type: "POST",
             contentType: "application/json",

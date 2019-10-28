@@ -6,11 +6,11 @@ $(document).ready(function () {
 function createProduct() {
 
     let idSmallCategory = '';
-    $('#small-category-value').click(function () {
+    $('#small-category-value').change(function () {
         idSmallCategory = $(this).val();
     });
     let productStatus = '';
-    $('#product-status').click(function () {
+    $('#product-status').change(function () {
         productStatus = $(this).val();
     });
 

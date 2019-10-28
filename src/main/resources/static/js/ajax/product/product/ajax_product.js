@@ -55,6 +55,7 @@ function findAllProductBySize(page) {
         },
         url: "api/v1/public/product/page?page=" + page,
         success: function (products) {
+            console.log(products);
             displayOnTable(products);
         },
         error: function (jqXHR, textStatus, errorThrown) {

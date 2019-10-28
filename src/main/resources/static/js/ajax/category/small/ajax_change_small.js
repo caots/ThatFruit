@@ -6,7 +6,7 @@ $(document).ready(function () {
 function createSmallCategory() {
 
     let idBigCategory = '';
-    $('#big-category-value').click(function () {
+    $('#big-category-value').change(function () {
         idBigCategory = $(this).val();
     });
     $('#btn-ok-small').click(function () {
