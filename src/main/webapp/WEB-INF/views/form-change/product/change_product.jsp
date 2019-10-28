@@ -65,7 +65,7 @@
                         <div class="form-group ">
                             <label class="control-label">Thẻ tag</label>
                             <input id="tag-product" class="form-control" type="text"
-                                   placeholder="'@tag' và không trùng tag cũ">
+                                   placeholder="'@tag' viết liền không cách và không trùng tag cũ">
                             <label class="control-label" id="list-tag" style="background: #80808036"></label>
                         </div>
                         <div class="form-group ">

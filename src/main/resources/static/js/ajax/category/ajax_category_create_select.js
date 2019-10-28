@@ -15,10 +15,9 @@ function findAllNameBigCategory() {
             const listSize = Object.keys(bigCategories).length;
             if (listSize > 0) {
 
-                let contentRow = '';
+                let contentRow = ' <option value="none"></option>';
                 bigCategories.map(function (bigCategory) {
                     contentRow += `
-                         <option value="none"></option>
                        <option value ="${bigCategory.id}" >${bigCategory.name}</option>
                     `;
                 });
@@ -41,10 +40,10 @@ function findAllNameMenuCategory() {
         success: function (mediumCategories) {
             const listSize = Object.keys(mediumCategories).length;
             if (listSize > 0) {
-                let contentRow = '';
+                let contentRow = ' <option value="none"></option>';
                 mediumCategories.map(function (mediumCategory) {
                     contentRow += `
-                       <option value="none"></option>
+                      
                        <option value="${mediumCategory.id}">${mediumCategory.name}</option>
                     `;
                 });

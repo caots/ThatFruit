@@ -342,16 +342,19 @@ public class ProductService_Impl implements ProductService {
         }
         //done
 
-        List<Tag> tags = tagRepository.findAll();
+        List<Tag> tags = tagRepository.findAllTagSize();
+
         for (int i = 1; i < nameTag.length; i++) {
             int index = 1;
 
             for (Tag tag : tags) {
+                System.out.println(tag.getName() + " - " + nameTag[i]);
                 if (tag.getName().equals(nameTag[i])) {
                     index = -1;
                     break;
                 }
             }
+
             System.out.println(index);
             if (index == 1) {
                 Tag t = new Tag();
