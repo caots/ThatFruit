@@ -40,7 +40,6 @@ function onSubmit(event) {
         error: function (jqXHR, textStatus, errorThrown) {
             alert("tài khoản hoặc mật khẩu không đúng");
             errMess(jqXHR, textStatus, errorThrown);
-            alert("error");
         }
     });
 }
