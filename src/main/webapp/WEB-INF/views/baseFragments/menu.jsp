@@ -17,7 +17,7 @@
                 class="app-menu__label">&nbsp; Danh sách đơn hàng</span></a></li>
 
         <li><a class="app-menu__item" href="user"><i class="fas fa-users"></i></i><span
-                class="app-menu__label">&nbsp; Quản lý user</span></a></li>
+                class="app-menu__label">&nbsp;User</span></a></li>
 
         <li><a class="app-menu__item" href="product"><i class="fab fa-product-hunt"></i></i><span
                 class="app-menu__label">&nbsp; Sản phẩm</span></a></li>
@@ -27,20 +27,20 @@
                 class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item" href="menu-category"> Danh mục</a>
+                    <a class="treeview-item" href="menu-category"> Menu</a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="big-category" rel="noopener"></i> Danh mục sản phẩm</a>
+                    <a class="treeview-item" href="big-category" rel="noopener"></i> Loại sản phẩm</a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="small-category"></i> Loại sản phẩm</a>
-                </li>
-                <li>
-                    <a class="treeview-item" href="image-page"></i> Ảnh trang chủ</a>
+                    <a class="treeview-item" href="small-category"></i> Danh mục sản phẩm</a>
                 </li>
 
             </ul>
         </li>
+
+        <li><a class="app-menu__item" href="image-page"><i class="fas fa-image"></i><span
+                class="app-menu__label"> Ảnh trang chủ</span></a></li>
 
         <li><a class="app-menu__item" href="form-contact"><i class="fab fa-wpforms"></i><span
                 class="app-menu__label">&nbsp; Form khách hàng</span></a></li>
@@ -70,14 +70,11 @@
                     <a class="treeview-item" href="contact"> Thông tin liên kết</a>
                 </li>
 
-                <li>
-                    <a class="treeview-item" href="partner"> Thông tin đối tác</a>
-                </li>
+<%--                <li>--%>
+<%--                    <a class="treeview-item" href="partner"> Thông tin đối tác</a>--%>
+<%--                </li>--%>
 
             </ul>
         </li>
-
-        <li><a class="app-menu__item" href="unlock"><i class="fas fa-unlock"></i><span
-                class="app-menu__label">&nbsp; Khóa màn hình</span></a></li>
     </ul>
 </aside>

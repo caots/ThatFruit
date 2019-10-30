@@ -78,7 +78,6 @@ function findAllNews(page) {
                         <td> ${timePost} </td>
                         <td> 
                               <div class="btn-group">
-                                   <a class="btn btn-primary" href="create-news"><i class="fa fa-lg fa-plus"></i></a>
                                    <a class="btn btn-primary" href="update-news?news-id=${newss.id}" name="${newss.id}"><i class="fa fa-lg fa-edit"></i></a>
                                    <a class="btn btn-primary delete-news" name="${newss.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                               </div>

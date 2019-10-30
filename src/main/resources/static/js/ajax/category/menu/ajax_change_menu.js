@@ -25,6 +25,7 @@ function findMenuById(id) {
 
 //============ update Menu ========================
 function updateMenuCategory(data) {
+
     $('#name-menu').val(data.name);
     $('#btn-ok-menu').click(function () {
         data.name = $('#name-menu').val();

@@ -7,10 +7,10 @@ $(document).ready(function () {
 //============ Create News ========================
 function createNews() {
     let idTopic = '';
-    $('#topic-value').click(function () {
+    $('#topic-value').change(function () {
         idTopic = $(this).val();
     });
-    var formData;
+    var formData = "";
     $("#change-news").change(function () {
         formData = new FormData($('form')[0]);
     });
@@ -19,12 +19,40 @@ function createNews() {
         const contentNews = $('.nicEdit-main').text();
         const titleNews = $('#name-title').val();
         const desNews = $('#name-description').val();
-        uploadFile(formData).then(data => {
+        if (formData !== "") {
+            uploadFile(formData).then(data => {
+                const news = {
+                    "content": contentNews,
+                    'title': titleNews,
+                    'description': desNews,
+                    'image': data.data.display_url,
+                };
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    headers: {
+                        "Authorization": tokenHeader_value,
+                    },
+                    url: "api/v1/admin/news?topic-id=" + idTopic,
+                    data: JSON.stringify(news),
+                    cache: false,
+                    timeout: 300000,
+                    success: function () {
+                        alert("Thêm thành công");
+                        $("#btn-ok-news").prop("disabled", true);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        errMess(jqXHR, textStatus, errorThrown);
+                        alert("Thêm thất bại ");
+                    }
+                })
+            });
+        } else {
             const news = {
                 "content": contentNews,
                 'title': titleNews,
                 'description': desNews,
-                'image': data.data.display_url,
+                'image': "",
             };
             $.ajax({
                 type: "POST",
@@ -45,7 +73,8 @@ function createNews() {
                     alert("Thêm thất bại ");
                 }
             })
-        });
+        }
+
 
     });
 
@@ -107,7 +136,7 @@ function updateNews(data) {
     $("#topic-value").text(data.topic.name);
     $("#topic-value").prop("disabled", true);
     $('#url-image-news').attr('src', data.image);
-    var formData;
+    let formData = "";
     $("#change-news").change(function () {
         formData = new FormData($('form')[0]);
     });
@@ -116,8 +145,29 @@ function updateNews(data) {
         data.content = $('.nicEdit-main').text();
         data.title = $('#name-title').val();
         data.description = $('#name-description').val();
-        uploadFile(formData).then(dataImage => {
-            data.image = dataImage.data.display_url;
+        if (formData !== "") {
+            uploadFile(formData).then(dataImage => {
+                data.image = dataImage.data.display_url;
+                $.ajax({
+                    type: "PUT",
+                    contentType: "application/json",
+                    headers: {
+                        "Authorization": tokenHeader_value,
+                    },
+                    url: "api/v1/admin/news",
+                    data: JSON.stringify(data),
+                    timeout: 30000,
+                    success: function () {
+                        alert('Chỉnh sửa thành công');
+                        $("#btn-ok-news").prop("disabled", true);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        errMess(jqXHR, textStatus, errorThrown);
+                        alert("Chỉnh sửa thất bại ");
+                    }
+                });
+            });
+        } else {
             $.ajax({
                 type: "PUT",
                 contentType: "application/json",
@@ -136,7 +186,7 @@ function updateNews(data) {
                     alert("Chỉnh sửa thất bại ");
                 }
             });
-        });
+        }
     });
 }
 

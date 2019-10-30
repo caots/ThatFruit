@@ -70,8 +70,7 @@ function displayOnTable(users) {
         "<td> Ngày sinh</td>" +
         "<td> Địa chỉ</td>" +
         "<td> Số điện thoại</td>" +
-        "<td> Email</td>" +
-        "<td> Chức năng</td>"
+        "<td> Email</td>"
     );
     const listSize = Object.keys(users).length;
     if (listSize > 0) {
@@ -100,11 +99,6 @@ function displayOnTable(users) {
                         <td> ${user.address} </td>
                         <td> ${phone} </td>
                         <td> ${user.email} </td>
-                        <td> 
-                              <div class="btn-group">
-                                   <a class="btn btn-primary delete-user" name="${user.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
-                              </div>
-                        </td>
                         </tr>
                     `;
             index++;

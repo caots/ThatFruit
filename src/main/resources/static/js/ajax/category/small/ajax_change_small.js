@@ -59,6 +59,7 @@ function findSmallCategoryById(id) {
 // ============ update Small Category ========================
 function updateSmallCategory(data) {
 
+
     $('#name-small-category').val(data.name);
     $("#big-category-value").prop("disabled", true);
     $('#btn-ok-small').click(function () {

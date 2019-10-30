@@ -57,7 +57,7 @@ function findAllSmallCategory(page) {
             $("#column-small").html(
                 "<td style='text-align: center'> STT</td>" +
                 "<td> Tên Loại sản phẩm </td>" +
-                "<td> Danh mục Sản Phẩm</td>" +
+                "<td> Loại Sản Phẩm</td>" +
                 "<td> Chức Năng</td>"
             );
             const listSize = Object.keys(smallCategories).length;
@@ -72,8 +72,7 @@ function findAllSmallCategory(page) {
                         <td  width="30%" > ${smallCategory.bigCategory.name} </td>
                         <td  width="25%"> 
                               <div class="btn-group">
-                                   <a class="btn btn-primary" href="create-small"><i class="fa fa-lg fa-plus"></i></a>
-                                   <a class="btn btn-primary" href="update-category?small-id=${smallCategory.id}" name="${smallCategory.id}"><i class="fa fa-lg fa-edit"></i></a>
+                                   <a class="btn btn-primary" href="update-small?small-id=${smallCategory.id}" name="${smallCategory.id}"><i class="fa fa-lg fa-edit"></i></a>
                                    <a class="btn btn-primary delete-small" name="${smallCategory.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                               </div>
                         </td>

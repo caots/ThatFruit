@@ -150,6 +150,22 @@
         <put-attribute name="body" value="/WEB-INF/views/form-change/category/change_category.jsp"/>
     </definition>
 
+    <definition name="create-big" extends="base.definition">
+        <put-attribute name="title" value="create category"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/category/change_big.jsp"/>
+    </definition>
+
+    <definition name="update-big" extends="base.definition">
+        <put-attribute name="title" value="update category"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/category/change_big.jsp"/>
+    </definition>
+
+
+    <definition name="update-menu" extends="base.definition">
+        <put-attribute name="title" value="update category"/>
+        <put-attribute name="body" value="/WEB-INF/views/form-change/category/change_menu.jsp"/>
+    </definition>
+
     <definition name="create-product" extends="base.definition">
         <put-attribute name="title" value="create product"/>
         <put-attribute name="body" value="/WEB-INF/views/form-change/product/change_product.jsp"/>

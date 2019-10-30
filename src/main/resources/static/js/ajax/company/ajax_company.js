@@ -38,9 +38,7 @@ function findAllCompany() {
                         <td> ${company.description} </td>
                         <td > 
                               <div class="btn-group">
-                                   <a class="btn btn-primary" href="create-company"><i class="fa fa-lg fa-plus"></i></a>
                                    <a class="btn btn-primary" href="update-company?id=${company.id}" name="${company.id}"><i class="fa fa-lg fa-edit"></i></a>
-                                   <a class="btn btn-primary delete-company" name="${company.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                               </div>
                         </td>
                         </tr>

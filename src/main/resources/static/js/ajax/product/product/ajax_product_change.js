@@ -117,10 +117,11 @@ function updateProduct(data) {
     var endDateX = (data.enDateSale + '').split(',');
     $('#demoDate').val(endDateX[2] + '/' + endDateX[1] + '/' + endDateX[0]);
 
-    var formData;
+    var formData = "";
     $("#change-product").change(function () {
         formData = new FormData($("form")[0]);
     });
+
     // $("#tag-product").prop("disabled", true);
     $("#small-category-value").prop("disabled", true);
     $('#btn-ok-product').click(function () {
@@ -135,12 +136,35 @@ function updateProduct(data) {
         data.origin = $("#origin-product").val();
         data.saleCostWholesale = $("#sale-cost-wholesale").val();
         data.originCostWholesale = $("#origin-cost-wholesale").val();
-        if ($('#product-status').val() == null) $('#product-status').val('true');
+        if($('#product-status').val() == null) $('#product-status').val('true');
         data.productStatus = $('#product-status').val();
         data.enDateSale = new Date(endDate);
         var listTagAfter = $('#tag-product').val();
-        uploadFile(formData).then(dataImage => {
-            data.image = dataImage.data.display_url;
+
+        if (formData !== "") {
+            uploadFile(formData).then(dataImage => {
+                data.image = dataImage.data.display_url;
+                $.ajax({
+                    type: "PUT",
+                    contentType: "application/json",
+                    headers: {
+                        "Authorization": tokenHeader_value,
+                    },
+                    url: "api/v1/admin/product?list-tag=" + listTagAfter,
+                    data: JSON.stringify(data),
+                    timeout: 30000,
+                    success: function () {
+                        alert('Chỉnh sửa thành công');
+                        $('#url-image-product').attr('src', data.image);
+                        $("#btn-ok-product").prop("disabled", true);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        errMess(jqXHR, textStatus, errorThrown);
+                        alert("Chỉnh sửa thất bại ");
+                    }
+                });
+            });
+        } else {
             $.ajax({
                 type: "PUT",
                 contentType: "application/json",
@@ -160,7 +184,7 @@ function updateProduct(data) {
                     alert("Chỉnh sửa thất bại ");
                 }
             });
-        });
+        }
 
     });
 }

@@ -56,8 +56,7 @@ function findAllBigCategory(page) {
         success: function (bigCategories) {
             $("#column-big").html(
                 "<td style='text-align: center'> STT</td>" +
-                "<td> Tên Danh mục sản phẩm </td>" +
-                "<td> Chuyên Mục Sản Phẩm</td>" +
+                "<td> Tên Danh mục sản phẩm </td> "+
                 "<td> Chức Năng</td>"
             );
             const listSize = Object.keys(bigCategories).length;
@@ -70,11 +69,9 @@ function findAllBigCategory(page) {
                         <tr>
                         <td style='text-align: center' width="15%"> ${index} </td>
                         <td  width="30%"> ${bigCategory.name} </td>
-                        <td  width="30%" > ${bigCategory.menu.name} </td>
                         <td  width="25%"> 
                               <div class="btn-group">
-                                   <a class="btn btn-primary" href="create-big"><i class="fa fa-lg fa-plus"></i></a>
-                                   <a class="btn btn-primary" href="update-category?big-id=${bigCategory.id}" name="${bigCategory.id}"><i class="fa fa-lg fa-edit"></i></a>
+                                   <a class="btn btn-primary" href="update-big?big-id=${bigCategory.id}" name="${bigCategory.id}"><i class="fa fa-lg fa-edit"></i></a>
                                    <a class="btn btn-primary delete-big" name="${bigCategory.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                               </div>
                         </td>

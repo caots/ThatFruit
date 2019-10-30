@@ -31,7 +31,7 @@ function findAllMenuCategory() {
                         <td style="width: 50%">  ${menu.name} </td>
                         <td style="width: 30%">
                             <div class="btn-group">
-                                   <a class="btn btn-primary" href="update-category?menu-id=${menu.id}" name="${menu.id}"><i class="fa fa-lg fa-edit"></i></a>
+                                   <a class="btn btn-primary" href="update-menu?menu-id=${menu.id}" name="${menu.id}"><i class="fa fa-lg fa-edit"></i></a>
                             </div>
                         </td>
                         </tr>

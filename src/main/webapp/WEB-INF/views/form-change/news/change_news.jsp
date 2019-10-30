@@ -72,11 +72,11 @@
                         </form>
                         <span style="color: #ff0000">Ảnh hiển thị tốt nhất trong khoảng 330x180(px)</span>
                     </div>
-                    <div class="col-md-3" style="padding-top: 25px"></div>
+                    <div class="col-md-3" style="padding-top: 50px"></div>
                 </div>
             </div>
 
-            <div class="tile-body">
+            <div class="tile-body" style="padding-top: 50px">
                 <div class="row">
                     <div id="sample col-11" style="margin-left: 130px ">
                         <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>

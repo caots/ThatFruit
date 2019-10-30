@@ -24,6 +24,12 @@ function findAllTopic() {
                 let contentRow = '';
                 var index = 1;
                 topics.map(function (topic) {
+                    if (topic.description == null) {
+                        topic.description = 'Chưa có'
+                    }
+                    if (topic.name == null) {
+                        topic.name = 'Chưa có'
+                    }
 
                     contentRow += `
                         <tr>
@@ -32,7 +38,6 @@ function findAllTopic() {
                         <td>  ${topic.description} </td>
                         <td>
                             <div class="btn-group">
-                                   <a class="btn btn-primary" href="create-topic"><i class="fa fa-lg fa-plus"></i></a>
                                    <a class="btn btn-primary" href="update-topic?topic-id=${topic.id}" name="${topic.id}"><i class="fa fa-lg fa-edit"></i></a>
                                    <a class="btn btn-primary delete-topic" name="${topic.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                             </div>

@@ -113,7 +113,6 @@ function displayOnTable(products) {
                          <td>   <a href="update-news-product?id=${product.id}" name="${product.id}" style="cursor: pointer;color: green">Bài viết</a>&nbsp;<br> </td>
                          <td style="min-width: 160px">
                             <div class="btn-group">
-                                   <a class="btn btn-primary" href="create-product"><i class="fa fa-lg fa-plus"></i></a>
                                    <a class="btn btn-primary" href="update-product?id=${product.id}" name="${product.id}"><i class="fa fa-lg fa-edit"></i></a>
                                    <a class="btn btn-primary delete-product" name="${product.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                              </div>

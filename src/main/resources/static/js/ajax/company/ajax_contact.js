@@ -37,9 +37,7 @@ function findAllCompanyContact() {
                         <td width="10%"> ${contact.youtube} </td>
                         <td width="15%"> 
                               <div class="btn-group">
-                                   <a class="btn btn-primary" href="create-contact"><i class="fa fa-lg fa-plus"></i></a>
                                    <a class="btn btn-primary" href="update-contact?id=${contact.id}" name="${contact.id}"><i class="fa fa-lg fa-edit"></i></a>
-                                   <a class="btn btn-primary delete-contact" name="${contact.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                               </div>
                         </td>
                         </tr>

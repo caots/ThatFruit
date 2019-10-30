@@ -90,7 +90,6 @@ function findAllContactForm(page) {
                         <td> 
                               <div class="btn-group">
                                    <a class="btn btn-primary" href="form-send-email?id=${contactForm.id}" name="${contactForm.id}"><i class="fa fa-lg fa-edit"></i></a>
-                                   <a class="btn btn-primary delete-form" name="${contactForm.id}" ><i class="fa fa-lg fa-trash" style="color: white"></i></a>
                               </div>
                         </td>
                         </tr>

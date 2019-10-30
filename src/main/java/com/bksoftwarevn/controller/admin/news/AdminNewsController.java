@@ -52,9 +52,9 @@ public class AdminNewsController {
     }
 
     @PutMapping("/topic/delete")
-    public ResponseEntity<Object> deleteTopic(@RequestBody Topic topic) {
+    public ResponseEntity<Object> deleteTopic(@RequestParam("id") int id) {
         Record record = recordService.findByName("topic");
-        if (topicService.deleteTopic(topic)) {
+        if (topicService.deleteTopic(topicService.findById(id))) {
             record.setNumber(record.getNumber() - 1);
             recordService.saveRecord(record);
             return new ResponseEntity<>("delete topic success", HttpStatus.OK);
@@ -90,7 +90,8 @@ public class AdminNewsController {
     }
 
     @PutMapping("/news/delete")
-    public ResponseEntity<Object> deleteNews(@RequestBody News news) {
+    public ResponseEntity<Object> deleteNews(@RequestParam("id") int id) {
+        News news = newsService.findById(id);
         Record record = recordService.findByName("news");
         if (newsService.deleteNews(news)) {
             record.setNumber(record.getNumber() - 1);

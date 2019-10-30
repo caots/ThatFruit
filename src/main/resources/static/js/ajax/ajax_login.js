@@ -12,7 +12,7 @@ function onSubmit(event) {
     var password = $("#password").val();
 
 
-    if (username.length == 0 || password.length == 0) {
+    if (username.length === 0 || password.length === 0) {
         alert("username or password is blank!");
         event.preventDefault(event);
         return;
@@ -38,6 +38,7 @@ function onSubmit(event) {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
+            alert("tài khoản hoặc mật khẩu không đúng");
             errMess(jqXHR, textStatus, errorThrown);
             alert("error");
         }

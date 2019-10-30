@@ -17,7 +17,7 @@ public class ChangePageController {
     }
 
     //=========================Category=================================
-    @GetMapping({"/create-menu", "/create-big", "/create-small", "/create-category"})
+    @GetMapping({ "/create-small"})
     public String createCategoryPage(HttpServletRequest request) {
 
 
@@ -29,10 +29,8 @@ public class ChangePageController {
         return "create-category";
     }
 
-    @GetMapping("/update-category")
+    @GetMapping("/update-small")
     public String updateCategoryPage(
-            @RequestParam(value = "menu-id", required = false, defaultValue = "-1") int menuId,
-            @RequestParam(value = "big-id", required = false, defaultValue = "-1") int bigId,
             @RequestParam(value = "small-id", required = false, defaultValue = "-1") int smallId,
             HttpServletRequest request
     ) {
@@ -42,6 +40,44 @@ public class ChangePageController {
             return "login";
         }
         return "update-category";
+    }
+    @GetMapping({ "/create-big"})
+    public String createBigCategoryPage(HttpServletRequest request) {
+
+
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "create-big";
+    }
+
+    @GetMapping("/update-big")
+    public String updateBigCategoryPage(
+            @RequestParam(value = "big-id", required = false, defaultValue = "-1") int bigId,
+            HttpServletRequest request
+    ) {
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "update-big";
+    }
+
+
+    @GetMapping("/update-menu")
+    public String updateMenuCategoryPage(
+            @RequestParam(value = "menu-id", required = false, defaultValue = "-1") int menuId,
+            HttpServletRequest request
+    ) {
+        String username = getToken(request);
+
+        if (username == null) {
+            return "login";
+        }
+        return "update-menu";
     }
 
 
